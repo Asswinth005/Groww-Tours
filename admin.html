@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Groww Tour</title>
+    <link rel="icon" type="asset/jpeg" href="assets/growwpark_logo.jpg">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-brown': '#8D6E63',
+                        'secondary-green': '#4CAF50',
+                        'accent-orange': '#82736e',
+                        'background-cream': '#FAF5EF',
+                        'neutral-dark': '#5D4037',
+                        'neutral-light': '#EFEBE9',
+                        'dark-bg': '#1a1a1a',
+                        'dark-card': '#2d2d2d'
+                    },
+                    fontFamily: {
+                        'sans': ['Space Grotesk', 'system-ui', 'sans-serif'],
+                        'display': ['Syne', 'sans-serif']
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <style>
+        body {
+            background-color: #FAF5EF;
+            color: #5D4037;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .dark body {
+            background-color: #1a1a1a;
+            color: #e5e5e5;
+        }
+        
+        /* Hide scrollbar */
+        body::-webkit-scrollbar { display: none; }
+        body { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Toggle button */
+        .toggle-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #EFEBE9;
+            color: #5D4037;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .dark .toggle-btn {
+            background: #374151;
+            color: #9CA3AF;
+        }
+        .toggle-btn:hover {
+            background: #8D6E63;
+            color: white;
+        }
+        .toggle-btn.active {
+            background: #8D6E63;
+            color: white;
+        }
+        
+        /* Header - No longer sticky */
+.header {
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+        
+        /* Dashboard card */
+        .dashboard-card {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(141, 110, 99, 0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .dark .dashboard-card {
+            background: #2d2d2d;
+            border-color: #404040;
+        }
+        .dashboard-card:hover {
+            box-shadow: 0 15px 30px rgba(141, 110, 99, 0.08);
+            border-color: #8D6E63;
+        }
+        
+        /* Stat card */
+        .stat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            border: 1px solid rgba(141, 110, 99, 0.1);
+            transition: all 0.3s ease;
+        }
+        .dark .stat-card {
+            background: #2d2d2d;
+            border-color: #404040;
+        }
+        .stat-card:hover {
+            border-color: #8D6E63;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(141, 110, 99, 0.1);
+        }
+        
+        /* Sidebar item */
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            padding: 1.1rem 1.5rem;
+            border-radius: 18px;
+            color: #5D4037;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+            font-size: 1.05rem;
+        }
+        .dark .sidebar-item {
+            color: #e5e5e5;
+        }
+        .sidebar-item:hover {
+            background: rgba(141, 110, 99, 0.1);
+            color: #8D6E63;
+            transform: translateX(5px);
+        }
+        .sidebar-item.active {
+            background: #8D6E63;
+            color: white;
+            box-shadow: 0 8px 15px rgba(141, 110, 99, 0.2);
+        }
+        .dark .sidebar-item.active {
+            background: #8D6E63;
+            color: white;
+        }
+        
+        /* Table styles */
+        .table-header {
+            background: rgba(141, 110, 99, 0.05);
+            padding: 1rem;
+            font-weight: 600;
+        }
+        .table-row {
+            border-bottom: 1px solid rgba(141, 110, 99, 0.1);
+            transition: all 0.2s ease;
+        }
+        .table-row:hover {
+            background: rgba(141, 110, 99, 0.02);
+        }
+        
+        /* Badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .status-active {
+            background: rgba(76, 175, 80, 0.1);
+            color: #2E7D32;
+        }
+        .status-pending {
+            background: rgba(230, 126, 34, 0.1);
+            color: #E67E22;
+        }
+        .status-inactive {
+            background: rgba(211, 47, 47, 0.1);
+            color: #B71C1C;
+        }
+        .status-completed {
+            background: rgba(76, 175, 80, 0.1);
+            color: #2E7D32;
+        }
+        .dark .status-active {
+            background: rgba(76, 175, 80, 0.2);
+            color: #A5D6A7;
+        }
+        .dark .status-pending {
+            background: rgba(230, 126, 34, 0.2);
+            color: #FFB74D;
+        }
+        .dark .status-inactive {
+            background: rgba(211, 47, 47, 0.2);
+            color: #EF9A9A;
+        }
+        
+        /* Form input */
+        .admin-input {
+            width: 100%;
+            padding: 0.9rem 1.25rem;
+            background: #F9FAFB;
+            border: 1.5px solid #EFEBE9;
+            border-radius: 14px;
+            color: #5D4037;
+            transition: all 0.3s ease;
+        }
+        .dark .admin-input {
+            background: #374151;
+            border-color: #4B5563;
+            color: #e5e5e5;
+        }
+        .admin-input:focus {
+            outline: none;
+            border-color: #8D6E63;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(141, 110, 99, 0.1);
+        }
+        
+        /* Save button */
+        .admin-btn {
+            background: #8D6E63;
+            color: white;
+            font-weight: 600;
+            padding: 0.9rem 2.5rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .admin-btn:hover {
+            background: #6D4C41;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(141, 110, 99, 0.3);
+        }
+        
+        /* Toggle switch */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 52px;
+            height: 28px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .3s;
+            border-radius: 34px;
+        }
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+        input:checked + .toggle-slider {
+            background-color: #8D6E63;
+        }
+        input:checked + .toggle-slider:before {
+            transform: translateX(24px);
+        }
+        
+        /* Chart container */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+        
+        /* RTL support */
+        [dir="rtl"] .ml-2 { margin-left: 0; margin-right: 0.5rem; }
+        [dir="rtl"] .mr-2 { margin-right: 0; margin-left: 0.5rem; }
+        [dir="rtl"] .ml-3 { margin-left: 0; margin-right: 0.75rem; }
+        [dir="rtl"] .mr-3 { margin-right: 0; margin-left: 0.75rem; }
+        [dir="rtl"] .ml-4 { margin-left: 0; margin-right: 1rem; }
+        [dir="rtl"] .mr-4 { margin-right: 0; margin-left: 1rem; }
+        [dir="rtl"] .space-x-2 > :not([hidden]) ~ :not([hidden]) { --tw-space-x-reverse: 1; }
+        [dir="rtl"] .space-x-3 > :not([hidden]) ~ :not([hidden]) { --tw-space-x-reverse: 1; }
+        [dir="rtl"] .space-x-4 > :not([hidden]) ~ :not([hidden]) { --tw-space-x-reverse: 1; }
+        [dir="rtl"] .sidebar-item:hover { transform: translateX(-5px); }
+    </style>
+</head>
+<body class="bg-background-cream dark:bg-dark-bg p-6 md:p-8">
+
+    <!-- ============  HEADER ============ -->
+    <div class="header">
+        <div class="flex justify-between items-center">
+            <!-- Logo -->
+            <a class='flex items-center space-x-3 group' href='index.html'>
+                <div class="w-10 h-10 bg-primary-brown rounded-lg flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
+                    <i class="fas fa-map-marked-alt text-white text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-2xl font-display font-bold tracking-tight text-neutral-dark dark:text-white">Groww</span>
+                    <span class="text-2xl font-display font-bold tracking-tight text-primary-brown">Tour</span>
+                </div>
+            </a>
+            <div class="flex items-center gap-3">
+                
+                <button id="theme-toggle" class="toggle-btn" title="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun hidden"></i>
+                </button>
+                <button id="rtl-toggle" class="toggle-btn" title="Toggle RTL/LTR">
+                    <i class="fas fa-exchange-alt"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Main Container -->
+    <div class="max-w-7xl mx-auto">
+        
+        <!-- Welcome Header -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+            <div>
+                <h1 class="text-3xl md:text-4xl font-display font-bold dark:text-white">
+                    Admin <span class="text-primary-brown">Dashboard</span>
+                </h1>
+                <p class="text-neutral-dark/70 dark:text-gray-400 mt-1 text-lg">
+                    Manage your platform, users, content, and analytics
+                </p>
+            </div>
+            <div class="mt-4 md:mt-0 flex items-center gap-4 bg-white dark:bg-dark-card px-5 py-3 rounded-2xl shadow-sm border border-neutral-light/50 dark:border-gray-700">
+                <div class="w-12 h-12 bg-primary-brown/20 rounded-full flex items-center justify-center">
+                    <i class="fas fa-user-tie text-2xl text-primary-brown"></i>
+                </div>
+                <div>
+                    <p class="font-semibold dark:text-white text-lg">Admin User</p>
+                    <p class="text-xs text-neutral-dark/60 dark:text-gray-400">admin@growwtour.com</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Dashboard Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- ============ SIDEBAR - 7 SECTIONS ============ -->
+            <div class="lg:col-span-3 xl:col-span-3">
+                <div class="dashboard-card">
+                    <div class="flex flex-col space-y-1">
+                        
+                        <!-- Overview / Statistics -->
+                        <div class="sidebar-item active" data-section="overview">
+                            <i class="fas fa-chart-pie w-7 text-2xl"></i>
+                            <span class="ml-4 font-semibold text-lg">Overview</span>
+                        </div>
+                        
+                        <!-- User Management -->
+                        <div class="sidebar-item" data-section="users">
+                            <i class="fas fa-users w-6 text-2xl"></i>
+                            <span class="ml-4 font-semibold text-lg">User Management</span>
+                        </div>
+                        
+                        <!-- Content Management -->
+                        <div class="sidebar-item" data-section="content">
+                            <i class="fas fa-file-alt w-7 text-2xl"></i>
+                            <span class="ml-4 font-semibold text-lg">Content Management</span>
+                        </div>
+                        
+                        <!-- Orders / Bookings -->
+                        <div class="sidebar-item" data-section="orders">
+                            <i class="fas fa-shopping-cart w-7 text-2xl"></i>
+                            <span class="ml-4 font-semibold text-lg">Orders / Bookings</span>
+                        </div>
+                        
+                        <!-- Messages / Notifications -->
+                        <div class="sidebar-item" data-section="messages">
+                            <i class="fas fa-envelope w-7 text-2xl"></i>
+                            <span class="ml-4 font-semibold text-lg">Messages</span>
+                            <span class="ml-auto bg-primary-brown text-white text-xs px-2.5 py-1.5 rounded-full font-bold">5</span>
+                        </div>
+                        
+                        <!-- Settings / Configuration -->
+                        <div class="sidebar-item" data-section="settings">
+                            <i class="fas fa-cog w-7 text-2xl"></i>
+                            <span class="ml-4 font-semibold text-lg">Settings</span>
+                        </div>
+                        
+                        <!-- Reports / Analytics -->
+                        <div class="sidebar-item" data-section="reports">
+                            <i class="fas fa-chart-line w-7 text-2xl"></i>
+                            <span class="ml-4 font-semibold text-lg">Reports</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Admin Info -->
+                    <div class="mt-8 pt-6 border-t border-neutral-light/50 dark:border-gray-700">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-primary-brown/20 rounded-full flex items-center justify-center">
+                                <i class="fas fa-user-cog text-2xl text-primary-brown"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="font-bold dark:text-white">Admin</p>
+                                <p class="text-xs text-neutral-dark/60 dark:text-gray-400">Super Admin</p>
+                                <p class="text-xs text-primary-brown mt-1 font-semibold"> Full Access 🔑</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============ CONTENT AREA - 7 SECTIONS ============ -->
+            <div class="lg:col-span-9 xl:col-span-9">
+                
+                <!-- ===== 1. OVERVIEW / STATISTICS SECTION ===== -->
+                <div id="overview-section" class="dashboard-section active">
+                    <div class="dashboard-card">
+                        <h2 class="text-2xl font-display font-bold mb-7 dark:text-white flex items-center">
+                            <i class="fas fa-chart-pie text-primary-brown mr-3 text-2xl"></i>
+                            Overview & Statistics
+                        </h2>
+                        
+                                               <!-- Stats Cards - Mobile: 1 column, Tablet: 2 columns, Desktop: 4 columns -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                            <div class="stat-card p-5">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Total Users</p>
+                                        <p class="text-3xl font-bold dark:text-white mt-1">2,547</p>
+                                        <p class="text-xs text-secondary-green mt-2">+12% this month</p>
+                                    </div>
+                                    <div class="w-12 h-12 bg-primary-brown/10 rounded-xl flex items-center justify-center">
+                                        <i class="fas fa-users text-primary-brown text-xl"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="stat-card p-5">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Total Bookings</p>
+                                        <p class="text-3xl font-bold dark:text-white mt-1">1,892</p>
+                                        <p class="text-xs text-secondary-green mt-2">+8% this month</p>
+                                    </div>
+                                    <div class="w-12 h-12 bg-primary-brown/10 rounded-xl flex items-center justify-center">
+                                        <i class="fas fa-shopping-cart text-primary-brown text-xl"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="stat-card p-5">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Active Tours</p>
+                                        <p class="text-3xl font-bold dark:text-white mt-1">156</p>
+                                        <p class="text-xs text-secondary-green mt-2">+5 new</p>
+                                    </div>
+                                    <div class="w-12 h-12 bg-primary-brown/10 rounded-xl flex items-center justify-center">
+                                        <i class="fas fa-map-marked-alt text-primary-brown text-xl"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="stat-card p-5">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Revenue</p>
+                                        <p class="text-3xl font-bold dark:text-white mt-1">$124K</p>
+                                        <p class="text-xs text-secondary-green mt-2">+23% vs last month</p>
+                                    </div>
+                                    <div class="w-12 h-12 bg-primary-brown/10 rounded-xl flex items-center justify-center">
+                                        <i class="fas fa-dollar-sign text-primary-brown text-xl"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Charts Row -->
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-neutral-light/30 dark:bg-gray-800/30 p-5 rounded-2xl">
+                                <h3 class="font-bold text-lg mb-4 dark:text-white">Weekly Bookings</h3>
+                                <div class="chart-container">
+                                    <canvas id="bookingsChart"></canvas>
+                                </div>
+                            </div>
+                            <div class="bg-neutral-light/30 dark:bg-gray-800/30 p-5 rounded-2xl">
+                                <h3 class="font-bold text-lg mb-4 dark:text-white">Revenue by Category</h3>
+                                <div class="chart-container">
+                                    <canvas id="revenueChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Recent Activity -->
+                        <div class="mt-8">
+                            <h3 class="font-bold text-lg mb-4 dark:text-white">Recent Activity</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between p-4 bg-neutral-light/30 dark:bg-gray-800/30 rounded-xl">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 bg-primary-brown/10 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-user-plus text-primary-brown"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold dark:text-white">New user registered</p>
+                                            <p class="text-xs text-neutral-dark/60 dark:text-gray-400">Sarah Johnson • 5 min ago</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-primary-brown font-semibold">View</span>
+                                </div>
+                                <div class="flex items-center justify-between p-4 bg-neutral-light/30 dark:bg-gray-800/30 rounded-xl">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 bg-primary-brown/10 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-shopping-cart text-primary-brown"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold dark:text-white">New booking #GW-4821</p>
+                                            <p class="text-xs text-neutral-dark/60 dark:text-gray-400">Alpine Summits Expedition • 15 min ago</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-primary-brown font-semibold">View</span>
+                                </div>
+                                <div class="flex items-center justify-between p-4 bg-neutral-light/30 dark:bg-gray-800/30 rounded-xl">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 bg-primary-brown/10 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-star text-primary-brown"></i>
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold dark:text-white">New review posted</p>
+                                            <p class="text-xs text-neutral-dark/60 dark:text-gray-400">5 stars • Ancient Rome Tour • 1 hour ago</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs text-primary-brown font-semibold">View</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== 2. USER MANAGEMENT SECTION ===== -->
+                <div id="users-section" class="dashboard-section hidden">
+                    <div class="dashboard-card">
+                        <h2 class="text-2xl font-display font-bold mb-7 dark:text-white flex items-center">
+                            <i class="fas fa-users text-primary-brown mr-3 text-2xl"></i>
+                            User Management
+                        </h2>
+                        
+                        <!-- Filters & Search -->
+                        <div class="flex flex-wrap gap-3 mb-6">
+                            <button class="px-5 py-2.5 rounded-full text-sm font-bold bg-primary-brown text-white shadow-md">All Users</button>
+                            <button class="px-5 py-2.5 rounded-full text-sm font-medium bg-white dark:bg-dark-card border border-neutral-light dark:border-gray-700 hover:bg-primary-brown/10 transition">Admins</button>
+                            <button class="px-5 py-2.5 rounded-full text-sm font-medium bg-white dark:bg-dark-card border border-neutral-light dark:border-gray-700 hover:bg-primary-brown/10 transition">Guides</button>
+                            <button class="px-5 py-2.5 rounded-full text-sm font-medium bg-white dark:bg-dark-card border border-neutral-light dark:border-gray-700 hover:bg-primary-brown/10 transition">Travelers</button>
+                            <div class="flex-1 min-w-[200px]">
+                                <input type="text" placeholder="Search users..." class="admin-input py-2.5">
+                            </div>
+                        </div>
+                        
+                        <!-- Users Table -->
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead class="table-header">
+                                    <tr>
+                                        <th class="text-left p-3">User</th>
+                                        <th class="text-left p-3">Role</th>
+                                        <th class="text-left p-3">Status</th>
+                                        <th class="text-left p-3">Joined</th>
+                                        <th class="text-left p-3">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="table-row">
+                                        <td class="p-3">
+                                            <div class="flex items-center gap-3">
+                                                <img src="/assets/per.jpg" class="w-10 h-10 rounded-full object-cover">
+                                                <div>
+                                                    <p class="font-semibold dark:text-white">Sophia Müller</p>
+                                                    <p class="text-xs text-neutral-dark/60">sophia@example.com</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="p-3">Guide</td>
+                                        <td class="p-3"><span class="status-badge status-active">Active</span></td>
+                                        <td class="p-3">Jan 15, 2024</td>
+                                        <td class="p-3">
+                                            <button class="text-primary-brown hover:underline text-sm">Edit</button>
+                                            <button class="text-red-500 hover:underline text-sm ml-3">Suspend</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="table-row">
+                                        <td class="p-3">
+                                            <div class="flex items-center gap-3">
+                                                <img src="/assets/trust.jpg" class="w-10 h-10 rounded-full object-cover">
+                                                <div>
+                                                    <p class="font-semibold dark:text-white">Marco Rossi</p>
+                                                    <p class="text-xs text-neutral-dark/60">marco@example.com</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="p-3">Guide</td>
+                                        <td class="p-3"><span class="status-badge status-active">Active</span></td>
+                                        <td class="p-3">Feb 3, 2024</td>
+                                        <td class="p-3">
+                                            <button class="text-primary-brown hover:underline text-sm">Edit</button>
+                                            <button class="text-red-500 hover:underline text-sm ml-3">Suspend</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="table-row">
+                                        <td class="p-3">
+                                            <div class="flex items-center gap-3">
+                                                <img src="/assets/per4.jpg" class="w-10 h-10 rounded-full object-cover">
+                                                <div>
+                                                    <p class="font-semibold dark:text-white">John Doe</p>
+                                                    <p class="text-xs text-neutral-dark/60">john@example.com</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="p-3">Traveler</td>
+                                        <td class="p-3"><span class="status-badge status-active">Active</span></td>
+                                        <td class="p-3">Mar 20, 2024</td>
+                                        <td class="p-3">
+                                            <button class="text-primary-brown hover:underline text-sm">Edit</button>
+                                            <button class="text-red-500 hover:underline text-sm ml-3">Suspend</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="table-row">
+                                        <td class="p-3">
+                                            <div class="flex items-center gap-3">
+                                                <img src="/assets/Guide3.jpg" class="w-10 h-10 rounded-full object-cover">
+                                                <div>
+                                                    <p class="font-semibold dark:text-white">Emma Watson</p>
+                                                    <p class="text-xs text-neutral-dark/60">emma@example.com</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="p-3">Traveler</td>
+                                        <td class="p-3"><span class="status-badge status-pending">Pending</span></td>
+                                        <td class="p-3">Apr 2, 2024</td>
+                                        <td class="p-3">
+                                            <button class="text-primary-brown hover:underline text-sm">Approve</button>
+                                            <button class="text-red-500 hover:underline text-sm ml-3">Reject</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="mt-6 flex justify-between items-center">
+                            <p class="text-sm text-neutral-dark/60">Showing 1-4 of 24 users</p>
+                            <div class="flex gap-2">
+                                <button class="px-4 py-2 border rounded-lg hover:bg-primary-brown/10">1</button>
+                                <button class="px-4 py-2 border rounded-lg hover:bg-primary-brown/10">2</button>
+                                <button class="px-4 py-2 border rounded-lg hover:bg-primary-brown/10">3</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== 3. CONTENT MANAGEMENT SECTION ===== -->
+                <div id="content-section" class="dashboard-section hidden">
+                    <div class="dashboard-card">
+                        <h2 class="text-2xl font-display font-bold mb-7 dark:text-white flex items-center">
+                            <i class="fas fa-file-alt text-primary-brown mr-3 text-2xl"></i>
+                            Content Management
+                        </h2>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <!-- Tours Content -->
+                            <div class="bg-neutral-light/30 dark:bg-gray-800/30 p-6 rounded-2xl">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="font-bold text-lg dark:text-white">Tours</h3>
+                                    <span class="text-primary-brown font-semibold">156 active</span>
+                                </div>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between items-center">
+                                        <span>Adventure Tours</span>
+                                        <span class="font-semibold">45</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>Cultural Tours</span>
+                                        <span class="font-semibold">38</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>Food Tours</span>
+                                        <span class="font-semibold">32</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>Nature Tours</span>
+                                        <span class="font-semibold">41</span>
+                                    </div>
+                                </div>
+                                <button class="w-full mt-4 py-3 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold hover:bg-primary-brown hover:text-white transition">
+                                    Manage Tours
+                                </button>
+                            </div>
+                            
+                            <!-- Guides Content -->
+                            <div class="bg-neutral-light/30 dark:bg-gray-800/30 p-6 rounded-2xl">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="font-bold text-lg dark:text-white">Guides</h3>
+                                    <span class="text-primary-brown font-semibold">84 active</span>
+                                </div>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between items-center">
+                                        <span>Adventure Guides</span>
+                                        <span class="font-semibold">28</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>Cultural Guides</span>
+                                        <span class="font-semibold">22</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>Food Guides</span>
+                                        <span class="font-semibold">18</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span>Nature Guides</span>
+                                        <span class="font-semibold">16</span>
+                                    </div>
+                                </div>
+                                <button class="w-full mt-4 py-3 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold hover:bg-primary-brown hover:text-white transition">
+                                    Manage Guides
+                                </button>
+                            </div>
+                            
+                            <!-- Blog Posts -->
+                            <div class="bg-neutral-light/30 dark:bg-gray-800/30 p-6 rounded-2xl">
+                                <h3 class="font-bold text-lg mb-4 dark:text-white">Blog Posts</h3>
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <span>Published</span>
+                                        <span class="font-semibold">24</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span>Drafts</span>
+                                        <span class="font-semibold">8</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span>Pending Review</span>
+                                        <span class="font-semibold">5</span>
+                                    </div>
+                                </div>
+                                <button class="w-full mt-4 py-3 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold hover:bg-primary-brown hover:text-white transition">
+                                    Manage Blog
+                                </button>
+                            </div>
+                            
+                            <!-- Media Library -->
+                            <div class="bg-neutral-light/30 dark:bg-gray-800/30 p-6 rounded-2xl">
+                                <h3 class="font-bold text-lg mb-4 dark:text-white">Media Library</h3>
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <span>Images</span>
+                                        <span class="font-semibold">1,247</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span>Videos</span>
+                                        <span class="font-semibold">89</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span>Documents</span>
+                                        <span class="font-semibold">156</span>
+                                    </div>
+                                </div>
+                                <button class="w-full mt-4 py-3 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold hover:bg-primary-brown hover:text-white transition">
+                                    Manage Media
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== 4. ORDERS / BOOKINGS SECTION ===== -->
+                <div id="orders-section" class="dashboard-section hidden">
+                    <div class="dashboard-card">
+                        <h2 class="text-2xl font-display font-bold mb-7 dark:text-white flex items-center">
+                            <i class="fas fa-shopping-cart text-primary-brown mr-3 text-2xl"></i>
+                            Orders / Bookings
+                        </h2>
+                        
+                        <!-- Filters -->
+                        <div class="flex flex-wrap gap-3 mb-6">
+                            <button class="px-5 py-2.5 rounded-full text-sm font-bold bg-primary-brown text-white shadow-md">All</button>
+                            <button class="px-5 py-2.5 rounded-full text-sm font-medium bg-white dark:bg-dark-card border border-neutral-light dark:border-gray-700 hover:bg-primary-brown/10 transition">Confirmed</button>
+                            <button class="px-5 py-2.5 rounded-full text-sm font-medium bg-white dark:bg-dark-card border border-neutral-light dark:border-gray-700 hover:bg-primary-brown/10 transition">Pending</button>
+                            <button class="px-5 py-2.5 rounded-full text-sm font-medium bg-white dark:bg-dark-card border border-neutral-light dark:border-gray-700 hover:bg-primary-brown/10 transition">Completed</button>
+                            <button class="px-5 py-2.5 rounded-full text-sm font-medium bg-white dark:bg-dark-card border border-neutral-light dark:border-gray-700 hover:bg-primary-brown/10 transition">Cancelled</button>
+                        </div>
+                        
+                        <!-- Bookings Table -->
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead class="table-header">
+                                    <tr>
+                                        <th class="text-left p-3">Booking ID</th>
+                                        <th class="text-left p-3">Customer</th>
+                                        <th class="text-left p-3">Tour</th>
+                                        <th class="text-left p-3">Date</th>
+                                        <th class="text-left p-3">Amount</th>
+                                        <th class="text-left p-3">Status</th>
+                                        <th class="text-left p-3">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="table-row">
+                                        <td class="p-3 font-mono">#GW-2468</td>
+                                        <td class="p-3">John Doe</td>
+                                        <td class="p-3">Alpine Summits</td>
+                                        <td class="p-3">Feb 5, 2026</td>
+                                        <td class="p-3 font-semibold">$299</td>
+                                        <td class="p-3"><span class="status-badge status-active">Confirmed</span></td>
+                                        <td class="p-3">
+                                            <button class="text-primary-brown hover:underline text-sm">View</button>
+                                            <button class="text-primary-brown hover:underline text-sm ml-2">Edit</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="table-row">
+                                        <td class="p-3 font-mono">#GW-3157</td>
+                                        <td class="p-3">Sarah Johnson</td>
+                                        <td class="p-3">Ancient Rome</td>
+                                        <td class="p-3">Mar 12, 2026</td>
+                                        <td class="p-3 font-semibold">$89</td>
+                                        <td class="p-3"><span class="status-badge status-active">Confirmed</span></td>
+                                        <td class="p-3">
+                                            <button class="text-primary-brown hover:underline text-sm">View</button>
+                                            <button class="text-primary-brown hover:underline text-sm ml-2">Edit</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="table-row">
+                                        <td class="p-3 font-mono">#GW-4289</td>
+                                        <td class="p-3">Michael Chen</td>
+                                        <td class="p-3">Rainforest Trek</td>
+                                        <td class="p-3">Apr 20, 2026</td>
+                                        <td class="p-3 font-semibold">$189</td>
+                                        <td class="p-3"><span class="status-badge status-pending">Pending</span></td>
+                                        <td class="p-3">
+                                            <button class="text-primary-brown hover:underline text-sm">Approve</button>
+                                            <button class="text-red-500 hover:underline text-sm ml-2">Cancel</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="table-row">
+                                        <td class="p-3 font-mono">#GW-5632</td>
+                                        <td class="p-3">Emma Watson</td>
+                                        <td class="p-3">Paris Food Tour</td>
+                                        <td class="p-3">May 3, 2026</td>
+                                        <td class="p-3 font-semibold">$95</td>
+                                        <td class="p-3"><span class="status-badge status-completed">Completed</span></td>
+                                        <td class="p-3">
+                                            <button class="text-primary-brown hover:underline text-sm">View</button>
+                                            <button class="text-primary-brown hover:underline text-sm ml-2">Receipt</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== 5. MESSAGES / NOTIFICATIONS SECTION ===== -->
+                <div id="messages-section" class="dashboard-section hidden">
+                    <div class="dashboard-card">
+                        <h2 class="text-xl sm:text-2xl font-display font-bold mb-5 dark:text-white flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 w-full">
+    <div class="flex items-center gap-2" style="font-family: 'Poppins', sans-serif;">
+    <i class="fas fa-envelope text-primary-brown text-xl sm:text-2xl"></i>
+    <span class="font-medium">Messages & Notifications</span>
+</div>
+    <div class="flex items-center justify-between sm:justify-start w-full sm:w-auto">
+        <span class="text-xs text-neutral-dark/50 dark:text-gray-400 sm:hidden">Unread:</span>
+        <span class="bg-primary-brown text-white text-xs px-3 py-1.5 rounded-full font-bold ml-auto sm:ml-0">5 unread</span>
+    </div>
+</h2>
+                        
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <!-- Messages List -->
+                            <div class="md:col-span-2 space-y-4">
+                                <div class="message-item unread p-4 bg-neutral-light/30 dark:bg-gray-800/30 rounded-xl">
+                                    <div class="flex items-start gap-3">
+                                        <img src="assets/per.jpg" class="w-12 h-12 rounded-full">
+                                        <div class="flex-1">
+                                            <div class="flex justify-between">
+                                                <h4 class="font-bold dark:text-white">Sophia Muller</h4>
+                                                <span class="text-xs text-neutral-dark/50">2 hours ago</span>
+                                            </div>
+                                            <p class="text-sm text-neutral-dark/70">Guide Application</p>
+                                            <p class="text-sm mt-1">I would like to apply as a hiking guide in Switzerland...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="message-item unread p-4 bg-neutral-light/30 dark:bg-gray-800/30 rounded-xl">
+                                    <div class="flex items-start gap-3">
+                                        <img src="/assets/test1.jpg" class="w-12 h-12 rounded-full">
+                                        <div class="flex-1">
+                                            <div class="flex justify-between">
+                                                <h4 class="font-bold dark:text-white">Marco Rossi</h4>
+                                                <span class="text-xs text-neutral-dark/50">Yesterday</span>
+                                            </div>
+                                            <p class="text-sm text-neutral-dark/70">Booking Question</p>
+                                            <p class="text-sm mt-1">Can I reschedule my Rome tour to next week?</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="message-item p-4 bg-neutral-light/30 dark:bg-gray-800/30 rounded-xl">
+                                    <div class="flex items-start gap-3">
+                                        <img src="assets/trust1.jpg" class="w-12 h-12 rounded-full">
+                                        <div class="flex-1">
+                                            <div class="flex justify-between">
+                                                <h4 class="font-bold dark:text-white">Support System</h4>
+                                                <span class="text-xs text-neutral-dark/50">3 days ago</span>
+                                            </div>
+                                            <p class="text-sm text-neutral-dark/70">New ticket #2847</p>
+                                            <p class="text-sm mt-1">Payment issue reported by user...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Quick Actions -->
+                            <div class="space-y-4">
+                                <div class="bg-neutral-light/30 dark:bg-gray-800/30 p-6 rounded-2xl">
+                                    <h3 class="font-bold text-lg mb-4 dark:text-white">Quick Actions</h3>
+                                    <div class="space-y-3">
+                                        <button class="w-full py-3 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold hover:bg-primary-brown hover:text-white transition">
+                                            <i class="fas fa-envelope mr-2"></i> New Message
+                                        </button>
+                                        <button class="w-full py-3 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold hover:bg-primary-brown hover:text-white transition">
+                                            <i class="fas fa-bell mr-2"></i> Send Notification
+                                        </button>
+                                        <button class="w-full py-3 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold hover:bg-primary-brown hover:text-white transition">
+                                            <i class="fas fa-cog mr-2"></i> Notification Settings
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-neutral-light/30 dark:bg-gray-800/30 p-6 rounded-2xl">
+                                    <h3 class="font-bold text-lg mb-4 dark:text-white">Stats</h3>
+                                    <div class="space-y-2">
+                                        <div class="flex justify-between">
+                                            <span>Unread</span>
+                                            <span class="font-bold text-primary-brown">5</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span>Total</span>
+                                            <span class="font-bold">28</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span>Response Rate</span>
+                                            <span class="font-bold text-secondary-green">98%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== 6. SETTINGS / CONFIGURATION SECTION ===== -->
+                <div id="settings-section" class="dashboard-section hidden">
+                    <div class="dashboard-card">
+                        <h2 class="text-2xl font-display font-bold mb-7 dark:text-white flex items-center">
+                            <i class="fas fa-cog text-primary-brown mr-3 text-2xl"></i>
+                            Settings & Configuration
+                        </h2>
+                        
+                        <div class="space-y-8">
+                            <!-- General Settings -->
+                            <div>
+                                <h3 class="text-xl font-bold mb-5 dark:text-white">General Settings</h3>
+                                <div class="grid md:grid-cols-2 gap-5">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Site Name</label>
+                                        <input type="text" class="admin-input" value="Groww Tour">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Site URL</label>
+                                        <input type="text" class="admin-input" value="https://growwtour.com">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Admin Email</label>
+                                        <input type="email" class="admin-input" value="admin@growwtour.com">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Support Email</label>
+                                        <input type="email" class="admin-input" value="support@growwtour.com">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Payment Settings -->
+                            <div>
+                                <h3 class="text-xl font-bold mb-5 dark:text-white">Payment Configuration</h3>
+                                <div class="space-y-4 bg-neutral-light/30 dark:bg-gray-800/30 p-5 rounded-2xl">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <p class="font-bold dark:text-white">Stripe</p>
+                                            <p class="text-sm text-neutral-dark/60">Accept credit card payments</p>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <p class="font-bold dark:text-white">PayPal</p>
+                                            <p class="text-sm text-neutral-dark/60">Accept PayPal payments</p>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <p class="font-bold dark:text-white">Currency</p>
+                                            <p class="text-sm text-neutral-dark/60">Default: USD</p>
+                                        </div>
+                                        <select class="bg-transparent border border-primary-brown/30 rounded-lg p-2">
+                                            <option>USD</option>
+                                            <option>EUR</option>
+                                            <option>GBP</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Email Settings -->
+                            <div>
+                                <h3 class="text-xl font-bold mb-5 dark:text-white">Email Configuration</h3>
+                                <div class="grid md:grid-cols-2 gap-5">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">SMTP Host</label>
+                                        <input type="text" class="admin-input" value="smtp.gmail.com">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">SMTP Port</label>
+                                        <input type="text" class="admin-input" value="587">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Username</label>
+                                        <input type="text" class="admin-input" value="noreply@growwtour.com">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2">Password</label>
+                                        <input type="password" class="admin-input" value="********">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-end">
+                                <button class="admin-btn px-12 py-3">
+                                    <i class="fas fa-save mr-2"></i> Save Settings
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== 7. REPORTS / ANALYTICS SECTION ===== -->
+                <div id="reports-section" class="dashboard-section hidden">
+                    <div class="dashboard-card">
+                        <h2 class="text-2xl font-display font-bold mb-7 dark:text-white flex items-center">
+                            <i class="fas fa-chart-line text-primary-brown mr-3 text-2xl"></i>
+                            Reports & Analytics
+                        </h2>
+                        
+                       <!-- Date Range - 2x2 on mobile, flex row on desktop -->
+                    <div class="grid grid-cols-2 sm:flex sm:flex-row gap-2 sm:gap-3 mb-6">
+                        <button class="w-full sm:w-auto px-5 py-2.5 rounded-full text-sm font-bold bg-primary-brown text-white">Last 7 Days</button>
+                        <button class="w-full sm:w-auto px-5 py-2.5 rounded-full text-sm font-medium bg-white dark:bg-dark-card border hover:bg-primary-brown/10">Last 30 Days</button>
+                        <button class="w-full sm:w-auto px-5 py-2.5 rounded-full text-sm font-medium bg-white dark:bg-dark-card border hover:bg-primary-brown/10">This Month</button>
+                        <button class="w-full sm:w-auto px-5 py-2.5 rounded-full text-sm font-medium bg-white dark:bg-dark-card border hover:bg-primary-brown/10">Custom</button>
+                    </div>
+                        <!-- Summary Cards -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                            <div class="stat-card p-4">
+                                <p class="text-sm text-neutral-dark/60">Revenue</p>
+                                <p class="text-2xl font-bold dark:text-white">$24.5K</p>
+                                <p class="text-xs text-secondary-green">+15.3%</p>
+                            </div>
+                            <div class="stat-card p-4">
+                                <p class="text-sm text-neutral-dark/60">Bookings</p>
+                                <p class="text-2xl font-bold dark:text-white">342</p>
+                                <p class="text-xs text-secondary-green">+8.2%</p>
+                            </div>
+                            <div class="stat-card p-4">
+                                <p class="text-sm text-neutral-dark/60">New Users</p>
+                                <p class="text-2xl font-bold dark:text-white">89</p>
+                                <p class="text-xs text-secondary-green">+12.5%</p>
+                            </div>
+                            <div class="stat-card p-4">
+                                <p class="text-sm text-neutral-dark/60">Conversion</p>
+                                <p class="text-2xl font-bold dark:text-white">4.8%</p>
+                                <p class="text-xs text-secondary-green">+0.6%</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Export Buttons -->
+                        <div class="flex gap-3 mb-6">
+                            <button class="px-5 py-2.5 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold hover:bg-primary-brown hover:text-white transition">
+                                <i class="fas fa-file-pdf mr-2"></i> Export PDF
+                            </button>
+                            <button class="px-5 py-2.5 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold hover:bg-primary-brown hover:text-white transition">
+                                <i class="fas fa-file-excel mr-2"></i> Export CSV
+                            </button>
+                            <button class="px-5 py-2.5 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold hover:bg-primary-brown hover:text-white transition">
+                                <i class="fas fa-print mr-2"></i> Print
+                            </button>
+                        </div>
+                        
+                        <!-- Reports List -->
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-4 bg-neutral-light/30 dark:bg-gray-800/30 rounded-xl">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-chart-bar text-primary-brown text-xl"></i>
+                                    <div>
+                                        <p class="font-semibold dark:text-white">Monthly Revenue Report</p>
+                                        <p class="text-xs text-neutral-dark/60">January 2026</p>
+                                    </div>
+                                </div>
+                                <button class="text-primary-brown hover:underline">Download</button>
+                            </div>
+                            <div class="flex items-center justify-between p-4 bg-neutral-light/30 dark:bg-gray-800/30 rounded-xl">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-users text-primary-brown text-xl"></i>
+                                    <div>
+                                        <p class="font-semibold dark:text-white">User Growth Analysis</p>
+                                        <p class="text-xs text-neutral-dark/60">Q1 2026</p>
+                                    </div>
+                                </div>
+                                <button class="text-primary-brown hover:underline">Download</button>
+                            </div>
+                            <div class="flex items-center justify-between p-4 bg-neutral-light/30 dark:bg-gray-800/30 rounded-xl">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-map-marked-alt text-primary-brown text-xl"></i>
+                                    <div>
+                                        <p class="font-semibold dark:text-white">Popular Tours Report</p>
+                                        <p class="text-xs text-neutral-dark/60">February 2026</p>
+                                    </div>
+                                </div>
+                                <button class="text-primary-brown hover:underline">Download</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // ============ THEME TOGGLE ============
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = themeToggle?.querySelector('.fa-moon');
+            const themeIconSun = themeToggle?.querySelector('.fa-sun');
+            
+            function toggleTheme() {
+                document.documentElement.classList.toggle('dark');
+                const isDark = document.documentElement.classList.contains('dark');
+                
+                if (isDark) {
+                    if (themeIcon) themeIcon.classList.add('hidden');
+                    if (themeIconSun) themeIconSun.classList.remove('hidden');
+                    if (themeToggle) themeToggle.classList.add('active');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    if (themeIcon) themeIcon.classList.remove('hidden');
+                    if (themeIconSun) themeIconSun.classList.add('hidden');
+                    if (themeToggle) themeToggle.classList.remove('active');
+                    localStorage.setItem('theme', 'light');
+                }
+            }
+            
+            if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+            
+            if (localStorage.getItem('theme') === 'dark') {
+                document.documentElement.classList.add('dark');
+                if (themeIcon) themeIcon.classList.add('hidden');
+                if (themeIconSun) themeIconSun.classList.remove('hidden');
+                if (themeToggle) themeToggle.classList.add('active');
+            }
+            
+            // ============ RTL TOGGLE ============
+            const rtlToggle = document.getElementById('rtl-toggle');
+            
+            function toggleRTL() {
+                if (document.documentElement.dir === 'rtl') {
+                    document.documentElement.dir = 'ltr';
+                    document.documentElement.lang = 'en';
+                    if (rtlToggle) rtlToggle.classList.remove('active');
+                    localStorage.setItem('dir', 'ltr');
+                } else {
+                    document.documentElement.dir = 'rtl';
+                    document.documentElement.lang = 'ar';
+                    if (rtlToggle) rtlToggle.classList.add('active');
+                    localStorage.setItem('dir', 'rtl');
+                }
+            }
+            
+            if (rtlToggle) rtlToggle.addEventListener('click', toggleRTL);
+            
+            if (localStorage.getItem('dir') === 'rtl') {
+                document.documentElement.dir = 'rtl';
+                document.documentElement.lang = 'ar';
+                if (rtlToggle) rtlToggle.classList.add('active');
+            }
+            
+            // ============ DASHBOARD SECTION TOGGLE ============
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+            const sections = {
+                overview: document.getElementById('overview-section'),
+                users: document.getElementById('users-section'),
+                content: document.getElementById('content-section'),
+                orders: document.getElementById('orders-section'),
+                messages: document.getElementById('messages-section'),
+                settings: document.getElementById('settings-section'),
+                reports: document.getElementById('reports-section')
+            };
+            
+            function hideAllSections() {
+                Object.values(sections).forEach(section => {
+                    if (section) section.classList.add('hidden');
+                });
+            }
+            
+            function removeActiveClass() {
+                sidebarItems.forEach(item => {
+                    item.classList.remove('active');
+                });
+            }
+            
+            sidebarItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const section = this.dataset.section;
+                    
+                    removeActiveClass();
+                    this.classList.add('active');
+                    hideAllSections();
+                    
+                    if (section === 'overview' && sections.overview) sections.overview.classList.remove('hidden');
+                    if (section === 'users' && sections.users) sections.users.classList.remove('hidden');
+                    if (section === 'content' && sections.content) sections.content.classList.remove('hidden');
+                    if (section === 'orders' && sections.orders) sections.orders.classList.remove('hidden');
+                    if (section === 'messages' && sections.messages) sections.messages.classList.remove('hidden');
+                    if (section === 'settings' && sections.settings) sections.settings.classList.remove('hidden');
+                    if (section === 'reports' && sections.reports) sections.reports.classList.remove('hidden');
+                });
+            });
+            
+            // ============ CHARTS ============
+            // Bookings Chart
+            const bookingsCtx = document.getElementById('bookingsChart')?.getContext('2d');
+            if (bookingsCtx) {
+                new Chart(bookingsCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                        datasets: [{
+                            label: 'Bookings',
+                            data: [12, 19, 15, 22, 24, 32, 28],
+                            borderColor: '#8D6E63',
+                            backgroundColor: 'rgba(141, 110, 99, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Revenue Chart
+            const revenueCtx = document.getElementById('revenueChart')?.getContext('2d');
+            if (revenueCtx) {
+                new Chart(revenueCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Adventure', 'Cultural', 'Food', 'Nature'],
+                        datasets: [{
+                            data: [45, 38, 32, 41],
+                            backgroundColor: ['#8D6E63', '#4CAF50', '#82736e', '#5D4037'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Save buttons
+            document.querySelectorAll('.admin-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    alert('Settings saved successfully! (Demo)');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

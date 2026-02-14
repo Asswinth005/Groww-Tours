@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groww Tour | Discover Your Next Adventure</title>
+    <link rel="icon" type="assets/jpeg" href="assets/growwpark_logo.jpg">
+    <meta name="description" content="Experience authentic local tours with knowledgeable guides. Discover hidden gems, cultural insights, and unforgettable adventures.">
+    <meta name="keywords" content="local tours, travel guides, cultural experiences, adventure tourism, city exploration">
+    <meta name="author" content="Groww Tour">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-brown': '#8D6E63',
+                        'secondary-green': '#4CAF50',
+                        'accent-orange': '#82736e',
+                        'background-cream': '#FAF5EF',
+                        'neutral-dark': '#5D4037',
+                        'neutral-light': '#EFEBE9',
+                        'dark-bg': '#1a1a1a',
+                        'dark-card': '#2d2d2d'
+                    },
+                    fontFamily: {
+                        'sans': ['Space Grotesk', 'system-ui', 'sans-serif'],
+                        'display': ['Syne', 'sans-serif']
+                    },
+                    animation: {
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s ease-in-out infinite',
+                        'fade-in': 'fadeIn 0.3s ease-out',
+                        'zoom-in': 'zoomIn 0.5s ease-out',
+                        'tilt': 'tilt 10s infinite linear',
+                    },
+                    keyframes: {
+                        slideUp: {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        zoomIn: {
+                            '0%': { transform: 'scale(0.95)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' },
+                        },
+                        tilt: {
+                            '0%, 100%': { transform: 'rotate(0deg)' },
+                            '25%': { transform: 'rotate(1deg)' },
+                            '75%': { transform: 'rotate(-1deg)' },
+                        }
+                    },
+                    backgroundImage: {
+                        'hero-pattern-2': "url('/assets/BG1.jpg')",
+                        'feature-pattern-2': "radial-gradient(circle at 80% 30%, rgba(76, 175, 80, 0.08) 0%, transparent 40%), radial-gradient(circle at 20% 70%, rgba(141, 110, 99, 0.08) 0%, transparent 40%)"
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Custom Styles - SAME AS HOME PAGE 1 */
+        body {
+            background-color: #FAF5EF;
+            color: #5D4037;
+            scroll-behavior: smooth;
+        }
+        
+        .dark body {
+            background-color: #1a1a1a;
+            color: #e5e5e5;
+        }
+        
+        /* Remove scrollbar line */
+        body::-webkit-scrollbar {
+            display: none;
+        }
+        
+        body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* Mobile menu scrollbar - hidden */
+        .mobile-menu::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .mobile-menu {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* Card Hover Effects - DIFFERENT */
+        .destination-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(141, 110, 99, 0.1);
+            position: relative;
+        }
+        
+        .dark .destination-card {
+            background: #2d2d2d;
+            border-color: #404040;
+        }
+        
+        .destination-card:hover {
+            transform: scale(1.03) translateY(-5px);
+            box-shadow: 0 30px 50px -15px rgba(141, 110, 99, 0.3);
+        }
+        
+        .destination-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #8D6E63, #4CAF50);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .destination-card:hover::before {
+            opacity: 1;
+        }
+        
+        /* Experience Card - NEW STYLE */
+        .experience-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(141, 110, 99, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dark .experience-card {
+            background: #2d2d2d;
+            border-color: #404040;
+        }
+        
+        .experience-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: linear-gradient(to top, rgba(141, 110, 99, 0.05), transparent);
+            transition: height 0.3s ease;
+            z-index: 0;
+        }
+        
+        .experience-card:hover::after {
+            height: 100%;
+        }
+        
+        .experience-card > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .experience-card:hover {
+            transform: translateY(-10px);
+            border-color: #8D6E63;
+        }
+        
+        /* Adventure Button - SAME */
+        .adventure-btn {
+            background: linear-gradient(135deg, #8D6E63 0%, #82736e 100%);
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .adventure-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(141, 110, 99, 0.3);
+        }
+        
+        /* Navigation - SAME */
+        .nav-item {
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #8D6E63;
+            transition: width 0.3s ease;
+        }
+        
+        [dir="rtl"] .nav-item::after {
+            left: auto;
+            right: 0;
+        }
+        
+        .nav-item:hover::after {
+            width: 100%;
+        }
+        
+        /* Dropdown Menu - SAME */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 220px;
+            background: white;
+            border-radius: 12px;
+            padding: 0.75rem 0;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: 1px solid #EFEBE9;
+        }
+        
+        .dark .dropdown-menu {
+            background: #2d2d2d;
+            border-color: #404040;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            color: #5D4037;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        
+        .dark .dropdown-item {
+            color: #e5e5e5;
+        }
+        
+        .dropdown-item:hover {
+            background: #EFEBE9;
+            color: #8D6E63;
+            padding-left: 1.75rem;
+        }
+        
+        /* Auth Buttons - SAME */
+        .auth-btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            white-space: nowrap;
+        }
+        
+        .auth-btn.login {
+            background: transparent;
+            border-color: #D7CCC8;
+            color: #5D4037;
+        }
+        
+        .dark .auth-btn.login {
+            border-color: #4B5563;
+            color: #D1D5DB;
+        }
+        
+        .auth-btn.login:hover {
+            border-color: #8D6E63;
+            color: #8D6E63;
+        }
+        
+        .auth-btn.signup {
+            background: #8D6E63;
+            color: white;
+        }
+        
+        .auth-btn.signup:hover {
+            background: #6D4C41;
+            transform: translateY(-2px);
+        }
+        
+        /* Toggle Buttons - SAME */
+        .toggle-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #F3F4F6;
+            color: #6B7280;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .dark .toggle-btn {
+            background: #374151;
+            color: #9CA3AF;
+        }
+        
+        .toggle-btn:hover {
+            background: #E5E7EB;
+            color: #374151;
+        }
+        
+        .toggle-btn.active {
+            background: #8D6E63;
+            color: white;
+        }
+        
+        /* Mobile Menu - SAME */
+        .mobile-menu {
+            background: white;
+            border-top: 1px solid #E5E5E5;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .dark .mobile-menu {
+            background: #1A1A1A;
+            border-color: #404040;
+        }
+
+        .mobile-menu.open {
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .mobile-menu-item {
+            display: block;
+            padding: 1rem 1.5rem;
+            font-weight: 500;
+            color: #5D4037;
+            border-bottom: 1px solid #F3F4F6;
+            transition: all 0.2s ease;
+        }
+
+        .dark .mobile-menu-item {
+            color: #D1D5DB;
+            border-bottom-color: #374151;
+        }
+
+        .mobile-menu-item:hover {
+            background-color: #F9FAFB;
+            color: #8D6E63;
+        }
+
+        .mobile-auth-btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-align: center;
+            margin: 0.25rem;
+            border: 1px solid transparent;
+        }
+
+        .mobile-auth-btn.login {
+            background: transparent;
+            border-color: #D7CCC8;
+            color: #5D4037;
+        }
+
+        .dark .mobile-auth-btn.login {
+            border-color: #4B5563;
+            color: #D1D5DB;
+        }
+
+        .mobile-auth-btn.login:hover {
+            background-color: #8D6E63;
+            color: white;
+            border-color: #8D6E63;
+        }
+
+        .mobile-auth-btn.signup {
+            background: #8D6E63;
+            color: white;
+        }
+
+        .mobile-auth-btn.signup:hover {
+            background: #6D4C41;
+        }
+
+        .mobile-dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .mobile-dropdown-content.show {
+            max-height: 300px;
+        }
+
+        .mobile-dropdown-item {
+            display: block;
+            padding: 0.75rem 2.5rem;
+            font-size: 0.95rem;
+            color: #6B7280;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid #F9FAFB;
+        }
+
+        .dark .mobile-dropdown-item {
+            color: #9CA3AF;
+            border-bottom-color: #374151;
+        }
+
+        .mobile-dropdown-item:hover {
+            color: #8D6E63;
+            background-color: #F9FAFB;
+        }
+
+        /* Dashboard Dropdown - SAME */
+        .dashboard-dropdown {
+            position: relative;
+        }
+        
+        .dashboard-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 200px;
+            background: white;
+            border-radius: 12px;
+            padding: 0.75rem 0;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: 1px solid #EFEBE9;
+        }
+        
+        .dark .dashboard-dropdown-menu {
+            background: #2d2d2d;
+            border-color: #404040;
+        }
+        
+        .dashboard-dropdown:hover .dashboard-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        /* Social Icons - SAME */
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #EFEBE9;
+            color: #5D4037;
+            transition: all 0.3s ease;
+        }
+        
+        .dark .social-icon {
+            background: #374151;
+            color: #e5e5e5;
+        }
+        
+        .social-icon:hover {
+            background: #8D6E63;
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        /* NEW: Hero Wave Divider */
+        .hero-wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+        
+        /* NEW: Stats Card */
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+        
+        /* NEW: Badge */
+        .feature-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background: rgba(141, 110, 99, 0.1);
+            border-radius: 100px;
+            color: #8D6E63;
+            font-weight: 500;
+            font-size: 0.875rem;
+            border: 1px solid rgba(141, 110, 99, 0.2);
+        }
+        
+        .dark .feature-badge {
+            background: rgba(141, 110, 99, 0.2);
+            color: #e5e5e5;
+            border-color: rgba(141, 110, 99, 0.3);
+        }
+        
+        /* NEW: Category Pill */
+        .category-pill {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            background: white;
+            border-radius: 50px;
+            color: #5D4037;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid #EFEBE9;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+        
+        .dark .category-pill {
+            background: #2d2d2d;
+            color: #e5e5e5;
+            border-color: #404040;
+        }
+        
+        .category-pill:hover {
+            background: #8D6E63;
+            color: white;
+            border-color: #8D6E63;
+            transform: translateY(-2px);
+        }
+        
+        .category-pill i {
+            margin-right: 0.5rem;
+        }
+        
+        /* NEW: Testimonial Card 2 */
+        .testimonial-card-2 {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.3s ease;
+            border: 1px solid #EFEBE9;
+        }
+        
+        .dark .testimonial-card-2 {
+            background: #2d2d2d;
+            border-color: #404040;
+        }
+        
+        .testimonial-card-2:hover {
+            box-shadow: 0 20px 40px rgba(141, 110, 99, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        .testimonial-card-2::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            right: 2rem;
+            font-size: 6rem;
+            color: #8D6E63;
+            opacity: 0.1;
+            font-family: serif;
+            line-height: 1;
+        }
+        
+        /* Desktop Navigation Container - FIXED */
+        .desktop-nav-container {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .nav-spacing {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        /* RTL Support */
+        [dir="rtl"] .ml-2 {
+            margin-left: 0;
+            margin-right: 0.5rem;
+        }
+        
+        [dir="rtl"] .mr-2 {
+            margin-right: 0;
+            margin-left: 0.5rem;
+        }
+        
+        [dir="rtl"] .ml-4 {
+            margin-left: 0;
+            margin-right: 1rem;
+        }
+        
+        [dir="rtl"] .space-x-3 > :not([hidden]) ~ :not([hidden]) {
+            --tw-space-x-reverse: 1;
+        }
+        
+        /* Footer - SAME */
+        footer {
+            background: #EFEBE9;
+            color: #5D4037;
+        }
+        
+        .dark footer {
+            background: #1a1a1a;
+            color: #e5e5e5;
+        }
+        
+        footer .border-t {
+            border-color: #D7CCC8;
+        }
+        
+        .dark footer .border-t {
+            border-color: #404040;
+        }
+    </style>
+</head>
+<body class="bg-background-cream dark:bg-dark-bg">
+
+    <!-- Fixed Navigation - PERFECTLY ALIGNED LIKE HOME PAGE 1 -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-neutral-light dark:border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between h-20 w-full">
+                <!-- Logo -->
+                <a class='flex items-center space-x-3 group' href='index.html'>
+                    <div class="w-10 h-10 bg-primary-brown rounded-lg flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
+                        <i class="fas fa-map-marked-alt text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-display font-bold tracking-tight text-neutral-dark dark:text-white">Groww</span>
+                        <span class="text-2xl font-display font-bold tracking-tight text-primary-brown">Tour</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation - FIXED ALIGNMENT -->
+                <div class="hidden xl:flex items-center flex-1 justify-end">
+                    <div class="desktop-nav-container">
+                        <!-- Navigation Items -->
+                        <div class="nav-spacing">
+                            <!-- Home Dropdown -->
+                            <div class="dropdown">
+                                <button class="nav-item font-medium text-neutral-dark dark:text-gray-300 hover:text-primary-brown transition flex items-center">
+                                    Home <i class="fas fa-chevron-down ml-2 text-xs"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class='dropdown-item' href='index.html'>
+                                        <i class="fas fa-home p-2"></i>
+                                        Home 1
+                                    </a>
+                                    <a href="home2.html" class="dropdown-item" style="background: rgba(141, 110, 99, 0.1); color: #8D6E63; border-left: 3px solid #8D6E63; font-weight: 600;">
+                                        <i class="fas fa-home p-2"></i>
+                                        Home 2
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- About -->
+                            <a class='nav-item font-medium text-neutral-dark dark:text-gray-300 hover:text-primary-brown transition' href='about.html'>
+                                About
+                            </a>
+                            
+                            <!-- Services -->
+                            <a class='nav-item font-medium text-neutral-dark dark:text-gray-300 hover:text-primary-brown transition' href='service.html'>
+                                Services
+                            </a>
+                            
+                            <!-- Book Now -->
+                            <a class='nav-item font-medium text-neutral-dark dark:text-gray-300 hover:text-primary-brown transition' href='book.html'>
+                                Book Now
+                            </a>
+
+                            <!-- Gallery -->
+                            <a class='nav-item font-medium text-neutral-dark dark:text-gray-300 hover:text-primary-brown transition' href='gallery.html'>
+                               Gallery
+                            </a>
+                            
+                            <!-- Contact Us -->
+                            <a class='nav-item font-medium text-neutral-dark dark:text-gray-300 hover:text-primary-brown transition' href='contact.html'>
+                                Contact 
+                            </a>
+                            
+                            <!-- Dashboard Dropdown -->
+                            <div class="dashboard-dropdown">
+                                <button class="nav-item font-medium text-neutral-dark dark:text-gray-300 hover:text-primary-brown transition flex items-center">
+                                    Dashboard <i class="fas fa-chevron-down ml-2 text-xs"></i>
+                                </button>
+                                <div class="dashboard-dropdown-menu">
+                                    <a class='dropdown-item' href='admin.html'>
+                                        <i class="fas fa-user-shield p-2"></i>
+                                        Admin
+                                    </a>
+                                    <a class='dropdown-item' href='client.html'>
+                                        <i class="fas fa-user p-2"></i>
+                                        Client
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Auth Buttons - ADJUSTED MARGIN -->
+                        <div class="flex items-center gap-3 ml-0">
+                            <a class='auth-btn login' href='login.html'>
+                                Login
+                            </a>
+                            <a class='auth-btn signup' href='signup.html'>
+                                Sign Up
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Compact Theme & Language Toggle -->
+                    <div class="flex gap-2 ml-4">
+                        <button id="theme-toggle" class="toggle-btn" title="Toggle theme">
+                            <i class="fas fa-moon"></i>
+                            <i class="fas fa-sun hidden"></i>
+                        </button>
+                        <button id="rtl-toggle" class="toggle-btn" title="Toggle RTL/LTR">
+                            ⇄
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-toggle" class="xl:hidden text-neutral-dark dark:text-gray-300 p-2">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu - SAME AS HOME PAGE 1 -->
+            <div id="mobile-menu" class="mobile-menu xl:hidden">
+                <!-- Home -->
+                <div class="mobile-dropdown">
+                    <button class="mobile-dropdown-btn flex items-center justify-between w-full mobile-menu-item">
+                        <span>Home</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                    <div class="mobile-dropdown-content">
+                        <a class='mobile-dropdown-item' href='index.html'>Home 1</a>
+                        <a href="home2.html" class="mobile-dropdown-item" style="background: rgba(141, 110, 99, 0.1); color: #8D6E63; border-left: 3px solid #8D6E63; font-weight: 600;">
+                            <i class="fas fa-home mr-2"></i>
+                            Home 2
+                        </a>                  
+                      </div>
+                </div>
+                
+                <!-- About -->
+                <a class='mobile-menu-item' href='about.html'>About</a>
+                
+                <!-- Services -->
+                <a class='mobile-menu-item' href='service.html'>Services</a>
+                
+                <!-- Book Now -->
+                <a class='mobile-menu-item' href='book.html'>Book Now</a>
+
+                  <!-- Gallery -->
+                <a class='mobile-menu-item' href='gallery.html'>Gallery</a>
+
+                <!-- Contact Us -->
+                <a class='mobile-menu-item' href='contact.html'>Contact</a>
+                
+                <!-- Dashboard -->
+                <div class="mobile-dropdown">
+                    <button class="mobile-dropdown-btn flex items-center justify-between w-full mobile-menu-item">
+                        <span>Dashboard</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                    <div class="mobile-dropdown-content">
+                        <a class='mobile-dropdown-item' href='admin.html'>Admin</a>
+                        <a class='mobile-dropdown-item' href='client.html'>Client</a>
+                    </div>
+                </div>
+                
+                <!-- Mobile Auth Buttons -->
+                <div class="flex flex-col sm:flex-row gap-3 p-6">
+                    <a class='mobile-auth-btn login flex-1 text-center' href='login.html'>
+                        Login
+                    </a>
+                    <a class='mobile-auth-btn signup flex-1 text-center' href='signup.html'>
+                        Sign Up
+                    </a>
+                </div>
+                
+                <!-- Mobile Toggle Buttons -->
+                <div class="flex justify-center gap-3 p-6 border-t border-gray-200 dark:border-gray-800">
+                    <button id="theme-toggle-mobile" class="toggle-btn">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun hidden"></i>
+                    </button>
+                    <button id="rtl-toggle-mobile" class="toggle-btn">
+                        ⇄
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION - COMPLETELY DIFFERENT DESIGN -->
+    <section id="home" class="relative bg-gradient-to-br from-primary-brown/90 to-accent-orange/90 dark:from-gray-900 dark:to-gray-800 text-white overflow-hidden">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="/assets/BG1.jpg" 
+                 alt="Hero Background" 
+                 class="w-full h-full object-cover opacity-20 dark:opacity-10">
+            <div class="absolute inset-0 bg-gradient-to-r from-primary-brown/80 to-accent-orange/80 dark:from-gray-900/90 dark:to-gray-800/90"></div>
+        </div>
+        
+        <!-- Animated Shapes -->
+        <div class="absolute top-20 left-10 w-64 h-64 bg-white/5 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div class="absolute bottom-10 right-10 w-96 h-96 bg-secondary-green/10 rounded-full blur-3xl animate-float"></div>
+        
+        <div class="container mx-auto px-6 py-32 md:py-40 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="animate-slide-up">
+                    <div class="feature-badge bg-white/20 text-white border-white/30 mb-6 inline-flex">
+                        <i class="fas fa-globe-asia mr-2"></i>
+                        Welcome to Groww Tour 2.0
+                    </div>
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6 leading-tight">
+                        Travel 
+                        <span class="relative">
+                            <span class="relative z-10">Deeper,</span>
+                            <span class="absolute bottom-3 left-0 w-full h-4 bg-secondary-green/30 -z-0"></span>
+                        </span>
+                        <br>Not Further
+                    </h1>
+                    <p class="text-xl opacity-95 mb-8 max-w-lg leading-relaxed">
+                        Move beyond the tourist trail. Our local hosts don't just show you around—they welcome you into their world.
+                    </p>
+                    
+                   <!-- CTA Buttons - Different Style -->
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+                        <a href="#" class="bg-white text-primary-brown font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-opacity-90 transition shadow-lg hover:shadow-2xl transform hover:-translate-y-1 flex items-center justify-center sm:justify-start">
+                            <i class="fas fa-play-circle mr-2"></i>
+                            Watch Film
+                        </a>
+                        <a href="#" class="bg-transparent border-2 border-white text-white font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-full hover:bg-white/10 transition flex items-center justify-center sm:justify-start">
+                            <i class="fas fa-calendar-check mr-2"></i>
+                            Start Tour
+                        </a>
+                    </div>
+                    
+                    <!-- Trust Badges -->
+                    <div class="flex items-center gap-6 mt-12">
+                        <div class="flex -space-x-2">
+                            <img src="assets/test2.jpg" class="w-10 h-10 rounded-full border-2 border-white">
+                            <img src="assets/trust.jpg" class="w-10 h-10 rounded-full border-2 border-white">
+                            <img src="assets/trust1.jpg" class="w-10 h-10 rounded-full border-2 border-white">
+                            <div class="w-10 h-10 rounded-full border-2 border-white bg-secondary-green text-white flex items-center justify-center text-xs font-bold">+2K</div>
+                        </div>
+                        <div>
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-300"></i>
+                                <i class="fas fa-star text-yellow-300"></i>
+                                <i class="fas fa-star text-yellow-300"></i>
+                                <i class="fas fa-star text-yellow-300"></i>
+                                <i class="fas fa-star text-yellow-300"></i>
+                                <span class="ml-2 font-bold">4.95</span>
+                            </div>
+                            <p class="text-sm opacity-80">2,500+ verified reviews</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Content - Booking Card -->
+                <div class="bg-white dark:bg-dark-card rounded-3xl p-8 shadow-2xl animate-slide-up" style="animation-delay: 0.2s">
+                    <h3 class="text-2xl font-display font-bold text-neutral-dark dark:text-white mb-6">
+                        Where to next?
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div class="relative">
+                            <i class="fas fa-map-marker-alt absolute left-4 top-1/2 transform -translate-y-1/2 text-primary-brown"></i>
+                            <input type="text" placeholder="Destination" class="w-full pl-12 pr-4 py-4 bg-neutral-light dark:bg-gray-800 rounded-xl text-neutral-dark dark:text-white placeholder-neutral-dark/50 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-brown">
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="relative">
+                                <i class="fas fa-calendar absolute left-4 top-1/2 transform -translate-y-1/2 text-primary-brown"></i>
+                                <input type="text" placeholder="Check in" class="w-full pl-12 pr-4 py-4 bg-neutral-light dark:bg-gray-800 rounded-xl text-neutral-dark dark:text-white placeholder-neutral-dark/50 focus:outline-none focus:ring-2 focus:ring-primary-brown">
+                            </div>
+                            <div class="relative">
+                                <i class="fas fa-calendar-check absolute left-4 top-1/2 transform -translate-y-1/2 text-primary-brown"></i>
+                                <input type="text" placeholder="Check out" class="w-full pl-12 pr-4 py-4 bg-neutral-light dark:bg-gray-800 rounded-xl text-neutral-dark dark:text-white placeholder-neutral-dark/50 focus:outline-none focus:ring-2 focus:ring-primary-brown">
+                            </div>
+                        </div>
+                        
+                        <div class="relative">
+                            <i class="fas fa-user-friends absolute left-4 top-1/2 transform -translate-y-1/2 text-primary-brown"></i>
+                            <select class="w-full pl-12 pr-4 py-4 bg-neutral-light dark:bg-gray-800 rounded-xl text-neutral-dark dark:text-white appearance-none focus:outline-none focus:ring-2 focus:ring-primary-brown">
+                                <option>2 travelers</option>
+                                <option>3 travelers</option>
+                                <option>4 travelers</option>
+                                <option>5+ travelers</option>
+                            </select>
+                            <i class="fas fa-chevron-down absolute right-4 top-1/2 transform -translate-y-1/2 text-neutral-dark/50"></i>
+                        </div>
+                        
+                        <a href="#" class="adventure-btn w-full text-center py-4">
+                            <i class="fas fa-search mr-2"></i>
+                            Search Experiences
+                        </a>
+                        
+                        <p class="text-center text-sm text-neutral-dark/60 dark:text-gray-400">
+                            <i class="fas fa-shield-alt mr-1"></i>
+                            Secure booking • Free cancellation
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CATEGORIES SECTION - MOBILE OPTIMIZED -->
+                <section class="py-20 relative -mt-8 sm:-mt-16 z-20">
+                    <div class="container mx-auto px-4 sm:px-6">
+                        <div class="bg-white dark:bg-dark-card rounded-3xl shadow-xl p-6 sm:p-8 md:p-10">
+                            <div class="flex flex-wrap items-center justify-between gap-4 mb-6 sm:mb-8">
+                                <h2 class="text-xl sm:text-2xl md:text-3xl font-sans font-semibold text-neutral-dark dark:text-white">
+                    Browse by Category
+                </h2>
+
+                <a href="#" class="text-primary-brown hover:text-accent-orange font-medium flex items-center text-sm sm:text-base">
+                    View all
+                    <i class="fas fa-arrow-right ml-2 text-xs sm:text-sm"></i>
+                </a>
+            </div>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
+                <a href="#" class="category-pill text-center py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base flex items-center justify-center">
+                    <i class="fas fa-hiking text-primary-brown mr-1 sm:mr-2"></i>
+                    Adventure
+                </a>
+                <a href="#" class="category-pill text-center py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base flex items-center justify-center">
+                    <i class="fas fa-landmark text-primary-brown mr-1 sm:mr-2"></i>
+                    Cultural
+                </a>
+                <a href="#" class="category-pill text-center py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base flex items-center justify-center">
+                    <i class="fas fa-utensils text-primary-brown mr-1 sm:mr-2"></i>
+                    Food
+                </a>
+                <a href="#" class="category-pill text-center py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base flex items-center justify-center">
+                    <i class="fas fa-camera text-primary-brown mr-1 sm:mr-2"></i>
+                    Photography
+                </a>
+                <a href="#" class="category-pill text-center py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base flex items-center justify-center">
+                    <i class="fas fa-tree text-primary-brown mr-1 sm:mr-2"></i>
+                    Nature
+                </a>
+                <a href="#" class="category-pill text-center py-2.5 sm:py-3 px-3 sm:px-4 text-sm sm:text-base flex items-center justify-center">
+                    <i class="fas fa-heart text-primary-brown mr-1 sm:mr-2"></i>
+                    Wellness
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- FEATURED DESTINATIONS - NEW CARD DESIGN -->
+    <section id="destinations" class="py-20 bg-feature-pattern-2">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="feature-badge mb-4">
+                    <i class="fas fa-map-pin mr-2"></i>
+                    Curated for you
+                </span>
+                <h2 class="text-4xl md:text-5xl font-display font-bold mb-6 text-neutral-dark dark:text-white">
+                    Discover <span class="text-primary-brown">Authentic</span> Places
+                </h2>
+                <p class="text-lg text-neutral-dark/70 dark:text-gray-300">
+                    Not the crowded tourist traps. The real neighborhoods, hidden cafes, and local haunts that make a city come alive.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Destination 1 -->
+                <div class="destination-card group">
+                    <div class="relative h-72 overflow-hidden">
+                        <img src="assets/des1.jpg" 
+                             alt="Venice" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                        <div class="absolute top-4 right-4 bg-white/90 dark:bg-dark-card px-4 py-2 rounded-full text-sm font-bold text-primary-brown">
+                            <i class="fas fa-euro-sign mr-1"></i> From €89
+                        </div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-2xl font-bold text-white mb-2">Venice</h3>
+                            <div class="flex items-center text-white/90 text-sm">
+                                <i class="fas fa-clock mr-2"></i>
+                                <span>5 experiences</span>
+                                <i class="fas fa-user-friends ml-4 mr-2"></i>
+                                <span>12 local hosts</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Destination 2 -->
+                <div class="destination-card group">
+                    <div class="relative h-72 overflow-hidden">
+                        <img src="assets/des2.jpg" 
+                             alt="Paris" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                        <div class="absolute top-4 right-4 bg-white/90 dark:bg-dark-card px-4 py-2 rounded-full text-sm font-bold text-primary-brown">
+                            <i class="fas fa-euro-sign mr-1"></i> From €75
+                        </div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-2xl font-bold text-white mb-2">Paris</h3>
+                            <div class="flex items-center text-white/90 text-sm">
+                                <i class="fas fa-clock mr-2"></i>
+                                <span>8 experiences</span>
+                                <i class="fas fa-user-friends ml-4 mr-2"></i>
+                                <span>15 local hosts</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Destination 3 -->
+                <div class="destination-card group">
+                    <div class="relative h-72 overflow-hidden">
+                        <img src="assets/des3.jpg" 
+                             alt="Kyoto" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                        <div class="absolute top-4 right-4 bg-white/90 dark:bg-dark-card px-4 py-2 rounded-full text-sm font-bold text-primary-brown">
+                            <i class="fas fa-yen-sign mr-1"></i> From ¥12000
+                        </div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <h3 class="text-2xl font-bold text-white mb-2">Kyoto</h3>
+                            <div class="flex items-center text-white/90 text-sm">
+                                <i class="fas fa-clock mr-2"></i>
+                                <span>6 experiences</span>
+                                <i class="fas fa-user-friends ml-4 mr-2"></i>
+                                <span>8 local hosts</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="inline-flex items-center text-primary-brown font-semibold hover:text-accent-orange transition border-2 border-primary-brown/30 hover:border-primary-brown px-8 py-3 rounded-full">
+                    Explore all destinations
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCES SECTION - DIFFERENT LAYOUT -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
+                <!-- Left Column - Content -->
+                <div class="lg:w-1/2 animate-slide-up">
+                    <span class="feature-badge mb-4">
+                        <i class="fas fa-sparkles mr-2"></i>
+                        Not your typical tour
+                    </span>
+                    <h2 class="text-4xl md:text-5xl font-display font-bold mb-6 text-neutral-dark dark:text-white">
+                        Real life, 
+                        <span class="text-secondary-green">real people,</span>
+                        <br>real connections
+                    </h2>
+                    <p class="text-lg text-neutral-dark/70 dark:text-gray-300 mb-8 leading-relaxed">
+                        Forget scripted tours and rushed itineraries. Our experiences are led by locals who treat you like a friend visiting their city.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 bg-primary-brown/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-user-check text-primary-brown text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2 dark:text-white">Vetted local hosts</h4>
+                                <p class="text-neutral-dark/70 dark:text-gray-400">Every guide is interviewed, background-checked, and trained.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 bg-primary-brown/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-shield-alt text-primary-brown text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2 dark:text-white">Risk-free booking</h4>
+                                <p class="text-neutral-dark/70 dark:text-gray-400">Free cancellation up to 24 hours before your experience.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 bg-primary-brown/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-heart text-primary-brown text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-2 dark:text-white">Give back to communities</h4>
+                                <p class="text-neutral-dark/70 dark:text-gray-400">10% of every booking supports local community projects.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="adventure-btn mt-10 px-10 py-4">
+                        <i class="fas fa-compass mr-2"></i>
+                        See how it works
+                    </a>
+                </div>
+                
+                <!-- Right Column - Stats & Cards -->
+                <div class="lg:w-1/2">
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="experience-card text-center">
+                        <div class="text-4xl font-bold text-primary-brown mb-2" style="font-family: 'Montserrat', sans-serif;">15K+</div>
+                            <p class="text-neutral-dark/70 dark:text-gray-400">Happy travelers</p>
+                        </div>
+                        <div class="experience-card text-center">
+                            <div class="text-4xl font-bold text-primary-brown mb-2" style="font-family: 'Montserrat', sans-serif;">450+</div>
+                            <p class="text-neutral-dark/70 dark:text-gray-400">Local guides</p>
+                        </div>
+                        <div class="experience-card text-center">
+                            <div class="text-4xl font-bold text-primary-brown mb-2" style="font-family: 'Montserrat', sans-serif;">65+</div>
+                            <p class="text-neutral-dark/70 dark:text-gray-400">Countries</p>
+                        </div>
+                        <div class="experience-card text-center">
+                            <div class="text-4xl font-bold text-primary-brown mb-2" style="font-family: 'Montserrat', sans-serif;">4.9★</div>
+                            <p class="text-neutral-dark/70 dark:text-gray-400">Average rating</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Featured Host Card -->
+                    <div class="mt-8 bg-gradient-to-br from-primary-brown to-accent-orange rounded-3xl p-8 text-white">
+                        <div class="flex items-center gap-4 mb-4">
+                            <img src="assets/trust.jpg" 
+                                 alt="Host" 
+                                 class="w-16 h-16 rounded-full border-4 border-white/30">
+                            <div>
+                                <h4 class="text-xl font-bold">Meet Marco, your Rome host</h4>
+                                <p class="opacity-90">"I've lived here my whole life. Let me show you the real Rome."</p>
+                            </div>
+                        </div>
+                        <a href="#" class="inline-flex items-center text-white border-b border-white/50 pb-1 hover:border-white">
+                            Read Marco's story
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS - DIFFERENT DESIGN -->
+    <section class="py-20 bg-neutral-light dark:bg-gray-900/50">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="feature-badge mb-4">
+                    <i class="fas fa-comment-dots mr-2"></i>
+                    Kind words
+                </span>
+                <h2 class="text-4xl md:text-5xl font-display font-bold mb-6 text-neutral-dark dark:text-white">
+                    Loved by <span class="text-accent-orange">travelers</span>
+                </h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card-2">
+                    <div class="flex items-center mb-6">
+                        <img src="assets/Guide1.jpg" 
+                             alt="Emma" 
+                             class="w-14 h-14 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold dark:text-white">Emma Watson</h4>
+                            <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Traveled to Kyoto</p>
+                        </div>
+                    </div>
+                    <p class="text-neutral-dark/80 dark:text-gray-300 mb-4 text-lg italic">
+                        "I've never experienced a city like this. Kenji didn't just show us temples—he introduced us to his favorite ramen shop, and we ended up staying for 3 hours chatting with the chef."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="ml-2 text-sm font-medium text-primary-brown">5.0</span>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card-2">
+                    <div class="flex items-center mb-6">
+                        <img src="assets/Guide2.jpg" 
+                             alt="Michael" 
+                             class="w-14 h-14 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold dark:text-white">Michael Chen</h4>
+                            <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Traveled to Venice</p>
+                        </div>
+                    </div>
+                    <p class="text-neutral-dark/80 dark:text-gray-300 mb-4 text-lg italic">
+                        "Marco took us to a tiny bacaro where his grandfather used to drink. Best cicchetti of my life. You just can't find these places in guidebooks."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="ml-2 text-sm font-medium text-primary-brown">5.0</span>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card-2">
+                    <div class="flex items-center mb-6">
+                        <img src="assets/Guide3.jpg" 
+                             alt="Sophie" 
+                             class="w-14 h-14 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold dark:text-white">Sophie Martin</h4>
+                            <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Traveled to Paris</p>
+                        </div>
+                    </div>
+                    <p class="text-neutral-dark/80 dark:text-gray-300 mb-4 text-lg italic">
+                        "Sophia took us to her favorite patisserie in the 10th. We spent an hour learning about French pastry from the owner himself. This is why I travel."
+                    </p>
+                    <div class="flex items-center">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="ml-2 text-sm font-medium text-primary-brown">5.0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INSTAGRAM FEED - NEW SECTION -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-wrap items-end justify-between gap-4 mb-12">
+                <div>
+                    <span class="feature-badge mb-4">
+                        <i class="fab fa-instagram mr-2"></i>
+                        @growwtour
+                    </span>
+                    <h2 class="text-4xl md:text-5xl font-display font-bold text-neutral-dark dark:text-white">
+                        Follow our <span class="text-primary-brown">journey</span>
+                    </h2>
+                </div>
+                <a href="#" class="text-primary-brown hover:text-accent-orange font-medium flex items-center">
+                    View all posts
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="relative group overflow-hidden rounded-2xl aspect-square">
+                    <img src="assets/ins.jpg" 
+                         alt="Instagram post" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                        <i class="fab fa-instagram text-white text-3xl"></i>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-2xl aspect-square">
+                    <img src="assets/ins1.jpg" 
+                         alt="Instagram post" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                        <i class="fab fa-instagram text-white text-3xl"></i>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-2xl aspect-square">
+                    <img src="assets/ins2.jpg" 
+                         alt="Instagram post" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                        <i class="fab fa-instagram text-white text-3xl"></i>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-2xl aspect-square">
+                    <img src="assets/ins3.jpg" 
+                         alt="Instagram post" 
+                         class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                        <i class="fab fa-instagram text-white text-3xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWSLETTER - DIFFERENT STYLE -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="bg-gradient-to-br from-primary-brown/10 to-secondary-green/10 dark:from-primary-brown/5 dark:to-secondary-green/5 rounded-3xl p-12 md:p-16 border border-primary-brown/20 dark:border-gray-700">
+                <div class="max-w-3xl mx-auto text-center">
+                    <span class="feature-badge mb-4">
+                        <i class="fas fa-envelope mr-2"></i>
+                        Stay inspired
+                    </span>
+                    <h2 class="text-3xl md:text-4xl font-display font-bold mb-6 text-neutral-dark dark:text-white">
+                        Get travel stories in your inbox
+                    </h2>
+                    <p class="text-lg text-neutral-dark/70 dark:text-gray-300 mb-10">
+                        No spam. Just local tips, hidden gems, and travel inspiration from our community of hosts.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
+                        <input type="email" 
+                               placeholder="Enter your email" 
+                               class="flex-1 px-6 py-4 bg-white dark:bg-dark-card border border-primary-brown/20 dark:border-gray-700 rounded-full focus:outline-none focus:ring-2 focus:ring-primary-brown">
+                        <button class="adventure-btn px-8 py-4 whitespace-nowrap">
+                            Subscribe
+                        </button>
+                    </div>
+                    
+                    <p class="text-sm text-neutral-dark/50 dark:text-gray-500 mt-6">
+                        By subscribing, you agree to our Privacy Policy and consent to receive updates.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER - EXACTLY SAME AS HOME PAGE 1 -->
+    <footer class="py-16">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <!-- Company Info -->
+                <div class="text-center md:text-left">
+                    <div class="flex items-center justify-center md:justify-start space-x-3 mb-6">
+                    <div class="w-10 h-10 bg-primary-brown rounded-lg flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">                            <i class="fas fa-map-marked-alt text-white text-lg"></i>
+                        </div>
+                        <div>
+                            <span class="text-2xl font-display font-bold text-neutral-dark dark:text-white">Groww</span>
+                            <span class="text-2xl font-display font-bold text-primary-brown">Tour</span>
+                        </div>
+                    </div>
+                    <p class="mb-6 opacity-80 dark:opacity-70 text-center md:text-left">
+                        Connecting travelers with passionate local guides for authentic experiences around the world since 2015.
+                    </p>
+                    <div class="flex space-x-4 justify-center md:justify-start">
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div class="text-center md:text-left">
+                <h3 class="text-neutral-dark dark:text-white text-xl font-bold mb-6">Quick Links</h3>
+                <ul class="space-y-3">
+                    <li><a class='hover:text-primary-brown transition block' href='index.html'>Home</a></li>
+                    <li><a class='hover:text-primary-brown transition block' href='about.html'>About</a></li>
+                    <li><a class='hover:text-primary-brown transition block' href='service.html'>Services</a></li>
+                    <li><a class='hover:text-primary-brown transition block' href='book.html'>Book Now</a></li>
+                    <li><a class='hover:text-primary-brown transition block' href='contact.html'>Contact Us</a></li>
+                </ul>
+            </div>
+                
+                <!-- Tour Types -->
+                <div class="text-center md:text-left">
+                <h3 class="text-neutral-dark dark:text-white text-xl font-bold mb-6">Tour Types</h3>
+                <ul class="space-y-3">
+                    <li><a href="service.html" class="hover:text-primary-brown transition block">Adventure Tours</a></li>
+                    <li><a href="service.html" class="hover:text-primary-brown transition block">Cultural Tours</a></li>
+                    <li><a href="service.html" class="hover:text-primary-brown transition block">Food Tours</a></li>
+                    <li><a href="service.html" class="hover:text-primary-brown transition block">Nature Tours</a></li>
+                    <li><a href="service.html" class="hover:text-primary-brown transition block">City Tours</a></li>
+                    <li><a href="service.html" class="hover:text-primary-brown transition block">Custom Tours</a></li>
+                </ul>
+            </div>
+                
+                <!-- Contact Info -->
+                <div class="text-center md:text-left">
+                    <h3 class="text-neutral-dark dark:text-white text-xl font-bold mb-6">Contact Info</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start justify-center md:justify-start">
+                            <i class="fas fa-map-marker-alt text-primary-brown mt-1 mr-3"></i>
+                            <span class="text-center md:text-left">123 Adventure Street, Travel District, NY 10001</span>
+                        </li>
+                        <li class="flex items-center justify-center md:justify-start">
+                            <i class="fas fa-phone text-primary-brown mr-3"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </li>
+                        <li class="flex items-center justify-center md:justify-start">
+                            <i class="fas fa-envelope text-primary-brown mr-3"></i>
+                            <span>hello@growwtour.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Bottom Bar -->
+            <div class="mt-12 pt-8 border-t text-center">
+                <p class="text-sm opacity-75 dark:opacity-70">
+                    &copy; 2026 Groww Tour. All rights reserved. Crafted with 
+                    <i class="fas fa-heart text-primary-brown mx-1"></i> and purpose.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript - SAME AS HOME PAGE 1 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme Toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = themeToggle?.querySelector('.fa-moon');
+            const themeIconSun = themeToggle?.querySelector('.fa-sun');
+            
+            const mobileThemeToggle = document.getElementById('theme-toggle-mobile');
+            const mobileThemeIcon = mobileThemeToggle?.querySelector('.fa-moon');
+            const mobileThemeIconSun = mobileThemeToggle?.querySelector('.fa-sun');
+            
+            function toggleTheme() {
+                document.documentElement.classList.toggle('dark');
+                
+                if (document.documentElement.classList.contains('dark')) {
+                    if (themeIcon) themeIcon.classList.add('hidden');
+                    if (themeIconSun) themeIconSun.classList.remove('hidden');
+                    if (themeToggle) themeToggle.classList.add('active');
+                    if (mobileThemeIcon) mobileThemeIcon.classList.add('hidden');
+                    if (mobileThemeIconSun) mobileThemeIconSun.classList.remove('hidden');
+                    if (mobileThemeToggle) mobileThemeToggle.classList.add('active');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    if (themeIcon) themeIcon.classList.remove('hidden');
+                    if (themeIconSun) themeIconSun.classList.add('hidden');
+                    if (themeToggle) themeToggle.classList.remove('active');
+                    if (mobileThemeIcon) mobileThemeIcon.classList.remove('hidden');
+                    if (mobileThemeIconSun) mobileThemeIconSun.classList.add('hidden');
+                    if (mobileThemeToggle) mobileThemeToggle.classList.remove('active');
+                    localStorage.setItem('theme', 'light');
+                }
+            }
+            
+            if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+            if (mobileThemeToggle) mobileThemeToggle.addEventListener('click', toggleTheme);
+            
+            if (localStorage.getItem('theme') === 'dark') {
+                document.documentElement.classList.add('dark');
+                if (themeIcon) themeIcon.classList.add('hidden');
+                if (themeIconSun) themeIconSun.classList.remove('hidden');
+                if (themeToggle) themeToggle.classList.add('active');
+                if (mobileThemeIcon) mobileThemeIcon.classList.add('hidden');
+                if (mobileThemeIconSun) mobileThemeIconSun.classList.remove('hidden');
+                if (mobileThemeToggle) mobileThemeToggle.classList.add('active');
+            }
+            
+            // RTL Toggle
+            const rtlToggle = document.getElementById('rtl-toggle');
+            const mobileRtlToggle = document.getElementById('rtl-toggle-mobile');
+            
+            function toggleRTL() {
+                if (document.documentElement.dir === 'rtl') {
+                    document.documentElement.dir = 'ltr';
+                    document.documentElement.lang = 'en';
+                    if (rtlToggle) {
+                        rtlToggle.textContent = '⇄';
+                        rtlToggle.classList.remove('active');
+                    }
+                    if (mobileRtlToggle) {
+                        mobileRtlToggle.textContent = '⇄';
+                        mobileRtlToggle.classList.remove('active');
+                    }
+                    localStorage.setItem('dir', 'ltr');
+                } else {
+                    document.documentElement.dir = 'rtl';
+                    document.documentElement.lang = 'ar';
+                    if (rtlToggle) {
+                        rtlToggle.textContent = '⇄';
+                        rtlToggle.classList.add('active');
+                    }
+                    if (mobileRtlToggle) {
+                        mobileRtlToggle.textContent = '⇄';
+                        mobileRtlToggle.classList.add('active');
+                    }
+                    localStorage.setItem('dir', 'rtl');
+                }
+            }
+            
+            if (rtlToggle) rtlToggle.addEventListener('click', toggleRTL);
+            if (mobileRtlToggle) mobileRtlToggle.addEventListener('click', toggleRTL);
+            
+            if (localStorage.getItem('dir') === 'rtl') {
+                document.documentElement.dir = 'rtl';
+                document.documentElement.lang = 'ar';
+                if (rtlToggle) {
+                    rtlToggle.textContent = '⇄';
+                    rtlToggle.classList.add('active');
+                }
+                if (mobileRtlToggle) {
+                    mobileRtlToggle.textContent = '⇄';
+                    mobileRtlToggle.classList.add('active');
+                }
+            }
+            
+            // Mobile Menu Toggle
+            const mobileToggle = document.getElementById('mobile-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileToggleIcon = document.querySelector('#mobile-toggle i');
+            
+            if (mobileToggle) {
+                mobileToggle.addEventListener('click', () => {
+                    const isOpening = !mobileMenu.classList.contains('open');
+                    
+                    if (isOpening) {
+                        mobileMenu.classList.add('open');
+                        mobileToggleIcon.classList.remove('fa-bars');
+                        mobileToggleIcon.classList.add('fa-times');
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        mobileMenu.classList.remove('open');
+                        mobileToggleIcon.classList.remove('fa-times');
+                        mobileToggleIcon.classList.add('fa-bars');
+                        document.body.style.overflow = '';
+                        
+                        document.querySelectorAll('.mobile-dropdown-content').forEach(content => {
+                            content.classList.remove('show');
+                        });
+                    }
+                });
+            }
+            
+            // Mobile Dropdown Toggle
+            document.querySelectorAll('.mobile-dropdown-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const dropdown = e.target.closest('.mobile-dropdown');
+                    const content = dropdown.querySelector('.mobile-dropdown-content');
+                    const icon = dropdown.querySelector('.fa-chevron-down');
+                    
+                    const isOpening = !content.classList.contains('show');
+                    content.classList.toggle('show');
+                    
+                    if (content.classList.contains('show')) {
+                        icon.style.transform = 'rotate(180deg)';
+                    } else {
+                        icon.style.transform = 'rotate(0deg)';
+                    }
+                    
+                    if (isOpening) {
+                        document.querySelectorAll('.mobile-dropdown-content').forEach(otherContent => {
+                            if (otherContent !== content) {
+                                otherContent.classList.remove('show');
+                                const otherIcon = otherContent.parentElement.querySelector('.fa-chevron-down');
+                                if (otherIcon) otherIcon.style.transform = 'rotate(0deg)';
+                            }
+                        });
+                    }
+                });
+            });
+            
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href === '#') return;
+                    
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

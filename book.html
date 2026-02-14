@@ -1,0 +1,1980 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Now | Groww Tour – Secure Your Local Experience</title>
+    <link rel="icon" type="asset/jpeg" href="assets/growwpark_logo.jpg">
+    <meta name="description" content="Book your authentic local tour with Groww Tour. Real-time availability, instant confirmation, and secure payment.">
+    <meta name="keywords" content="booking, availability calendar, tour booking, confirmation, multi-step booking">
+    <meta name="author" content="Groww Tour">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-brown': '#8D6E63',
+                        'secondary-green': '#4CAF50',
+                        'accent-orange': '#82736e',
+                        'background-cream': '#FAF5EF',
+                        'neutral-dark': '#5D4037',
+                        'neutral-light': '#EFEBE9',
+                        'dark-bg': '#1a1a1a',
+                        'dark-card': '#2d2d2d'
+                    },
+                    fontFamily: {
+                        'sans': ['Space Grotesk', 'system-ui', 'sans-serif'],
+                        'display': ['Syne', 'sans-serif']
+                    },
+                    animation: {
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s ease-in-out infinite',
+                        'fade-in': 'fadeIn 0.3s ease-out',
+                        'zoom-in': 'zoomIn 0.5s ease-out',
+                        'tilt': 'tilt 10s infinite linear',
+                    },
+                    keyframes: {
+                        slideUp: {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        zoomIn: {
+                            '0%': { transform: 'scale(0.95)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' },
+                        },
+                        tilt: {
+                            '0%, 100%': { transform: 'rotate(0deg)' },
+                            '25%': { transform: 'rotate(1deg)' },
+                            '75%': { transform: 'rotate(-1deg)' },
+                        }
+                    },
+                    backgroundImage: {
+                        'booking-pattern': "radial-gradient(circle at 30% 40%, rgba(141, 110, 99, 0.08) 0%, transparent 45%), radial-gradient(circle at 80% 70%, rgba(76, 175, 80, 0.08) 0%, transparent 50%)"
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ============ EXACT HEADER/FOOTER STYLES FROM HOME PAGE ============ */
+        body {
+            background-color: #FAF5EF;
+            color: #5D4037;
+            scroll-behavior: smooth;
+        }
+        .dark body {
+            background-color: #1a1a1a;
+            color: #e5e5e5;
+        }
+        body::-webkit-scrollbar { display: none; }
+        body { -ms-overflow-style: none; scrollbar-width: none; }
+        .mobile-menu::-webkit-scrollbar { display: none; }
+        .mobile-menu { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Navigation - exact copy */
+        .nav-item {
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #8D6E63;
+            transition: width 0.3s ease;
+        }
+        [dir="rtl"] .nav-item::after { left: auto; right: 0; }
+        .nav-item:hover::after { width: 100%; }
+        
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 220px;
+            background: white;
+            border-radius: 12px;
+            padding: 0.75rem 0;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: 1px solid #EFEBE9;
+        }
+        .dark .dropdown-menu {
+            background: #2d2d2d;
+            border-color: #404040;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        [dir="rtl"] .dropdown-menu { left: auto; right: 0; }
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            color: #5D4037;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .dark .dropdown-item { color: #e5e5e5; }
+        .dropdown-item:hover {
+            background: #EFEBE9;
+            color: #8D6E63;
+            padding-left: 1.75rem;
+        }
+        [dir="rtl"] .dropdown-item:hover { padding-left: 1.5rem; padding-right: 1.75rem; }
+        .dark .dropdown-item:hover { background: #404040; }
+        .dropdown-item i { margin-right: 0.75rem; width: 20px; text-align: center; }
+        [dir="rtl"] .dropdown-item i { margin-right: 0; margin-left: 0.75rem; }
+        
+        .auth-btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            white-space: nowrap;
+        }
+        .auth-btn.login {
+            background: transparent;
+            border-color: #D7CCC8;
+            color: #5D4037;
+        }
+        .dark .auth-btn.login { border-color: #4B5563; color: #D1D5DB; }
+        .auth-btn.login:hover { border-color: #8D6E63; color: #8D6E63; }
+        .auth-btn.signup {
+            background: #8D6E63;
+            color: white;
+        }
+        .auth-btn.signup:hover { background: #6D4C41; transform: translateY(-2px); }
+        
+        .toggle-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #F3F4F6;
+            color: #6B7280;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .dark .toggle-btn { background: #374151; color: #9CA3AF; }
+        .toggle-btn:hover { background: #E5E7EB; color: #374151; }
+        .dark .toggle-btn:hover { background: #4B5563; color: #E5E7EB; }
+        .toggle-btn.active { background: #8D6E63; color: white; }
+        
+        /* Mobile menu */
+        .mobile-menu {
+            background: white;
+            border-top: 1px solid #E5E5E5;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        .dark .mobile-menu { background: #1A1A1A; border-color: #404040; }
+        .mobile-menu.open { max-height: 85vh; overflow-y: auto; }
+        .mobile-menu-item {
+            display: block;
+            padding: 1rem 1.5rem;
+            font-weight: 500;
+            color: #5D4037;
+            border-bottom: 1px solid #F3F4F6;
+            transition: all 0.2s ease;
+        }
+        .dark .mobile-menu-item { color: #D1D5DB; border-bottom-color: #374151; }
+        .mobile-menu-item:hover { background-color: #F9FAFB; color: #8D6E63; }
+        .dark .mobile-menu-item:hover { background-color: #374151; }
+        
+        .mobile-auth-btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-align: center;
+            margin: 0.25rem;
+            border: 1px solid transparent;
+        }
+        .mobile-auth-btn.login {
+            background: transparent;
+            border-color: #D7CCC8;
+            color: #5D4037;
+        }
+        .dark .mobile-auth-btn.login { border-color: #4B5563; color: #D1D5DB; }
+        .mobile-auth-btn.login:hover { background-color: #8D6E63; color: white; border-color: #8D6E63; }
+        .mobile-auth-btn.signup { background: #8D6E63; color: white; }
+        .mobile-auth-btn.signup:hover { background: #6D4C41; }
+        
+        .mobile-dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .mobile-dropdown-content.show { max-height: 300px; }
+        .mobile-dropdown-item {
+            display: block;
+            padding: 0.75rem 2.5rem;
+            font-size: 0.95rem;
+            color: #6B7280;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid #F9FAFB;
+        }
+        .dark .mobile-dropdown-item { color: #9CA3AF; border-bottom-color: #374151; }
+        .mobile-dropdown-item:hover { color: #8D6E63; background-color: #F9FAFB; }
+        .dark .mobile-dropdown-item:hover { background-color: #374151; }
+        
+        .dashboard-dropdown { position: relative; }
+        .dashboard-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 200px;
+            background: white;
+            border-radius: 12px;
+            padding: 0.75rem 0;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: 1px solid #EFEBE9;
+        }
+        .dark .dashboard-dropdown-menu {
+            background: #2d2d2d;
+            border-color: #404040;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        .dashboard-dropdown:hover .dashboard-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        [dir="rtl"] .dashboard-dropdown-menu { left: auto; right: 0; }
+        
+        .nav-spacing { display: flex; align-items: center; gap: 2rem; }
+        .desktop-nav-container { display: flex; align-items: center; gap: 2rem; }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #EFEBE9;
+            color: #5D4037;
+            transition: all 0.3s ease;
+        }
+        .dark .social-icon { background: #374151; color: #e5e5e5; }
+        .social-icon:hover { background: #8D6E63; color: white; transform: translateY(-3px); }
+        
+        footer {
+            background: #EFEBE9;
+            color: #5D4037;
+        }
+        .dark footer { background: #1a1a1a; color: #e5e5e5; }
+        footer a:hover { color: #8D6E63; }
+        footer .border-t { border-color: #D7CCC8; }
+        .dark footer .border-t { border-color: #404040; }
+        
+        [dir="rtl"] .space-x-3 > :not([hidden]) ~ :not([hidden]) { --tw-space-x-reverse: 1; }
+        [dir="rtl"] .ml-2 { margin-left: 0; margin-right: 0.5rem; }
+        [dir="rtl"] .mr-2 { margin-right: 0; margin-left: 0.5rem; }
+        [dir="rtl"] .ml-4 { margin-left: 0; margin-right: 1rem; }
+        
+        /* ============ BOOKING PAGE UNIQUE STYLES ============ */
+        
+        /* Booking hero with different design */
+        .booking-hero {
+            position: relative;
+            background: linear-gradient(145deg, #5D4037 0%, #8D6E63 100%);
+            overflow: hidden;
+        }
+        .booking-hero::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -10%;
+            width: 60%;
+            height: 160%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .booking-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 70%;
+            height: 160%;
+            background: radial-gradient(circle, rgba(76,175,80,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        /* Step indicator */
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        .step-line {
+            position: absolute;
+            top: 15px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #D7CCC8;
+            z-index: 1;
+        }
+        .dark .step-line { background: #404040; }
+        .step-item {
+            position: relative;
+            z-index: 2;
+            background: #FAF5EF;
+            padding: 0 0.5rem;
+            text-align: center;
+            cursor: pointer;
+        }
+        .dark .step-item { background: #1a1a1a; }
+        .step-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid #D7CCC8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.5rem;
+            font-weight: 600;
+            color: #5D4037;
+        }
+        .dark .step-circle { background: #2d2d2d; border-color: #404040; color: #e5e5e5; }
+        .step-item.active .step-circle {
+            background: #8D6E63;
+            border-color: #8D6E63;
+            color: white;
+        }
+        .step-item.completed .step-circle {
+            background: #4CAF50;
+            border-color: #4CAF50;
+            color: white;
+        }
+        
+        /* Booking card */
+        .booking-card {
+            background: white;
+            border-radius: 32px;
+            padding: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
+            border: 1px solid rgba(141,110,99,0.1);
+            transition: all 0.3s ease;
+            height: fit-content;
+        }
+        .dark .booking-card { background: #2d2d2d; border-color: #404040; }
+        
+        /* Calendar grid – Availability Calendar integrated */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+        }
+        .calendar-day {
+            aspect-ratio: 1 / 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #F9FAFB;
+            border-radius: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+        .dark .calendar-day { background: #374151; color: #e5e5e5; }
+        .calendar-day:hover { border-color: #8D6E63; background: white; }
+        .calendar-day.available { background: rgba(76,175,80,0.1); color: #2E7D32; font-weight: 600; }
+        .dark .calendar-day.available { background: rgba(76,175,80,0.2); color: #A5D6A7; }
+        .calendar-day.selected { background: #8D6E63; color: white; border-color: #8D6E63; }
+        .calendar-day.unavailable { opacity: 0.4; cursor: not-allowed; text-decoration: line-through; }
+        
+        /* Time slot */
+        .time-slot {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            background: #F9FAFB;
+            border-radius: 50px;
+            margin: 0.25rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+        .dark .time-slot { background: #374151; color: #e5e5e5; }
+        .time-slot:hover { border-color: #8D6E63; background: white; }
+        .time-slot.selected { background: #8D6E63; color: white; }
+        .time-slot.unavailable { opacity: 0.4; cursor: not-allowed; text-decoration: line-through; }
+        
+        /* Tour summary card */
+        .tour-summary {
+            background: linear-gradient(145deg, #FAF5EF, #EFEBE9);
+            border-radius: 24px;
+            padding: 1.75rem;
+        }
+        .dark .tour-summary { background: #374151; }
+        
+        /* Confirmation page mockup */
+        .confirmation-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 2rem;
+            background: rgba(76,175,80,0.15);
+            border-radius: 50px;
+            color: #2E7D32;
+            font-weight: 600;
+            border: 1px solid rgba(76,175,80,0.3);
+        }
+        .dark .confirmation-badge { background: rgba(76,175,80,0.2); color: #A5D6A7; }
+        
+        /* Booking input fields */
+        .booking-input {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            background: #F9FAFB;
+            border: 1.5px solid #EFEBE9;
+            border-radius: 16px;
+            color: #5D4037;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        .dark .booking-input {
+            background: #374151;
+            border-color: #4B5563;
+            color: #e5e5e5;
+        }
+        .booking-input:focus {
+            outline: none;
+            border-color: #8D6E63;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(141,110,99,0.1);
+        }
+        .dark .booking-input:focus { background: #2d2d2d; border-color: #8D6E63; }
+        
+        .booking-btn {
+            background: #8D6E63;
+            color: white;
+            font-weight: 600;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .booking-btn:hover {
+            background: #6D4C41;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(141,110,99,0.3);
+        }
+        .booking-btn i { margin-right: 0.75rem; transition: transform 0.3s ease; }
+        .booking-btn:hover i { transform: translateX(5px); }
+        .booking-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+        
+        .booking-btn-outline {
+            background: transparent;
+            border: 2px solid #8D6E63;
+            color: #8D6E63;
+            font-weight: 600;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        .dark .booking-btn-outline { color: #e5e5e5; border-color: #8D6E63; }
+        .booking-btn-outline:hover { background: #8D6E63; color: white; }
+        
+        .contact-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.6rem 1.2rem;
+            background: rgba(141,110,99,0.1);
+            border-radius: 50px;
+            color: #8D6E63;
+            font-weight: 500;
+            font-size: 0.9rem;
+            border: 1px solid rgba(141,110,99,0.2);
+        }
+        .dark .contact-badge { background: rgba(141,110,99,0.2); color: #e5e5e5; border-color: rgba(141,110,99,0.3); }
+        
+        /* ============ DESTINATION CARD STYLES - FILL THE EMPTY SPACE ============ */
+        .destination-card {
+            transition: all 0.3s ease;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(141,110,99,0.1);
+        }
+        .destination-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 28px rgba(141,110,99,0.2);
+        }
+        
+        /* Confirmation buttons responsive */
+        .confirmation-buttons {
+            display: flex;
+            gap: 0.75rem;
+        }
+        @media (max-width: 640px) {
+            .booking-card {
+                padding: 1.5rem;
+            }
+            .step-indicator {
+                gap: 0.25rem;
+            }
+            .step-item span {
+                font-size: 0.7rem;
+            }
+            .step-circle {
+                width: 28px;
+                height: 28px;
+                font-size: 0.8rem;
+            }
+            .confirmation-buttons {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            .confirmation-buttons a,
+            .confirmation-buttons button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body class="bg-background-cream dark:bg-dark-bg pattern-bg">
+
+    <!-- ============ HEADER - EXACT COPY FROM HOME PAGE ============ -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-neutral-light dark:border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a class='flex items-center space-x-3 group' href='index.html' id="home-logo">
+                    <div class="w-10 h-10 bg-primary-brown rounded-lg flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
+                        <i class="fas fa-map-marked-alt text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-display font-bold tracking-tight text-neutral-dark dark:text-white">Groww</span>
+                        <span class="text-2xl font-display font-bold tracking-tight text-primary-brown">Tour</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden xl:flex items-center">
+                    <div class="desktop-nav-container">
+                        <!-- Navigation Items -->
+                        <div class="nav-spacing">
+                            <!-- Home Dropdown -->
+                            <div class="dropdown">
+                                <button class="nav-item font-medium text-neutral-dark dark:text-gray-300 hover:text-primary-brown transition flex items-center">
+                                    Home <i class="fas fa-chevron-down ml-2 text-xs"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                   <a class='dropdown-item' href='index.html'>
+                                    <i class="fas fa-home"></i>
+                                    Home 1 
+                                </a>
+                                    <a href="home2.html" class="dropdown-item">
+                                        <i class="fas fa-home"></i>
+                                        Home 2
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- About -->
+                            <a class='nav-item font-medium text-neutral-dark dark:text-gray-300 hover:text-primary-brown transition' href='about.html'>
+                                About
+                            </a>
+                            
+                            <!-- Services -->
+                            <a class='nav-item font-medium text-neutral-dark dark:text-gray-300 hover:text-primary-brown transition' href='service.html'>
+                                Services
+                            </a>
+                            
+                            <!-- Book Now (active state) -->
+                            <a class='nav-item font-medium text-primary-brown dark:text-primary-brown transition' href='book.html' style="color: #8D6E63; font-weight: 600;">
+                                Book Now
+                            </a>
+                            
+                           <!-- Gallery-->
+                            <a class='nav-item font-medium text-neutral-dark dark:text-gray-300 hover:text-primary-brown transition' href='gallery.html'>
+                                Gallery
+                            </a>
+                            
+                            <!-- Contact Us -->
+                            <a class='nav-item font-medium text-neutral-dark dark:text-gray-300 hover:text-primary-brown transition' href='contact.html'>
+                                Contact 
+                            </a>
+                            
+                            <!-- Dashboard Dropdown -->
+                            <div class="dashboard-dropdown">
+                                <button class="nav-item font-medium text-neutral-dark dark:text-gray-300 hover:text-primary-brown transition flex items-center">
+                                    Dashboard <i class="fas fa-chevron-down ml-2 text-xs"></i>
+                                </button>
+                                <div class="dashboard-dropdown-menu">
+                                    <a class='dropdown-item' href='admin.html'>
+                                        <i class="fas fa-user-shield"></i>
+                                        Admin
+                                    </a>
+                                    <a class='dropdown-item' href='client.html'>
+                                        <i class="fas fa-user"></i>
+                                        Client
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Auth Buttons -->
+                        <div class="flex items-center gap-3 ml-0">
+                            <a class='auth-btn login' href='login.html'>
+                                Login
+                            </a>
+                            <a class='auth-btn signup' href='signup.html'>
+                                Sign Up
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Compact Theme & Language Toggle -->
+                    <div class="flex gap-2 ml-4">
+                        <button id="theme-toggle" class="toggle-btn" title="Toggle theme">
+                            <i class="fas fa-moon"></i>
+                            <i class="fas fa-sun hidden"></i>
+                        </button>
+                        <button id="rtl-toggle" class="toggle-btn" title="Toggle RTL/LTR">
+                            ⇄
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-toggle" class="xl:hidden text-neutral-dark dark:text-gray-300 p-2">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu - SIMPLIFIED -->
+            <div id="mobile-menu" class="mobile-menu xl:hidden">
+                <!-- Home -->
+                <div class="mobile-dropdown">
+                    <button class="mobile-dropdown-btn flex items-center justify-between w-full mobile-menu-item">
+                        <span>Home</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                    <div class="mobile-dropdown-content">
+                        <a class='mobile-dropdown-item' href='index.html'>
+                            <i class="fas fa-home mr-2"></i>
+                            Home 1 
+                        </a>                     
+                        <a href="home2.html" class="mobile-dropdown-item">Home 2</a>
+                    </div>
+                </div>
+                
+                <!-- About -->
+                <a class='mobile-menu-item' href='about.html'>About</a>
+                
+                <!-- Services -->
+                  <a class='mobile-menu-item' href='service.html'>Services</a>
+
+                
+                <!-- Book Now - ACTIVE STATE -->
+                <a class='mobile-menu-item' href='book.html' style="background: rgba(141, 110, 99, 0.1); color: #8D6E63; border-left: 3px solid #8D6E63; font-weight: 600;">
+                    Book Now
+                </a>
+                
+                <!-- Gallery -->
+                <a class='mobile-menu-item' href='gallery.html'>Gallery</a>
+                
+                <!-- Contact Us -->
+                <a class='mobile-menu-item' href='contact.html'>Contact</a>
+                
+                <!-- Dashboard -->
+                <div class="mobile-dropdown">
+                    <button class="mobile-dropdown-btn flex items-center justify-between w-full mobile-menu-item">
+                        <span>Dashboard</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                    <div class="mobile-dropdown-content">
+                        <a class='mobile-dropdown-item' href='admin.html'>Admin</a>
+                        <a class='mobile-dropdown-item' href='client.html'>Client</a>
+                    </div>
+                </div>
+                
+                <!-- Mobile Auth Buttons -->
+                <div class="flex flex-col sm:flex-row gap-3 p-6">
+                    <a class='mobile-auth-btn login flex-1 text-center' href='login.html'>
+                        Login
+                    </a>
+                    <a class='mobile-auth-btn signup flex-1 text-center' href='signup.html'>
+                        Sign Up
+                    </a>
+                </div>
+                
+                <!-- Mobile Toggle Buttons -->
+                <div class="flex justify-center gap-3 p-6 border-t border-gray-200 dark:border-gray-800">
+                    <button id="theme-toggle-mobile" class="toggle-btn">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun hidden"></i>
+                    </button>
+                    <button id="rtl-toggle-mobile" class="toggle-btn">
+                        ⇄
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============ BOOKING HERO ============ -->
+    <section class="booking-hero text-white pt-36 pb-24 md:pt-44 md:pb-32">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-4xl mx-auto text-center animate-slide-up">
+                <div class="inline-flex items-center px-5 py-3 bg-white/15 backdrop-blur-md rounded-full mb-6 border border-white/20">
+                    <i class="fas fa-calendar-check mr-2 text-secondary-green"></i>
+                    <span class="font-medium">Secure your spot – real‑time availability</span>
+                </div>
+                
+                <h1 class="text-5xl md:text-6xl font-display font-bold mb-6">
+                    Book Your <span class="relative">
+                        <span class="relative z-10 text-white">Local Adventure</span>
+                        <span class="absolute bottom-2 left-0 w-full h-4 bg-secondary-green/50 -z-0 rounded-full"></span>
+                    </span>
+                </h1>
+                
+                <p class="text-xl opacity-95 mb-8 max-w-2xl mx-auto leading-relaxed">
+                    Choose your tour, pick a date with live availability, and confirm instantly. 
+                    No waiting – your journey starts now.
+                </p>
+                
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#booking-flow" id="start-booking-btn" class="bg-white text-primary-brown font-bold px-8 py-4 rounded-full hover:bg-opacity-90 transition shadow-lg hover:shadow-2xl transform hover:-translate-y-1">
+                        <i class="fas fa-arrow-down mr-2"></i>
+                        Start Booking
+                    </a>
+                    <a href="#confirmation-mockup" id="view-confirmation-btn" class="bg-transparent border-2 border-white text-white font-bold px-8 py-4 rounded-full hover:bg-white/10 transition transform hover:-translate-y-1">
+                        <i class="fas fa-check-circle mr-2"></i>
+                        View Confirmation
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ BOOKING FLOW – MULTI-STEP + AVAILABILITY CALENDAR ============ -->
+    <section id="booking-flow" class="py-20 relative -mt-16 z-20">
+        <div class="container mx-auto px-6">
+            
+            <!-- Step Indicator -->
+            <div class="step-indicator max-w-3xl mx-auto mb-12">
+                <div class="step-line"></div>
+                <div class="step-item active" id="step1">
+                    <div class="step-circle">1</div>
+                    <span class="text-sm font-medium dark:text-gray-300">Select Tour</span>
+                </div>
+                <div class="step-item" id="step2">
+                    <div class="step-circle">2</div>
+                    <span class="text-sm font-medium dark:text-gray-300">Date & Time</span>
+                </div>
+                <div class="step-item" id="step3">
+                    <div class="step-circle">3</div>
+                    <span class="text-sm font-medium dark:text-gray-300">Your Details</span>
+                </div>
+                <div class="step-item" id="step4">
+                    <div class="step-circle">4</div>
+                    <span class="text-sm font-medium dark:text-gray-300">Payment</span>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- LEFT: Tour selection + calendar -->
+                <div class="lg:col-span-2">
+                    <div class="booking-card">
+                        <h2 class="text-2xl font-display font-bold mb-6 flex items-center">
+                            <span class="w-8 h-8 bg-primary-brown rounded-full text-white flex items-center justify-center mr-3">1</span>
+                            <span class="text-neutral-dark dark:text-white">Choose your experience</span>
+                        </h2>
+                        
+                        <!-- Tour selector - Fully interactive -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                            <div class="border-2 border-transparent hover:border-primary-brown rounded-2xl p-4 cursor-pointer transition bg-white dark:bg-dark-card shadow-sm relative tour-card" data-tour="Historic City Tour" data-price="45" data-image="/assets/Tour.jpg" data-guide="Marco" data-duration="3h • max 8">
+                                <div class="flex items-start">
+                                    <img src="/assets/Tour.jpg" alt="Historic City Tour" class="w-16 h-16 rounded-xl object-cover mr-4">
+                                    <div>
+                                        <h3 class="font-bold dark:text-white">Historic City Tour</h3>
+                                        <p class="text-sm text-neutral-dark/70 dark:text-gray-400">3h • max 8</p>
+                                        <div class="flex items-center mt-1">
+                                            <span class="text-primary-brown font-bold">$45</span>
+                                            <span class="text-xs text-neutral-dark/50 dark:text-gray-500 ml-2">/ person</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-2 text-xs text-secondary-green font-semibold flex items-center">
+                                    <i class="fas fa-check-circle mr-1"></i> Available today
+                                </div>
+                            </div>
+                            <div class="border-2 border-primary-brown rounded-2xl p-4 cursor-pointer bg-white dark:bg-dark-card shadow-md relative tour-card selected-tour" data-tour="Mountain Trail" data-price="75" data-image="/assets/Tour1.jpg" data-guide="Sophia" data-duration="6h • max 6">
+                                <div class="absolute top-2 right-2 bg-secondary-green text-white text-xs px-2 py-1 rounded-full selected-badge">Selected</div>
+                                <div class="flex items-start">
+                                    <img src="/assets/Tour1.jpg" alt="Mountain Trail" class="w-16 h-16 rounded-xl object-cover mr-4">
+                                    <div>
+                                        <h3 class="font-bold dark:text-white">Mountain Trail</h3>
+                                        <p class="text-sm text-neutral-dark/70 dark:text-gray-400">6h • max 6</p>
+                                        <div class="flex items-center mt-1">
+                                            <span class="text-primary-brown font-bold">$75</span>
+                                            <span class="text-xs text-neutral-dark/50 dark:text-gray-500 ml-2">/ person</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-2 border-transparent hover:border-primary-brown rounded-2xl p-4 cursor-pointer transition bg-white dark:bg-dark-card shadow-sm tour-card" data-tour="Street Food Tour" data-price="60" data-image="/assets/Tour2.jpg" data-guide="Kenji" data-duration="4h • max 10">
+                                <div class="flex items-start">
+                                    <img src="/assets/Tour2.jpg" alt="Food Tour" class="w-16 h-16 rounded-xl object-cover mr-4">
+                                    <div>
+                                        <h3 class="font-bold dark:text-white">Street Food Tour</h3>
+                                        <p class="text-sm text-neutral-dark/70 dark:text-gray-400">4h • max 10</p>
+                                        <div class="flex items-center mt-1">
+                                            <span class="text-primary-brown font-bold">$60</span>
+                                            <span class="text-xs text-neutral-dark/50 dark:text-gray-500 ml-2">/ person</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-2 border-transparent hover:border-primary-brown rounded-2xl p-4 cursor-pointer transition bg-white dark:bg-dark-card shadow-sm tour-card" data-tour="Art & Culture" data-price="50" data-image="/assets/tour3.jpg" data-guide="Maria" data-duration="3h • max 12">
+                                <div class="flex items-start">
+                                    <img src="/assets/tour3.jpg" alt="Cultural Tour" class="w-16 h-16 rounded-xl object-cover mr-4">
+                                    <div>
+                                        <h3 class="font-bold dark:text-white">Art & Culture</h3>
+                                        <p class="text-sm text-neutral-dark/70 dark:text-gray-400">3h • max 12</p>
+                                        <div class="flex items-center mt-1">
+                                            <span class="text-primary-brown font-bold">$50</span>
+                                            <span class="text-xs text-neutral-dark/50 dark:text-gray-500 ml-2">/ person</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- ===== AVAILABILITY CALENDAR (FULLY INTERACTIVE) ===== -->
+                        <h2 class="text-2xl font-display font-bold mb-6 flex items-center mt-8" id="calendar">
+                            <span class="w-8 h-8 bg-primary-brown rounded-full text-white flex items-center justify-center mr-3">2</span>
+                            <span class="text-neutral-dark dark:text-white">Select date & time – real‑time availability</span>
+                        </h2>
+                        
+                        <div class="bg-neutral-light/30 dark:bg-gray-800/30 rounded-3xl p-6">
+                            <div class="flex items-center justify-between mb-6">
+                                <h3 class="font-bold text-lg dark:text-white" id="current-month">February 2026</h3>
+                                <div class="flex gap-2">
+                                    <button id="prev-month" class="w-8 h-8 rounded-full bg-white dark:bg-dark-card flex items-center justify-center shadow-sm hover:bg-primary-brown hover:text-white transition">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </button>
+                                    <button id="next-month" class="w-8 h-8 rounded-full bg-white dark:bg-dark-card flex items-center justify-center shadow-sm hover:bg-primary-brown hover:text-white transition">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Calendar grid -->
+                            <div class="calendar-grid mb-2">
+                                <div class="text-center text-xs font-medium text-neutral-dark/60 dark:text-gray-400 py-2">Mo</div>
+                                <div class="text-center text-xs font-medium text-neutral-dark/60 dark:text-gray-400 py-2">Tu</div>
+                                <div class="text-center text-xs font-medium text-neutral-dark/60 dark:text-gray-400 py-2">We</div>
+                                <div class="text-center text-xs font-medium text-neutral-dark/60 dark:text-gray-400 py-2">Th</div>
+                                <div class="text-center text-xs font-medium text-neutral-dark/60 dark:text-gray-400 py-2">Fr</div>
+                                <div class="text-center text-xs font-medium text-neutral-dark/60 dark:text-gray-400 py-2">Sa</div>
+                                <div class="text-center text-xs font-medium text-neutral-dark/60 dark:text-gray-400 py-2">Su</div>
+                            </div>
+                            <div class="calendar-grid" id="calendar-days">
+                                <!-- Days will be populated by JavaScript -->
+                            </div>
+                            
+                            <div class="flex items-center gap-4 mt-6 text-sm">
+                                <div class="flex items-center"><span class="w-3 h-3 bg-green-500/50 rounded-full mr-2"></span> Available</div>
+                                <div class="flex items-center"><span class="w-3 h-3 bg-primary-brown rounded-full mr-2"></span> Selected</div>
+                                <div class="flex items-center"><span class="w-3 h-3 bg-gray-300 dark:bg-gray-600 rounded-full mr-2"></span> Unavailable</div>
+                            </div>
+                            
+                            <!-- Time slots -->
+                            <div class="mt-8">
+                                <h4 class="font-semibold mb-3 dark:text-white" id="selected-date-display">Available time slots for Feb 5, 2026</h4>
+                                <div id="time-slots-container">
+                                    <span class="time-slot available" data-time="09:00 AM">09:00 AM</span>
+                                    <span class="time-slot available selected" data-time="10:30 AM">10:30 AM</span>
+                                    <span class="time-slot available" data-time="01:00 PM">01:00 PM</span>
+                                    <span class="time-slot available" data-time="03:30 PM">03:30 PM</span>
+                                    <span class="time-slot unavailable" data-time="05:00 PM">05:00 PM</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 3: Your details -->
+                        <div class="mt-10">
+                            <h2 class="text-2xl font-display font-bold mb-6 flex items-center">
+                                <span class="w-8 h-8 bg-primary-brown rounded-full text-white flex items-center justify-center mr-3">3</span>
+                                <span class="text-neutral-dark dark:text-white">Your information</span>
+                            </h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <input type="text" id="full-name" placeholder="Full name *" class="booking-input" value="John Doe">
+                                <input type="email" id="email-address" placeholder="Email address *" class="booking-input" value="john.doe@example.com">
+                                <input type="tel" id="phone-number" placeholder="Phone number" class="booking-input" value="+1 (555) 123-4567">
+                                <select id="traveler-count" class="booking-input appearance-none">
+                                    <option value="1">1 traveler</option>
+                                    <option value="2" selected>2 travelers</option>
+                                    <option value="3">3 travelers</option>
+                                    <option value="4">4 travelers</option>
+                                    <option value="5">5+ travelers</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 4: Payment -->
+                        <div class="mt-10">
+                            <h2 class="text-2xl font-display font-bold mb-6 flex items-center">
+                                <span class="w-8 h-8 bg-primary-brown rounded-full text-white flex items-center justify-center mr-3">4</span>
+                                <span class="text-neutral-dark dark:text-white">Payment method</span>
+                            </h2>
+                            <div class="flex flex-wrap gap-3 mb-4">
+                                <div class="border-2 border-primary-brown rounded-xl px-5 py-3 flex items-center bg-white dark:bg-dark-card payment-method selected">
+                                    <i class="fab fa-cc-visa text-2xl text-blue-600 mr-2"></i>
+                                    <span class="font-medium dark:text-white">Visa</span>
+                                </div>
+                                <div class="border-2 border-transparent rounded-xl px-5 py-3 flex items-center bg-white dark:bg-dark-card payment-method">
+                                    <i class="fab fa-cc-mastercard text-2xl text-orange-500 mr-2"></i>
+                                    <span class="font-medium dark:text-white">Mastercard</span>
+                                </div>
+                                <div class="border-2 border-transparent rounded-xl px-5 py-3 flex items-center bg-white dark:bg-dark-card payment-method">
+                                    <i class="fab fa-paypal text-2xl text-blue-700 mr-2"></i>
+                                    <span class="font-medium dark:text-white">PayPal</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <input type="text" id="card-number" placeholder="Card number" class="booking-input col-span-2" value="4111 1111 1111 1111">
+                                <input type="text" id="expiry-date" placeholder="MM/YY" class="booking-input" value="12/26">
+                                <input type="text" id="cvc" placeholder="CVC" class="booking-input" value="123">
+                            </div>
+                        </div>
+                        
+                        <div class="mt-10 flex flex-col sm:flex-row justify-between items-center gap-4">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="terms" class="mr-2 w-4 h-4">
+                                <label for="terms" class="text-sm dark:text-gray-300">I agree to the <a href="#" class="text-primary-brown underline">Terms</a> and <a href="#" class="text-primary-brown underline">Cancellation policy</a></label>
+                            </div>
+                            <button id="complete-booking-btn" class="booking-btn px-10">
+                                <i class="fas fa-lock mr-2"></i> Complete Booking
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ============ RIGHT COLUMN - YOUR BOOKING + DESTINATION CARDS (FILLS ALL EMPTY SPACE) ============ -->
+                <div class="lg:col-span-1">
+                    <div class="booking-card">
+                        <!-- Your Booking Summary -->
+                        <h3 class="text-xl font-display font-bold mb-6 dark:text-white">Your booking</h3>
+                        
+                        <div class="tour-summary mb-6" id="booking-summary">
+                            <div class="flex items-center mb-4">
+                                <img src="/assets/Tour1.jpg" alt="Mountain Trail" class="w-16 h-16 rounded-xl object-cover mr-4" id="summary-image">
+                                <div>
+                                    <h4 class="font-bold dark:text-white" id="summary-tour-name">Mountain Trail & Waterfall</h4>
+                                    <p class="text-sm text-neutral-dark/70 dark:text-gray-400" id="summary-guide-duration">with Sophia • 6 hours</p>
+                                </div>
+                            </div>
+                            <div class="flex justify-between py-2 border-b border-neutral-light/50 dark:border-gray-700">
+                                <span class="dark:text-gray-300">Date</span>
+                                <span class="font-semibold dark:text-white" id="summary-date">Feb 5, 2026</span>
+                            </div>
+                            <div class="flex justify-between py-2 border-b border-neutral-light/50 dark:border-gray-700">
+                                <span class="dark:text-gray-300">Time</span>
+                                <span class="font-semibold dark:text-white" id="summary-time">10:30 AM</span>
+                            </div>
+                            <div class="flex justify-between py-2 border-b border-neutral-light/50 dark:border-gray-700">
+                                <span class="dark:text-gray-300">Travelers</span>
+                                <span class="font-semibold dark:text-white" id="summary-travelers">2 adults</span>
+                            </div>
+                            <div class="flex justify-between py-2">
+                                <span class="dark:text-gray-300">Total</span>
+                                <span class="text-xl font-bold text-primary-brown" id="summary-total">$150</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Secure Confirmation Card -->
+                        <div class="bg-white dark:bg-dark-card rounded-2xl p-5 border border-neutral-light dark:border-gray-700 mb-6">
+                            <div class="flex items-center text-secondary-green mb-3">
+                                <i class="fas fa-shield-alt mr-2"></i>
+                                <span class="font-semibold">Secure & instant confirmation</span>
+                            </div>
+                            <p class="text-xs text-neutral-dark/60 dark:text-gray-400">
+                                Your spot is reserved for 15 minutes. Full payment secures your booking.
+                            </p>
+                        </div>
+                        
+                       
+                        
+                        <!-- Travel Tip Mini Card - Adds more value and fills space -->
+                        <div class="bg-gradient-to-r from-primary-brown/10 to-secondary-green/10 dark:from-primary-brown/20 dark:to-secondary-green/20 rounded-xl p-4 mb-6">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-primary-brown/20 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fas fa-lightbulb text-primary-brown text-sm"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-semibold dark:text-white">✈️ Travel tip</p>
+                                    <p class="text-[11px] text-neutral-dark/70 dark:text-gray-400">Free cancellation up to 48 hours before your tour</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- ===== CONFIRMATION PREVIEW (UPDATES IN REAL TIME) ===== -->
+                        <div id="confirmation-mockup" class="mt-2 pt-5 border-t border-neutral-light dark:border-gray-700">
+                            <h4 class="font-display font-bold mb-4 flex items-center text-primary-brown">
+                                <i class="fas fa-check-circle mr-2"></i> Confirmation preview
+                            </h4>
+                            <div class="bg-white dark:bg-dark-card rounded-xl p-5 shadow-sm" id="confirmation-preview">
+                                <div class="flex items-center mb-3">
+                                    <div class="w-10 h-10 bg-secondary-green/20 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-check text-secondary-green"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-sm dark:text-white" id="confirmation-booking-id">Booking #GW-2468-01</p>
+                                        <p class="text-xs text-neutral-dark/60 dark:text-gray-400" id="confirmation-date">Confirmed just now</p>
+                                    </div>
+                                </div>
+                                <div class="bg-neutral-light/30 dark:bg-gray-800 rounded-lg p-3 text-xs" id="confirmation-details">
+                                    <!-- Dynamic content -->
+                                </div>
+                                <div class="mt-3 flex gap-2 confirmation-buttons">
+                                    <a href="#" id="eticket-btn" class="text-xs bg-primary-brown text-white px-4 py-2.5 rounded-full hover:bg-opacity-90 transition flex items-center justify-center flex-1 font-medium">
+                                        <i class="fas fa-download mr-1.5"></i> E-ticket
+                                    </a>
+                                    <a href="#" id="calendar-btn" class="text-xs border-2 border-primary-brown text-primary-brown px-4 py-2.5 rounded-full hover:bg-primary-brown hover:text-white transition flex items-center justify-center flex-1 font-medium">
+                                        <i class="fas fa-calendar-plus mr-1.5"></i> Calendar
+                                    </a>
+                                </div>
+                                <p class="text-xs text-neutral-dark/50 dark:text-gray-500 mt-3" id="confirmation-email">
+                                    <i class="fas fa-envelope mr-1"></i> Email notification sent
+                                </p>
+                            </div>
+                            <p class="text-xs text-center mt-4 text-neutral-dark/50 dark:text-gray-400">
+                                <a href="#" id="view-full-confirmation" class="text-primary-brown font-semibold hover:underline">
+                                    View full confirmation page →
+                                </a>
+                            </p>
+                        </div>
+                                            </div> <!-- End of Secure Confirmation Card -->
+                        
+                        <!-- ===== NEW DESTINATION CARDS - FILL THE EMPTY SPACE ===== -->
+                        <!-- Section Title -->
+                        <div class="flex items-center justify-between mt-6 mb-6">
+                            <h4 class="font-display font-semibold text-neutral-dark dark:text-white">
+                                <i class="fas fa-map-marked-alt text-primary-brown mr-2"></i>
+                                You might also like
+                            </h4>
+                            <a href="#" class="text-xs text-primary-brown hover:underline font-medium">View all</a>
+                        </div>
+                        
+                                                <!-- 7 Beautiful Destination Cards - 1x1 STACKED VERTICALLY -->
+                        <div class="flex flex-col gap-3 mb-6">
+                            
+                            <!-- Card 1: Paris -->
+                            <div class="group bg-white dark:bg-dark-card rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex items-center mb-4">
+                                <div class="relative w-24 h-24 flex-shrink-0">
+                                    <img src="/assets/card.jpg" alt="Paris" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                                    <div class="absolute bottom-1 left-2 text-white">
+                                        <p class="text-xs font-bold">Paris</p>
+                                        <p class="text-[10px] opacity-90">France</p>
+                                    </div>
+                                    <div class="absolute top-1 right-1 bg-white/90 dark:bg-gray-900/90 rounded-full px-1.5 py-0.5 text-[10px] font-semibold text-primary-brown">
+                                        ★ 4.8
+                                    </div>
+                                </div>
+                                <div class="p-3 flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <span class="text-xs font-medium dark:text-white">24 tours</span>
+                                            <p class="text-[10px] text-neutral-dark/50 dark:text-gray-500">Eiffel Tower, Louvre</p>
+                                        </div>
+                                        <span class="text-xs font-bold text-primary-brown">$49+</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Card 2: Bali -->
+                            <div class="group bg-white dark:bg-dark-card rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex items-center mb-4">
+                                <div class="relative w-24 h-24 flex-shrink-0">
+                                    <img src="/assets/card1.jpg" alt="Bali" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                                    <div class="absolute bottom-1 left-2 text-white">
+                                        <p class="text-xs font-bold">Bali</p>
+                                        <p class="text-[10px] opacity-90">Indonesia</p>
+                                    </div>
+                                    <div class="absolute top-1 right-1 bg-white/90 dark:bg-gray-900/90 rounded-full px-1.5 py-0.5 text-[10px] font-semibold text-primary-brown">
+                                        ★ 4.9
+                                    </div>
+                                </div>
+                                <div class="p-3 flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <span class="text-xs font-medium dark:text-white">32 tours</span>
+                                            <p class="text-[10px] text-neutral-dark/50 dark:text-gray-500">Ubud, temples</p>
+                                        </div>
+                                        <span class="text-xs font-bold text-primary-brown">$65+</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Card 3: Santorini -->
+                            <div class="group bg-white dark:bg-dark-card rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex items-center mb-4">
+                                <div class="relative w-24 h-24 flex-shrink-0">
+                                    <img src="/assets/card2.jpg" alt="Santorini" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                                    <div class="absolute bottom-1 left-2 text-white">
+                                        <p class="text-xs font-bold">Santorini</p>
+                                        <p class="text-[10px] opacity-90">Greece</p>
+                                    </div>
+                                    <div class="absolute top-1 right-1 bg-white/90 dark:bg-gray-900/90 rounded-full px-1.5 py-0.5 text-[10px] font-semibold text-primary-brown">
+                                        ★ 4.7
+                                    </div>
+                                </div>
+                                <div class="p-3 flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <span class="text-xs font-medium dark:text-white">18 tours</span>
+                                            <p class="text-[10px] text-neutral-dark/50 dark:text-gray-500">Oia sunset, caldera</p>
+                                        </div>
+                                        <span class="text-xs font-bold text-primary-brown">$79+</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Card 4: Kyoto -->
+                            <div class="group bg-white dark:bg-dark-card rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex items-center mb-4">
+                                <div class="relative w-24 h-24 flex-shrink-0">
+                                    <img src="/assets/card3.jpg" alt="Kyoto" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                                    <div class="absolute bottom-1 left-2 text-white">
+                                        <p class="text-xs font-bold">Kyoto</p>
+                                        <p class="text-[10px] opacity-90">Japan</p>
+                                    </div>
+                                    <div class="absolute top-1 right-1 bg-white/90 dark:bg-gray-900/90 rounded-full px-1.5 py-0.5 text-[10px] font-semibold text-primary-brown">
+                                        ★ 4.9
+                                    </div>
+                                </div>
+                                <div class="p-3 flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <span class="text-xs font-medium dark:text-white">27 tours</span>
+                                            <p class="text-[10px] text-neutral-dark/50 dark:text-gray-500">Temples, geishas</p>
+                                        </div>
+                                        <span class="text-xs font-bold text-primary-brown">$55+</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Card 5: New York -->
+                            <div class="group bg-white dark:bg-dark-card rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex items-center mb-4">
+                                <div class="relative w-24 h-24 flex-shrink-0">
+                                    <img src="/assets/card4.jpg" alt="New York" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                                    <div class="absolute bottom-1 left-2 text-white">
+                                        <p class="text-xs font-bold">New York</p>
+                                        <p class="text-[10px] opacity-90">USA</p>
+                                    </div>
+                                    <div class="absolute top-1 right-1 bg-white/90 dark:bg-gray-900/90 rounded-full px-1.5 py-0.5 text-[10px] font-semibold text-primary-brown">
+                                        ★ 4.8
+                                    </div>
+                                </div>
+                                <div class="p-3 flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <span class="text-xs font-medium dark:text-white">45 tours</span>
+                                            <p class="text-[10px] text-neutral-dark/50 dark:text-gray-500">Statue of Liberty, Central Park</p>
+                                        </div>
+                                        <span class="text-xs font-bold text-primary-brown">$59+</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Card 6: Rome -->
+                            <div class="group bg-white dark:bg-dark-card rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex items-center mb-4">
+                                <div class="relative w-24 h-24 flex-shrink-0">
+                                    <img src="/assets/card5.jpg" alt="Rome" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                                    <div class="absolute bottom-1 left-2 text-white">
+                                        <p class="text-xs font-bold">Rome</p>
+                                        <p class="text-[10px] opacity-90">Italy</p>
+                                    </div>
+                                    <div class="absolute top-1 right-1 bg-white/90 dark:bg-gray-900/90 rounded-full px-1.5 py-0.5 text-[10px] font-semibold text-primary-brown">
+                                        ★ 4.9
+                                    </div>
+                                </div>
+                                <div class="p-3 flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <span class="text-xs font-medium dark:text-white">36 tours</span>
+                                            <p class="text-[10px] text-neutral-dark/50 dark:text-gray-500">Colosseum, Vatican</p>
+                                        </div>
+                                        <span class="text-xs font-bold text-primary-brown">$52+</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                               
+                        </div>
+                        
+                        <!-- Travel Tip Card -->
+                        <div class="bg-gradient-to-r from-primary-brown/5 to-secondary-green/5 dark:from-primary-brown/10 dark:to-secondary-green/10 rounded-xl p-3 mb-6">
+                            <div class="flex items-center">
+                                <div class="w-7 h-7 bg-primary-brown/10 rounded-full flex items-center justify-center mr-2">
+                                    <i class="fas fa-lightbulb text-primary-brown text-xs"></i>
+                                </div>
+                                <p class="text-[11px] text-neutral-dark/70 dark:text-gray-400">
+                                    <span class="font-semibold dark:text-white">Travel tip:</span> Book at least 3 days in advance for best availability!
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- ===== CONFIRMATION PREVIEW ===== -->
+                        <div id="confirmation-mockup" class="mt-2 pt-5 border-t border-neutral-light dark:border-gray-700">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FULL CONFIRMATION PAGE MOCKUP ============ -->
+    <section id="full-confirmation-section" class="py-16 bg-neutral-light dark:bg-gray-900/30 hidden">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center mb-8">
+                <span class="contact-badge bg-secondary-green/20 text-secondary-green border-secondary-green/30 px-6 py-3">
+                    <i class="fas fa-check-circle mr-2"></i> Booking confirmed – email sent
+                </span>
+                <h2 class="text-3xl md:text-4xl font-display font-bold mt-6 mb-4 dark:text-white">
+                    Thank you, <span id="confirmation-name" class="text-primary-brown">John!</span>
+                </h2>
+                <p class="text-lg text-neutral-dark/70 dark:text-gray-300" id="confirmation-email-message">
+                    Your adventure is confirmed. We've sent your e-ticket and guide details to john.doe@example.com
+                </p>
+            </div>
+            
+            <div class="bg-white dark:bg-dark-card rounded-3xl p-8 md:p-10 shadow-xl max-w-4xl mx-auto">
+                <div class="flex flex-col md:flex-row items-start gap-8">
+                    <div class="md:w-2/3">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 bg-primary-brown/10 rounded-2xl flex items-center justify-center mr-4">
+                                <i class="fas fa-check-circle text-2xl text-secondary-green"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Booking reference</p>
+                                <p class="text-2xl font-display font-bold text-primary-brown" id="full-confirmation-id">#GW-2468-01</p>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4 mb-6" id="full-confirmation-details">
+                            <!-- Dynamic content -->
+                        </div>
+                        
+                        <div class="bg-neutral-light/40 dark:bg-gray-800 rounded-xl p-5 mb-6">
+                            <h5 class="font-bold flex items-center mb-3 dark:text-white"><i class="fas fa-map-pin text-primary-brown mr-2"></i> Meeting point</h5>
+                            <p class="text-sm dark:text-gray-300">Main Square, Interlaken (in front of the tourist office)</p>
+                            <p class="text-xs text-neutral-dark/50 dark:text-gray-400 mt-1">Guide will be holding a Groww Tour sign</p>
+                        </div>
+                        
+                        <div class="flex gap-3 confirmation-buttons">
+                            <button class="booking-btn px-6 py-3 text-sm eticket-full-btn">
+                                <i class="fas fa-download mr-2"></i> Download e-ticket
+                            </button>
+                            <button class="booking-btn-outline px-6 py-3 text-sm calendar-full-btn">
+                                <i class="fas fa-calendar-alt mr-2"></i> Add to calendar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="md:w-1/3 bg-gradient-to-br from-primary-brown to-accent-orange rounded-2xl p-6 text-white text-center">
+                        <i class="fas fa-map-marked-alt text-4xl mb-3 opacity-90"></i>
+                        <h4 class="font-bold text-xl mb-2">Need help?</h4>
+                        <p class="text-sm opacity-90 mb-4">Your guide is just a message away</p>
+                        <div class="bg-white/20 rounded-lg p-3 text-sm" id="guide-contact">
+                            <p><i class="fas fa-phone-alt mr-2"></i> +41 78 123 45 67</p>
+                            <p class="mt-2"><i class="fas fa-comment mr-2"></i> sophia@growwtour.com</p>
+                        </div>
+                        <p class="text-xs mt-4 opacity-80">
+                            <i class="fas fa-clock mr-1"></i> Responds within 30 min
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="mt-8 pt-6 border-t border-neutral-light dark:border-gray-700 text-center">
+                    <p class="text-sm text-neutral-dark/60 dark:text-gray-400" id="full-confirmation-footer">
+                        <i class="fas fa-envelope mr-1"></i> A confirmation email has been sent to john.doe@example.com
+                    </p>
+                    <a href="index.html" id="back-to-home-btn" class="inline-block mt-4 text-primary-brown font-semibold hover:underline">
+                        <i class="fas fa-arrow-left mr-1"></i> Back to homepage
+                    </a>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <p class="text-sm text-neutral-dark/50 dark:text-gray-500">
+                    This is your confirmation page. 
+                    <a href="#" id="book-another-tour" class="text-primary-brown underline">Book another tour</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FOOTER - EXACT COPY FROM HOME PAGE ============ -->
+    <footer class="py-16">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <!-- Company Info -->
+                <div class="text-center md:text-left">
+                    <div class="flex items-center justify-center md:justify-start space-x-3 mb-6">
+                    <div class="w-10 h-10 bg-primary-brown rounded-lg flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">                            <i class="fas fa-map-marked-alt text-white text-lg"></i>
+                        </div>
+                        <div>
+                            <span class="text-2xl font-display font-bold text-neutral-dark dark:text-white">Groww</span>
+                            <span class="text-2xl font-display font-bold text-primary-brown">Tour</span>
+                        </div>
+                    </div>
+                    <p class="mb-6 opacity-80 dark:opacity-70 text-center md:text-left">
+                        Connecting travelers with passionate local guides for authentic experiences around the world since 2015.
+                    </p>
+                    <div class="flex space-x-4 justify-center md:justify-start">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                  <div class="text-center md:text-left">
+                <h3 class="text-neutral-dark dark:text-white text-xl font-bold mb-6">Quick Links</h3>
+                <ul class="space-y-3">
+                    <li><a class='hover:text-primary-brown transition block' href='index.html'>Home</a></li>
+                    <li><a class='hover:text-primary-brown transition block' href='about.html'>About</a></li>
+                    <li><a class='hover:text-primary-brown transition block' href='service.html'>Services</a></li>
+                    <li><a class='hover:text-primary-brown transition block' href='book.html'>Book Now</a></li>
+                    <li><a class='hover:text-primary-brown transition block' href='contact.html'>Contact Us</a></li>
+                </ul>
+            </div>
+                
+                <!-- Tour Types -->
+                <div class="text-center md:text-left">
+                <h3 class="text-neutral-dark dark:text-white text-xl font-bold mb-6">Tour Types</h3>
+                <ul class="space-y-3">
+                    <li><a href="service.html" class="hover:text-primary-brown transition block">Adventure Tours</a></li>
+                    <li><a href="service.html" class="hover:text-primary-brown transition block">Cultural Tours</a></li>
+                    <li><a href="service.html" class="hover:text-primary-brown transition block">Food Tours</a></li>
+                    <li><a href="service.html" class="hover:text-primary-brown transition block">Nature Tours</a></li>
+                    <li><a href="service.html" class="hover:text-primary-brown transition block">City Tours</a></li>
+                    <li><a href="service.html" class="hover:text-primary-brown transition block">Custom Tours</a></li>
+                </ul>
+            </div>
+                
+                <!-- Contact Info -->
+                <div class="text-center md:text-left">
+                    <h3 class="text-neutral-dark dark:text-white text-xl font-bold mb-6">Contact Info</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start justify-center md:justify-start">
+                            <i class="fas fa-map-marker-alt text-primary-brown mt-1 mr-3"></i>
+                            <span class="text-center md:text-left">123 Adventure Street, Travel District, NY 10001</span>
+                        </li>
+                        <li class="flex items-center justify-center md:justify-start">
+                            <i class="fas fa-phone text-primary-brown mr-3"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </li>
+                        <li class="flex items-center justify-center md:justify-start">
+                            <i class="fas fa-envelope text-primary-brown mr-3"></i>
+                            <span>hello@growwtour.com</span>
+                        </li>
+                        <li class="flex items-center justify-center md:justify-start">
+                            <i class="fas fa-clock text-primary-brown mr-3"></i>
+                            <span>Mon - Fri: 9:00 - 18:00</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Bottom Bar -->
+            <div class="mt-12 pt-8 border-t text-center">
+                <p class="text-sm opacity-75 dark:opacity-70">
+                    &copy; 2026 Groww Tour. All rights reserved. Crafted with 
+                    <i class="fas fa-heart text-primary-brown mx-1"></i> and purpose.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============ FULLY WORKABLE JAVASCRIPT - ALL BUTTONS FUNCTIONAL ============ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // ============ THEME TOGGLE ============
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = themeToggle?.querySelector('.fa-moon');
+            const themeIconSun = themeToggle?.querySelector('.fa-sun');
+            const mobileThemeToggle = document.getElementById('theme-toggle-mobile');
+            const mobileThemeIcon = mobileThemeToggle?.querySelector('.fa-moon');
+            const mobileThemeIconSun = mobileThemeToggle?.querySelector('.fa-sun');
+            
+            function toggleTheme() {
+                document.documentElement.classList.toggle('dark');
+                const isDark = document.documentElement.classList.contains('dark');
+                
+                if (isDark) {
+                    if (themeIcon) themeIcon.classList.add('hidden');
+                    if (themeIconSun) themeIconSun.classList.remove('hidden');
+                    if (themeToggle) themeToggle.classList.add('active');
+                    if (mobileThemeIcon) mobileThemeIcon.classList.add('hidden');
+                    if (mobileThemeIconSun) mobileThemeIconSun.classList.remove('hidden');
+                    if (mobileThemeToggle) mobileThemeToggle.classList.add('active');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    if (themeIcon) themeIcon.classList.remove('hidden');
+                    if (themeIconSun) themeIconSun.classList.add('hidden');
+                    if (themeToggle) themeToggle.classList.remove('active');
+                    if (mobileThemeIcon) mobileThemeIcon.classList.remove('hidden');
+                    if (mobileThemeIconSun) mobileThemeIconSun.classList.add('hidden');
+                    if (mobileThemeToggle) mobileThemeToggle.classList.remove('active');
+                    localStorage.setItem('theme', 'light');
+                }
+            }
+            
+            if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+            if (mobileThemeToggle) mobileThemeToggle.addEventListener('click', toggleTheme);
+            
+            if (localStorage.getItem('theme') === 'dark') {
+                document.documentElement.classList.add('dark');
+                if (themeIcon) themeIcon.classList.add('hidden');
+                if (themeIconSun) themeIconSun.classList.remove('hidden');
+                if (themeToggle) themeToggle.classList.add('active');
+                if (mobileThemeIcon) mobileThemeIcon.classList.add('hidden');
+                if (mobileThemeIconSun) mobileThemeIconSun.classList.remove('hidden');
+                if (mobileThemeToggle) mobileThemeToggle.classList.add('active');
+            }
+            
+            // ============ RTL TOGGLE ============
+            const rtlToggle = document.getElementById('rtl-toggle');
+            const mobileRtlToggle = document.getElementById('rtl-toggle-mobile');
+            
+            function toggleRTL() {
+                if (document.documentElement.dir === 'rtl') {
+                    document.documentElement.dir = 'ltr';
+                    document.documentElement.lang = 'en';
+                    if (rtlToggle) { rtlToggle.textContent = '⇄'; rtlToggle.classList.remove('active'); }
+                    if (mobileRtlToggle) { mobileRtlToggle.textContent = '⇄'; mobileRtlToggle.classList.remove('active'); }
+                    localStorage.setItem('dir', 'ltr');
+                } else {
+                    document.documentElement.dir = 'rtl';
+                    document.documentElement.lang = 'ar';
+                    if (rtlToggle) { rtlToggle.textContent = '⇄'; rtlToggle.classList.add('active'); }
+                    if (mobileRtlToggle) { mobileRtlToggle.textContent = '⇄'; mobileRtlToggle.classList.add('active'); }
+                    localStorage.setItem('dir', 'rtl');
+                }
+            }
+            
+            if (rtlToggle) rtlToggle.addEventListener('click', toggleRTL);
+            if (mobileRtlToggle) mobileRtlToggle.addEventListener('click', toggleRTL);
+            
+            if (localStorage.getItem('dir') === 'rtl') {
+                document.documentElement.dir = 'rtl';
+                document.documentElement.lang = 'ar';
+                if (rtlToggle) { rtlToggle.textContent = '⇄'; rtlToggle.classList.add('active'); }
+                if (mobileRtlToggle) { mobileRtlToggle.textContent = '⇄'; mobileRtlToggle.classList.add('active'); }
+            }
+            
+            // ============ MOBILE MENU ============
+            const mobileToggle = document.getElementById('mobile-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileToggleIcon = document.querySelector('#mobile-toggle i');
+            
+            if (mobileToggle) {
+                mobileToggle.addEventListener('click', () => {
+                    const isOpening = !mobileMenu.classList.contains('open');
+                    if (isOpening) {
+                        mobileMenu.classList.add('open');
+                        mobileToggleIcon.classList.remove('fa-bars');
+                        mobileToggleIcon.classList.add('fa-times');
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        mobileMenu.classList.remove('open');
+                        mobileToggleIcon.classList.remove('fa-times');
+                        mobileToggleIcon.classList.add('fa-bars');
+                        document.body.style.overflow = '';
+                        document.querySelectorAll('.mobile-dropdown-content').forEach(c => c.classList.remove('show'));
+                    }
+                });
+            }
+            
+            // Mobile Dropdown
+            document.querySelectorAll('.mobile-dropdown-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const dropdown = e.target.closest('.mobile-dropdown');
+                    const content = dropdown.querySelector('.mobile-dropdown-content');
+                    const icon = dropdown.querySelector('.fa-chevron-down');
+                    const isOpening = !content.classList.contains('show');
+                    content.classList.toggle('show');
+                    if (content.classList.contains('show')) icon.style.transform = 'rotate(180deg)';
+                    else icon.style.transform = 'rotate(0deg)';
+                    if (isOpening) {
+                        document.querySelectorAll('.mobile-dropdown-content').forEach(otherContent => {
+                            if (otherContent !== content) {
+                                otherContent.classList.remove('show');
+                                const otherIcon = otherContent.parentElement.querySelector('.fa-chevron-down');
+                                if (otherIcon) otherIcon.style.transform = 'rotate(0deg)';
+                            }
+                        });
+                    }
+                });
+            });
+            
+            // Close mobile menu on link click
+            document.querySelectorAll('.mobile-menu-item, .mobile-dropdown-item').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (!e.target.closest('.mobile-dropdown-btn')) {
+                        mobileMenu.classList.remove('open');
+                        if (mobileToggleIcon) {
+                            mobileToggleIcon.classList.remove('fa-times');
+                            mobileToggleIcon.classList.add('fa-bars');
+                        }
+                        document.body.style.overflow = '';
+                    }
+                });
+            });
+            
+            // ============ BOOKING FUNCTIONALITY - FULLY WORKABLE ============
+            
+            // State variables
+            let currentMonth = 2; // February
+            let currentYear = 2026;
+            let selectedDate = 5;
+            let selectedTime = '10:30 AM';
+            let selectedTour = {
+                name: 'Mountain Trail',
+                price: 75,
+                image: '/assets/Tour1.jpg',
+                guide: 'Sophia',
+                duration: '6h • max 6'
+            };
+            let travelerCount = 2;
+            
+            // Month names
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            
+            // Initialize calendar
+            function renderCalendar() {
+                const calendarDays = document.getElementById('calendar-days');
+                const currentMonthEl = document.getElementById('current-month');
+                if (!calendarDays || !currentMonthEl) return;
+                
+                currentMonthEl.innerText = `${monthNames[currentMonth - 1]} ${currentYear}`;
+                
+                // Generate days for the month
+                const daysInMonth = new Date(currentYear, currentMonth, 0).getDate();
+                const firstDay = new Date(currentYear, currentMonth - 1, 1).getDay();
+                const startOffset = firstDay === 0 ? 6 : firstDay - 1; // Monday is 1, Sunday is 0
+                
+                let html = '';
+                
+                // Previous month days (unavailable)
+                for (let i = 0; i < startOffset; i++) {
+                    html += `<div class="calendar-day unavailable"></div>`;
+                }
+                
+                // Current month days
+                for (let i = 1; i <= daysInMonth; i++) {
+                    const isAvailable = i >= 1 && i <= 28; // Demo: days 1-28 available, 29-31 unavailable
+                    const isSelected = i === selectedDate;
+                    const availableClass = isAvailable ? 'available' : 'unavailable';
+                    const selectedClass = isSelected ? 'selected' : '';
+                    html += `<div class="calendar-day ${availableClass} ${selectedClass}" data-day="${i}">${i}</div>`;
+                }
+                
+                // Next month days (unavailable)
+                const totalCells = Math.ceil((startOffset + daysInMonth) / 7) * 7;
+                for (let i = startOffset + daysInMonth; i < totalCells; i++) {
+                    html += `<div class="calendar-day unavailable"></div>`;
+                }
+                
+                calendarDays.innerHTML = html;
+                
+                // Add click listeners to calendar days
+                document.querySelectorAll('.calendar-day.available').forEach(day => {
+                    day.addEventListener('click', function() {
+                        document.querySelectorAll('.calendar-day.selected').forEach(d => d.classList.remove('selected'));
+                        this.classList.add('selected');
+                        selectedDate = parseInt(this.dataset.day);
+                        
+                        // Update display
+                        document.getElementById('selected-date-display').innerHTML = `Available time slots for ${monthNames[currentMonth - 1]} ${selectedDate}, ${currentYear}`;
+                        document.getElementById('summary-date').innerText = `${monthNames[currentMonth - 1]} ${selectedDate}, ${currentYear}`;
+                        
+                        // Update time slots (randomize availability for demo)
+                        document.querySelectorAll('.time-slot').forEach(slot => {
+                            if (!slot.classList.contains('unavailable')) {
+                                if (Math.random() > 0.3) {
+                                    slot.classList.add('available');
+                                    slot.classList.remove('unavailable');
+                                } else {
+                                    slot.classList.add('unavailable');
+                                    slot.classList.remove('available');
+                                }
+                            }
+                        });
+                    });
+                });
+            }
+            
+            // Month navigation
+            document.getElementById('prev-month')?.addEventListener('click', function() {
+                currentMonth--;
+                if (currentMonth < 1) { currentMonth = 12; currentYear--; }
+                renderCalendar();
+            });
+            
+            document.getElementById('next-month')?.addEventListener('click', function() {
+                currentMonth++;
+                if (currentMonth > 12) { currentMonth = 1; currentYear++; }
+                renderCalendar();
+            });
+            
+            // Tour selection
+            document.querySelectorAll('.tour-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    // Remove selected state from all cards
+                    document.querySelectorAll('.tour-card').forEach(c => {
+                        c.classList.remove('border-primary-brown', 'selected-tour');
+                        c.classList.add('border-transparent');
+                        const badge = c.querySelector('.selected-badge');
+                        if (badge) badge.remove();
+                    });
+                    
+                    // Add selected state to clicked card
+                    this.classList.remove('border-transparent');
+                    this.classList.add('border-primary-brown', 'border-2', 'selected-tour');
+                    
+                    // Add selected badge
+                    const badge = document.createElement('div');
+                    badge.className = 'absolute top-2 right-2 bg-secondary-green text-white text-xs px-2 py-1 rounded-full selected-badge';
+                    badge.innerText = 'Selected';
+                    this.style.position = 'relative';
+                    this.appendChild(badge);
+                    
+                    // Update selected tour data
+                    selectedTour = {
+                        name: this.dataset.tour,
+                        price: parseInt(this.dataset.price),
+                        image: this.dataset.image,
+                        guide: this.dataset.guide,
+                        duration: this.dataset.duration
+                    };
+                    
+                    // Update booking summary
+                    updateBookingSummary();
+                });
+            });
+            
+            // Time slot selection
+            document.querySelectorAll('.time-slot').forEach(slot => {
+                slot.addEventListener('click', function() {
+                    if (this.classList.contains('unavailable')) {
+                        alert('This time slot is no longer available. Please select another time.');
+                        return;
+                    }
+                    
+                    document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedTime = this.dataset.time;
+                    document.getElementById('summary-time').innerText = selectedTime;
+                });
+            });
+            
+            // Traveler count change
+            document.getElementById('traveler-count')?.addEventListener('change', function() {
+                travelerCount = parseInt(this.value);
+                updateBookingSummary();
+            });
+            
+            // Payment method selection
+            document.querySelectorAll('.payment-method').forEach(method => {
+                method.addEventListener('click', function() {
+                    document.querySelectorAll('.payment-method').forEach(m => {
+                        m.classList.remove('border-primary-brown', 'selected');
+                        m.classList.add('border-transparent');
+                    });
+                    this.classList.remove('border-transparent');
+                    this.classList.add('border-primary-brown', 'selected');
+                });
+            });
+            
+            // Update booking summary function
+            function updateBookingSummary() {
+                const total = selectedTour.price * travelerCount;
+                
+                document.getElementById('summary-image').src = selectedTour.image;
+                document.getElementById('summary-tour-name').innerText = selectedTour.name;
+                document.getElementById('summary-guide-duration').innerHTML = `with ${selectedTour.guide} • ${selectedTour.duration.split('•')[0].trim()}`;
+                document.getElementById('summary-travelers').innerText = `${travelerCount} ${travelerCount > 1 ? 'adults' : 'adult'}`;
+                document.getElementById('summary-total').innerText = `$${total}`;
+                
+                // Update confirmation preview
+                updateConfirmationPreview();
+            }
+            
+            // Update confirmation preview
+            function updateConfirmationPreview() {
+                const bookingId = `#GW-${Math.floor(Math.random() * 9000 + 1000)}`;
+                const name = document.getElementById('full-name')?.value || 'John';
+                const email = document.getElementById('email-address')?.value || 'john.doe@example.com';
+                const total = selectedTour.price * travelerCount;
+                
+                document.getElementById('confirmation-booking-id').innerText = `Booking ${bookingId}`;
+                document.getElementById('confirmation-date').innerText = 'Confirmed just now';
+                
+                const detailsEl = document.getElementById('confirmation-details');
+                detailsEl.innerHTML = `
+                    <p class="flex justify-between"><span>Tour:</span> <span class="font-semibold">${selectedTour.name}</span></p>
+                    <p class="flex justify-between mt-1"><span>Guide:</span> <span class="font-semibold">${selectedTour.guide}</span></p>
+                    <p class="flex justify-between mt-1"><span>Date & time:</span> <span class="font-semibold">${monthNames[currentMonth - 1]} ${selectedDate}, ${currentYear} • ${selectedTime}</span></p>
+                    <p class="flex justify-between mt-1"><span>Travelers:</span> <span class="font-semibold">${travelerCount} ${travelerCount > 1 ? 'adults' : 'adult'}</span></p>
+                    <p class="flex justify-between mt-1"><span>Total paid:</span> <span class="font-semibold text-primary-brown">$${total}</span></p>
+                    <p class="flex justify-between mt-1"><span>Meeting point:</span> <span class="font-semibold">Main Square, Interlaken</span></p>
+                `;
+                
+                document.getElementById('confirmation-email').innerHTML = `<i class="fas fa-envelope mr-1"></i> Email notification sent to ${email}`;
+                
+                // Update full confirmation section
+                document.getElementById('confirmation-name').innerText = name.split(' ')[0];
+                document.getElementById('confirmation-email-message').innerHTML = `Your adventure is confirmed. We've sent your e-ticket and guide details to ${email}`;
+                document.getElementById('full-confirmation-id').innerText = bookingId;
+                document.getElementById('full-confirmation-footer').innerHTML = `<i class="fas fa-envelope mr-1"></i> A confirmation email has been sent to ${email}`;
+                
+                const fullDetails = document.getElementById('full-confirmation-details');
+                fullDetails.innerHTML = `
+                    <div>
+                        <p class="text-xs text-neutral-dark/50 dark:text-gray-500">Tour</p>
+                        <p class="font-semibold dark:text-white">${selectedTour.name}</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-neutral-dark/50 dark:text-gray-500">Guide</p>
+                        <p class="font-semibold dark:text-white">${selectedTour.guide}</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-neutral-dark/50 dark:text-gray-500">Date & time</p>
+                        <p class="font-semibold dark:text-white">${monthNames[currentMonth - 1]} ${selectedDate}, ${currentYear} • ${selectedTime}</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-neutral-dark/50 dark:text-gray-500">Travelers</p>
+                        <p class="font-semibold dark:text-white">${travelerCount} ${travelerCount > 1 ? 'adults' : 'adult'}</p>
+                    </div>
+                `;
+                
+                const guideContact = document.getElementById('guide-contact');
+                if (selectedTour.guide === 'Sophia') {
+                    guideContact.innerHTML = `<p><i class="fas fa-phone-alt mr-2"></i> +41 78 123 45 67</p><p class="mt-2"><i class="fas fa-comment mr-2"></i> sophia@growwtour.com</p>`;
+                } else if (selectedTour.guide === 'Marco') {
+                    guideContact.innerHTML = `<p><i class="fas fa-phone-alt mr-2"></i> +39 06 1234 5678</p><p class="mt-2"><i class="fas fa-comment mr-2"></i> marco@growwtour.com</p>`;
+                } else if (selectedTour.guide === 'Kenji') {
+                    guideContact.innerHTML = `<p><i class="fas fa-phone-alt mr-2"></i> +81 3 1234 5678</p><p class="mt-2"><i class="fas fa-comment mr-2"></i> kenji@growwtour.com</p>`;
+                } else {
+                    guideContact.innerHTML = `<p><i class="fas fa-phone-alt mr-2"></i> +34 93 123 45 67</p><p class="mt-2"><i class="fas fa-comment mr-2"></i> maria@growwtour.com</p>`;
+                }
+            }
+            
+            // Complete booking button
+            document.getElementById('complete-booking-btn')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Check terms
+                const termsCheckbox = document.getElementById('terms');
+                if (!termsCheckbox.checked) {
+                    alert('Please agree to the Terms and Cancellation policy to continue.');
+                    return;
+                }
+                
+                // Validate form
+                const nameInput = document.getElementById('full-name');
+                const emailInput = document.getElementById('email-address');
+                
+                if (!nameInput.value.trim()) {
+                    alert('Please enter your full name.');
+                    nameInput.focus();
+                    return;
+                }
+                
+                if (!emailInput.value.trim() || !emailInput.value.includes('@')) {
+                    alert('Please enter a valid email address.');
+                    emailInput.focus();
+                    return;
+                }
+                
+                // Process booking
+                this.disabled = true;
+                this.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Processing...';
+                
+                setTimeout(() => {
+                    alert('✅ Booking confirmed! Your adventure is all set.');
+                    
+                    // Update confirmation preview
+                    updateConfirmationPreview();
+                    
+                    // Show full confirmation section
+                    document.getElementById('full-confirmation-section').classList.remove('hidden');
+                    document.getElementById('full-confirmation-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    // Reset button
+                    this.disabled = false;
+                    this.innerHTML = '<i class="fas fa-lock mr-2"></i> Complete Booking';
+                    
+                    // Update step indicators
+                    document.querySelectorAll('.step-item').forEach((item, index) => {
+                        if (index < 3) item.classList.add('completed');
+                        item.classList.remove('active');
+                    });
+                    document.getElementById('step4').classList.add('active');
+                }, 1500);
+            });
+            
+            // View full confirmation
+            document.getElementById('view-full-confirmation')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('full-confirmation-section').classList.remove('hidden');
+                document.getElementById('full-confirmation-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                updateConfirmationPreview();
+            });
+            
+            // E-ticket buttons
+            document.getElementById('eticket-btn')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('📧 E-ticket has been sent to your email inbox.');
+            });
+            
+            document.getElementById('calendar-btn')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('📅 Event added to your calendar successfully!');
+            });
+            
+            document.querySelectorAll('.eticket-full-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('📧 E-ticket has been sent to your email inbox.');
+                });
+            });
+            
+            document.querySelectorAll('.calendar-full-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('📅 Event added to your calendar successfully!');
+                });
+            });
+            
+            // Start booking button
+            document.getElementById('start-booking-btn')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('booking-flow').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+            
+            // View confirmation button in hero
+            document.getElementById('view-confirmation-btn')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('full-confirmation-section').classList.remove('hidden');
+                document.getElementById('full-confirmation-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                updateConfirmationPreview();
+            });
+            
+            // Book another tour
+            document.getElementById('book-another-tour')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'book.html#booking-flow';
+            });
+            
+            // Back to homepage
+            document.getElementById('back-to-home-btn')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'index.html';
+            });
+            
+            document.getElementById('home-logo')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'index.html';
+            });
+            
+            // Destination card click handlers
+            document.querySelectorAll('.destination-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const destination = this.querySelector('.text-xs.font-bold')?.innerText || 'this destination';
+                    alert(`✨ Explore amazing tours in ${destination}! Check out our top-rated experiences.`);
+                });
+            });
+            
+            // Initialize
+            renderCalendar();
+            updateBookingSummary();
+            
+            // Set initial summary date
+            document.getElementById('summary-date').innerText = `February 5, 2026`;
+            
+            // Step indicator clicks
+            document.getElementById('step1')?.addEventListener('click', function() {
+                document.getElementById('booking-flow').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+            document.getElementById('step2')?.addEventListener('click', function() {
+                document.getElementById('calendar').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+            document.getElementById('step3')?.addEventListener('click', function() {
+                document.getElementById('full-name').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+        });
+    </script>
+</body>
+</html>

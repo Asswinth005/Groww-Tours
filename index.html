@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groww Tour | Discover Authentic Local Experiences</title>
+    <link rel="icon" type="asset/jpeg" href="assets/growwpark_logo.jpg">
+    <meta name="description" content="Experience authentic local tours with knowledgeable guides. Discover hidden gems, cultural insights, and unforgettable adventures.">
+    <meta name="keywords" content="local tours, travel guides, cultural experiences, adventure tourism, city exploration">
+    <meta name="author" content="Groww Tour">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-brown': '#8D6E63',
+                        'secondary-green': '#4CAF50',
+                        'accent-orange': '#82736e',
+                        'background-cream': '#FAF5EF',
+                        'neutral-dark': '#5D4037',
+                        'neutral-light': '#EFEBE9',
+                        'dark-bg': '#1a1a1a',
+                        'dark-card': '#2d2d2d'
+                    },
+                    fontFamily: {
+                        'sans': ['Space Grotesk', 'system-ui', 'sans-serif'],
+                        'display': ['Syne', 'sans-serif']
+                    },
+                    animation: {
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s ease-in-out infinite',
+                        'fade-in': 'fadeIn 0.3s ease-out',
+                        'zoom-in': 'zoomIn 0.5s ease-out',
+                        'tilt': 'tilt 10s infinite linear',
+                    },
+                    keyframes: {
+                        slideUp: {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        zoomIn: {
+                            '0%': { transform: 'scale(0.95)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' },
+                        },
+                        tilt: {
+                            '0%, 100%': { transform: 'rotate(0deg)' },
+                            '25%': { transform: 'rotate(1deg)' },
+                            '75%': { transform: 'rotate(-1deg)' },
+                        }
+                    },
+                    backgroundImage: {
+                    'hero-pattern': "url('/assets/BG.jpg')",
+                        'feature-pattern': "radial-gradient(circle at 20% 50%, rgba(141, 110, 99, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(76, 175, 80, 0.1) 0%, transparent 50%)"
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Custom Styles */
+        body {
+            background-color: #FAF5EF;
+            color: #5D4037;
+            scroll-behavior: smooth;
+        }
+        
+        .dark body {
+            background-color: #1a1a1a;
+            color: #e5e5e5;
+        }
+        
+        /* Remove scrollbar line */
+        body::-webkit-scrollbar {
+            display: none;
+        }
+        
+        body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* Mobile menu scrollbar - hidden */
+        .mobile-menu::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .mobile-menu {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* Card Hover Effects */
+        .tour-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(141, 110, 99, 0.1);
+        }
+        
+        .dark .tour-card {
+            background: #2d2d2d;
+            border-color: #404040;
+        }
+        
+        .tour-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(141, 110, 99, 0.15);
+        }
+        
+        /* Adventure Button */
+        .adventure-btn {
+            background: linear-gradient(135deg, #8D6E63 0%, #82736e 100%);
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .adventure-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(141, 110, 99, 0.3);
+        }
+        
+        /* Navigation */
+        .nav-item {
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #8D6E63;
+            transition: width 0.3s ease;
+        }
+        
+        [dir="rtl"] .nav-item::after {
+            left: auto;
+            right: 0;
+        }
+        
+        .nav-item:hover::after {
+            width: 100%;
+        }
+        
+        /* Dropdown Menu - FIXED */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 220px;
+            background: white;
+            border-radius: 12px;
+            padding: 0.75rem 0;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: 1px solid #EFEBE9;
+        }
+        
+        .dark .dropdown-menu {
+            background: #2d2d2d;
+            border-color: #404040;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        [dir="rtl"] .dropdown-menu {
+            left: auto;
+            right: 0;
+        }
+        
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            color: #5D4037;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        
+        .dark .dropdown-item {
+            color: #e5e5e5;
+        }
+        
+        .dropdown-item:hover {
+            background: #EFEBE9;
+            color: #8D6E63;
+            padding-left: 1.75rem;
+        }
+        
+        [dir="rtl"] .dropdown-item:hover {
+            padding-left: 1.5rem;
+            padding-right: 1.75rem;
+        }
+        
+        .dark .dropdown-item:hover {
+            background: #404040;
+        }
+        
+        .dropdown-item i {
+            margin-right: 0.75rem;
+            width: 20px;
+            text-align: center;
+        }
+        
+        [dir="rtl"] .dropdown-item i {
+            margin-right: 0;
+            margin-left: 0.75rem;
+        }
+        
+        /* Auth Buttons */
+        .auth-btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            white-space: nowrap;
+        }
+        
+        .auth-btn.login {
+            background: transparent;
+            border-color: #D7CCC8;
+            color: #5D4037;
+        }
+        
+        .dark .auth-btn.login {
+            border-color: #4B5563;
+            color: #D1D5DB;
+        }
+        
+        .auth-btn.login:hover {
+            border-color: #8D6E63;
+            color: #8D6E63;
+        }
+        
+        .dark .auth-btn.login:hover {
+            border-color: #8D6E63;
+            color: #8D6E63;
+        }
+        
+        .auth-btn.signup {
+            background: #8D6E63;
+            color: white;
+        }
+        
+        .auth-btn.signup:hover {
+            background: #6D4C41;
+            transform: translateY(-2px);
+        }
+        
+        /* Toggle Buttons */
+        .toggle-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #F3F4F6;
+            color: #6B7280;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .dark .toggle-btn {
+            background: #374151;
+            color: #9CA3AF;
+        }
+        
+        .toggle-btn:hover {
+            background: #E5E7EB;
+            color: #374151;
+        }
+        
+        .dark .toggle-btn:hover {
+            background: #4B5563;
+            color: #E5E7EB;
+        }
+        
+        .toggle-btn.active {
+            background: #8D6E63;
+            color: white;
+        }
+        
+        /* Mobile Menu - SIMPLIFIED */
+        .mobile-menu {
+            background: white;
+            border-top: 1px solid #E5E5E5;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .dark .mobile-menu {
+            background: #1A1A1A;
+            border-color: #404040;
+        }
+
+        .mobile-menu.open {
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        /* Mobile menu items - SIMPLE */
+        .mobile-menu-item {
+            display: block;
+            padding: 1rem 1.5rem;
+            font-weight: 500;
+            color: #5D4037;
+            border-bottom: 1px solid #F3F4F6;
+            transition: all 0.2s ease;
+        }
+
+        .dark .mobile-menu-item {
+            color: #D1D5DB;
+            border-bottom-color: #374151;
+        }
+
+        .mobile-menu-item:hover {
+            background-color: #F9FAFB;
+            color: #8D6E63;
+        }
+
+        .dark .mobile-menu-item:hover {
+            background-color: #374151;
+        }
+
+        /* Mobile auth buttons */
+        .mobile-auth-btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-align: center;
+            margin: 0.25rem;
+            border: 1px solid transparent;
+        }
+
+        .mobile-auth-btn.login {
+            background: transparent;
+            border-color: #D7CCC8;
+            color: #5D4037;
+        }
+
+        .dark .mobile-auth-btn.login {
+            border-color: #4B5563;
+            color: #D1D5DB;
+        }
+
+        .mobile-auth-btn.login:hover {
+            background-color: #8D6E63;
+            color: white;
+            border-color: #8D6E63;
+        }
+
+        .mobile-auth-btn.signup {
+            background: #8D6E63;
+            color: white;
+        }
+
+        .mobile-auth-btn.signup:hover {
+            background: #6D4C41;
+        }
+
+        /* Mobile dropdown items - SIMPLE */
+        .mobile-dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .mobile-dropdown-content.show {
+            max-height: 300px;
+        }
+
+        .mobile-dropdown-item {
+            display: block;
+            padding: 0.75rem 2.5rem;
+            font-size: 0.95rem;
+            color: #6B7280;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid #F9FAFB;
+        }
+
+        .dark .mobile-dropdown-item {
+            color: #9CA3AF;
+            border-bottom-color: #374151;
+        }
+
+        .mobile-dropdown-item:hover {
+            color: #8D6E63;
+            background-color: #F9FAFB;
+        }
+
+        .dark .mobile-dropdown-item:hover {
+            background-color: #374151;
+        }
+        
+        /* Fix for dropdown arrows in RTL */
+        [dir="rtl"] .dropdown > button i {
+            margin-right: 0;
+            margin-left: 0.5rem;
+        }
+        
+        /* Navigation spacing for both LTR and RTL */
+        .nav-spacing {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        /* Desktop navigation container */
+        .desktop-nav-container {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        /* Testimonial Card */
+        .testimonial-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #8D6E63;
+        }
+        
+        [dir="rtl"] .testimonial-card {
+            border-left: none;
+            border-right: 4px solid #8D6E63;
+        }
+        
+        .dark .testimonial-card {
+            background: #2d2d2d;
+            border-left-color: #4CAF50;
+        }
+        
+        [dir="rtl"] .dark .testimonial-card {
+            border-right-color: #4CAF50;
+        }
+        
+        /* Feature Icon */
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.75rem;
+        }
+        
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #8D6E63, #4CAF50, #FFB74D);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Hero Background */
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/BG.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .dark .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/assets/BG.jpg');
+        }
+        
+        /* Tour Category Badge */
+        .category-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Rating Stars */
+        .rating-stars {
+            color: #FFB74D;
+        }
+        
+        /* Search Bar */
+        .search-bar {
+            background: white;
+            border-radius: 50px;
+            padding: 0.5rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .search-bar {
+            background: #2d2d2d;
+        }
+        
+        /* Pattern Background */
+        .pattern-bg {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(141, 110, 99, 0.08) 0%, transparent 55%),
+                radial-gradient(circle at 75% 75%, rgba(76, 175, 80, 0.08) 0%, transparent 55%);
+        }
+        
+        .dark .pattern-bg {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(141, 110, 99, 0.12) 0%, transparent 55%),
+                radial-gradient(circle at 75% 75%, rgba(76, 175, 80, 0.12) 0%, transparent 55%);
+        }
+        
+        /* Social Media Icons */
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #EFEBE9;
+            color: #5D4037;
+            transition: all 0.3s ease;
+        }
+        
+        .dark .social-icon {
+            background: #374151;
+            color: #e5e5e5;
+        }
+        
+        .social-icon:hover {
+            background: #8D6E63;
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        /* Floating Elements */
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Section Divider */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(141, 110, 99, 0.2), transparent);
+            margin: 4rem 0;
+        }
+        
+        /* Ensure proper spacing in RTL */
+        [dir="rtl"] .space-x-3 > :not([hidden]) ~ :not([hidden]) {
+            --tw-space-x-reverse: 1;
+        }
+        
+        [dir="rtl"] .ml-2 {
+            margin-left: 0;
+            margin-right: 0.5rem;
+        }
+        
+        [dir="rtl"] .mr-2 {
+            margin-right: 0;
+            margin-left: 0.5rem;
+        }
+        
+        [dir="rtl"] .ml-4 {
+            margin-left: 0;
+            margin-right: 1rem;
+        }
+        
+        [dir="rtl"] .mr-4 {
+            margin-right: 0;
+            margin-left: 1rem;
+        }
+        
+        [dir="rtl"] .ml-8 {
+            margin-left: 0;
+            margin-right: 2rem;
+        }
+        
+        /* Footer Styles - FIXED for dark mode */
+        footer {
+            background: #EFEBE9;
+            color: #5D4037;
+        }
+        
+        .dark footer {
+            background: #1a1a1a;
+            color: #e5e5e5;
+        }
+        
+        footer a:hover {
+            color: #8D6E63;
+        }
+        
+        footer .border-t {
+            border-color: #D7CCC8;
+        }
+        
+        .dark footer .border-t {
+            border-color: #404040;
+        }
+        
+        /* Dashboard Dropdown */
+        .dashboard-dropdown {
+            position: relative;
+        }
+        
+        .dashboard-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 200px;
+            background: white;
+            border-radius: 12px;
+            padding: 0.75rem 0;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: 1px solid #EFEBE9;
+        }
+        
+        .dark .dashboard-dropdown-menu {
+            background: #2d2d2d;
+            border-color: #404040;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .dashboard-dropdown:hover .dashboard-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        [dir="rtl"] .dashboard-dropdown-menu {
+            left: auto;
+            right: 0;
+        }
+        
+        /* Mobile Menu Toggle Animation */
+        .mobile-toggle-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-toggle-icon.rotate {
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+<body class="pattern-bg">
+
+    <!-- Fixed Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-neutral-light dark:border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a class='flex items-center space-x-3 group' href='index.html'>
+                    <div class="w-10 h-10 bg-primary-brown rounded-lg flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
+                        <i class="fas fa-map-marked-alt text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-display font-bold tracking-tight text-neutral-dark dark:text-white">Groww</span>
+                        <span class="text-2xl font-display font-bold tracking-tight text-primary-brown">Tour</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden xl:flex items-center">
+                    <div class="desktop-nav-container">
+                        <!-- Navigation Items -->
+                        <div class="nav-spacing">
+                            <!-- Home Dropdown -->
+                            <div class="dropdown">
+                                <button class="nav-item font-medium text-neutral-dark dark:text-gray-300 hover:text-primary-brown transition flex items-center">
+                                    Home <i class="fas fa-chevron-down ml-2 text-xs"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                   <a class='dropdown-item' href='index.html' style="background: rgba(141, 110, 99, 0.1); color: #8D6E63; border-left: 3px solid #8D6E63; font-weight: 600;">
+                                    <i class="fas fa-home"></i>
+                                    Home 1 
+                                </a>
+                                    <a href="home2.html" class="dropdown-item">
+                                        <i class="fas fa-home"></i>
+                                        Home 2
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- About -->
+                            <a class='nav-item font-medium text-neutral-dark dark:text-gray-300 hover:text-primary-brown transition' href='about.html'>
+                                About
+                            </a>
+                            
+                            <!-- Services -->
+                            <a class='nav-item font-medium text-neutral-dark dark:text-gray-300 hover:text-primary-brown transition' href='service.html'>
+                                Services
+                            </a>
+                            
+                            <!-- Book Now-->
+                            <a class='nav-item font-medium text-neutral-dark dark:text-gray-300 hover:text-primary-brown transition' href='book.html'>
+                                Book Now
+                            </a>
+                            
+                           <!-- Gallery-->
+                            <a class='nav-item font-medium text-neutral-dark dark:text-gray-300 hover:text-primary-brown transition' href='gallery.html'>
+                                Gallery
+                            </a>
+                            
+                            <!-- Contact Us -->
+                            <a class='nav-item font-medium text-neutral-dark dark:text-gray-300 hover:text-primary-brown transition' href='contact.html'>
+                                Contact 
+                            </a>
+                            
+                            <!-- Dashboard Dropdown -->
+                            <div class="dashboard-dropdown">
+                                <button class="nav-item font-medium text-neutral-dark dark:text-gray-300 hover:text-primary-brown transition flex items-center">
+                                    Dashboard <i class="fas fa-chevron-down ml-2 text-xs"></i>
+                                </button>
+                                <div class="dashboard-dropdown-menu">
+                                    <a class='dropdown-item' href='admin.html'>
+                                        <i class="fas fa-user-shield"></i>
+                                        Admin
+                                    </a>
+                                    <a class='dropdown-item' href='client.html'>
+                                        <i class="fas fa-user"></i>
+                                        Client
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Auth Buttons -->
+                        <div class="flex items-center gap-3 ml-0">
+                            <a class='auth-btn login' href='login.html'>
+                                Login
+                            </a>
+                            <a class='auth-btn signup' href='signup.html'>
+                                Sign Up
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Compact Theme & Language Toggle -->
+                    <div class="flex gap-2 ml-4">
+                        <button id="theme-toggle" class="toggle-btn" title="Toggle theme">
+                            <i class="fas fa-moon"></i>
+                            <i class="fas fa-sun hidden"></i>
+                        </button>
+                        <button id="rtl-toggle" class="toggle-btn" title="Toggle RTL/LTR">
+                            ⇄
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-toggle" class="xl:hidden text-neutral-dark dark:text-gray-300 p-2">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu - SIMPLIFIED -->
+            <div id="mobile-menu" class="mobile-menu xl:hidden">
+                <!-- Home -->
+                <div class="mobile-dropdown">
+                    <button class="mobile-dropdown-btn flex items-center justify-between w-full mobile-menu-item">
+                        <span>Home</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                    <div class="mobile-dropdown-content">
+                        <a class='mobile-dropdown-item' href='index.html' style="background: rgba(141, 110, 99, 0.1); color: #8D6E63; border-left: 3px solid #8D6E63; font-weight: 600;">
+                            <i class="fas fa-home mr-2"></i>
+                            Home 1 
+                        </a>                     
+                        <a href="home2.html" class="mobile-dropdown-item">Home 2</a>
+                    </div>
+                </div>
+                
+                <!-- About -->
+                <a class='mobile-menu-item' href='about.html'>About</a>
+                
+                <!-- Services -->
+                <a class='mobile-menu-item' href='service.html'>Services</a>
+                
+                <!-- Book Now -->
+                <a class='mobile-menu-item' href='book.html'>Book Now</a>
+                
+                <!-- Gallery -->
+                <a class='mobile-menu-item' href='gallery.html'>Gallery</a>
+
+                
+                <!-- Contact Us -->
+                <a class='mobile-menu-item' href='contact.html'>Contact</a>
+                
+                <!-- Dashboard -->
+                <div class="mobile-dropdown">
+                    <button class="mobile-dropdown-btn flex items-center justify-between w-full mobile-menu-item">
+                        <span>Dashboard</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                    <div class="mobile-dropdown-content">
+                        <a class='mobile-dropdown-item' href='admin.html'>Admin</a>
+                        <a class='mobile-dropdown-item' href='client.html'>Client</a>
+                    </div>
+                </div>
+                
+                <!-- Mobile Auth Buttons -->
+                <div class="flex flex-col sm:flex-row gap-3 p-6">
+                    <a class='mobile-auth-btn login flex-1 text-center' href='login.html'>
+                        Login
+                    </a>
+                    <a class='mobile-auth-btn signup flex-1 text-center' href='signup.html'>
+                        Sign Up
+                    </a>
+                </div>
+                
+                <!-- Mobile Toggle Buttons -->
+                <div class="flex justify-center gap-3 p-6 border-t border-gray-200 dark:border-gray-800">
+                    <button id="theme-toggle-mobile" class="toggle-btn">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun hidden"></i>
+                    </button>
+                    <button id="rtl-toggle-mobile" class="toggle-btn">
+                        ⇄
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg text-white pt-32 pb-20 md:pt-40 md:pb-32">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center animate-slide-up">
+                <div class="inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full mb-6">
+                    <i class="fas fa-compass mr-2"></i>
+                    <span class="font-medium">Discover Authentic Experiences</span>
+                </div>
+                
+                <h1 class="text-4xl md:text-6xl font-display font-bold mb-6">
+                    Explore Like a <span class="text-primary-brown font-bold">Local</span>
+                </h1>
+                
+                <p class="text-xl opacity-90 mb-10 max-w-2xl mx-auto">
+                    Connect with passionate local guides who will show you hidden gems, share cultural insights, and create unforgettable travel memories.
+                </p>
+                
+                <!-- Search Bar -->
+                <div class="search-bar max-w-2xl mx-auto mb-10">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="flex-1 p-2">
+                            <div class="flex items-center">
+                                <i class="fas fa-search text-primary-brown ml-3 mr-2"></i>
+                                <input type="text" placeholder="Where do you want to explore?" class="w-full p-2 focus:outline-none dark:bg-transparent dark:text-white">
+                            </div>
+                        </div>
+                        <div class="flex-1 p-2">
+                            <div class="flex items-center">
+                                <i class="fas fa-calendar text-primary-brown ml-3 mr-2"></i>
+                                <input type="text" placeholder="Select dates" class="w-full p-2 focus:outline-none dark:bg-transparent dark:text-white">
+                            </div>
+                        </div>
+                        <div class="p-2">
+                            <button class="adventure-btn px-6">
+                                <i class="fas fa-search mr-2"></i> Find Tours
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-6">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold">500+</div>
+                        <div class="opacity-80">Local Guides</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold">2,000+</div>
+                        <div class="opacity-80">Unique Tours</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold">50+</div>
+                        <div class="opacity-80">Countries</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold">4.9★</div>
+                        <div class="opacity-80">Average Rating</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Tours Section -->
+    <section id="tours" class="py-20 bg-feature-pattern">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">
+                    <span class="text-neutral-dark dark:text-white">Featured</span>
+                    <span class="text-primary-brown"> Tours</span>
+                </h2>
+                <p class="text-neutral-dark/70 dark:text-gray-300 max-w-2xl mx-auto">
+                    Handpicked experiences that showcase the best of local culture, adventure, and hidden treasures
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Tour 1 -->
+                <div class="tour-card animate-slide-up">
+                    <div class="h-48 overflow-hidden">
+                        <img src="/assets/Tour.jpg" 
+                             alt="Historic City Walking Tour" 
+                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                        <div class="absolute top-4 right-4 bg-accent-orange text-white px-3 py-1 rounded-full text-sm font-semibold">
+                            <i class="fas fa-fire mr-1"></i> Popular
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="category-badge bg-primary-brown/10 text-primary-brown dark:bg-primary-brown/20">Walking Tour</span>
+                            <span class="category-badge bg-secondary-green/10 text-secondary-green dark:bg-secondary-green/20">Cultural</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-neutral-dark dark:text-white">Historic City Center Exploration</h3>
+                        <p class="text-neutral-dark/70 dark:text-gray-400 mb-4">Discover hidden alleyways, historic landmarks, and local stories with our expert city guides.</p>
+                        
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="ml-2 text-neutral-dark/70 dark:text-gray-400">(248 reviews)</span>
+                            </div>
+                            <div class="text-lg font-bold text-primary-brown">$45</div>
+                        </div>
+                        
+                        <div class="flex items-center text-neutral-dark/50 dark:text-gray-500 text-sm mb-4">
+                            <i class="fas fa-clock mr-2"></i>
+                            <span>3 hours</span>
+                            <i class="fas fa-user-friends ml-4 mr-2"></i>
+                            <span>Small group (max 8)</span>
+                        </div>
+                        
+                        <a href="#" class="adventure-btn w-full text-center">
+                            <i class="fas fa-calendar-check mr-2"></i> Book Now
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Tour 2 -->
+                <div class="tour-card animate-slide-up" style="animation-delay: 0.1s">
+                    <div class="h-48 overflow-hidden">
+                        <img src="/assets/Tour1.jpg" 
+                             alt="Mountain Adventure Tour" 
+                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                        <div class="absolute top-4 right-4 bg-secondary-green text-white px-3 py-1 rounded-full text-sm font-semibold">
+                            <i class="fas fa-leaf mr-1"></i> Eco-Friendly
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="category-badge bg-secondary-green/10 text-secondary-green dark:bg-secondary-green/20">Adventure</span>
+                            <span class="category-badge bg-neutral-dark/10 text-neutral-dark dark:bg-neutral-dark/20 dark:text-gray-300">Nature</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-neutral-dark dark:text-white">Mountain Trail & Waterfall Adventure</h3>
+                        <p class="text-neutral-dark/70 dark:text-gray-400 mb-4">Hike through pristine trails, discover hidden waterfalls, and learn about local flora and fauna.</p>
+                        
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="ml-2 text-neutral-dark/70 dark:text-gray-400">(189 reviews)</span>
+                            </div>
+                            <div class="text-lg font-bold text-primary-brown">$75</div>
+                        </div>
+                        
+                        <div class="flex items-center text-neutral-dark/50 dark:text-gray-500 text-sm mb-4">
+                            <i class="fas fa-clock mr-2"></i>
+                            <span>6 hours</span>
+                            <i class="fas fa-user-friends ml-4 mr-2"></i>
+                            <span>Small group (max 6)</span>
+                        </div>
+                        
+                        <a href="#" class="adventure-btn w-full text-center">
+                            <i class="fas fa-calendar-check mr-2"></i> Book Now
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Tour 3 -->
+                <div class="tour-card animate-slide-up" style="animation-delay: 0.2s">
+                    <div class="h-48 overflow-hidden">
+                        <img src="/assets/Tour2.jpg" 
+                             alt="Food Tasting Tour" 
+                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                        <div class="absolute top-4 right-4 bg-accent-orange text-white px-3 py-1 rounded-full text-sm font-semibold">
+                            <i class="fas fa-utensils mr-1"></i> Foodie Favorite
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="category-badge bg-accent-orange/10 text-accent-orange dark:bg-accent-orange/20">Food Tour</span>
+                            <span class="category-badge bg-primary-brown/10 text-primary-brown dark:bg-primary-brown/20">Cultural</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-neutral-dark dark:text-white">Local Street Food & Market Tour</h3>
+                        <p class="text-neutral-dark/70 dark:text-gray-400 mb-4">Taste authentic local dishes, visit bustling markets, and learn about culinary traditions from food experts.</p>
+                        
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="ml-2 text-neutral-dark/70 dark:text-gray-400">(312 reviews)</span>
+                            </div>
+                            <div class="text-lg font-bold text-primary-brown">$60</div>
+                        </div>
+                        
+                        <div class="flex items-center text-neutral-dark/50 dark:text-gray-500 text-sm mb-4">
+                            <i class="fas fa-clock mr-2"></i>
+                            <span>4 hours</span>
+                            <i class="fas fa-user-friends ml-4 mr-2"></i>
+                            <span>Small group (max 10)</span>
+                        </div>
+                        
+                        <a href="#" class="adventure-btn w-full text-center">
+                            <i class="fas fa-calendar-check mr-2"></i> Book Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="inline-flex items-center text-primary-brown font-semibold hover:text-accent-orange transition">
+                    View All Tours <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-20 bg-neutral-light dark:bg-gray-900/50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">
+                    How <span class="text-secondary-green">Groww Tour</span> Works
+                </h2>
+                <p class="text-neutral-dark/70 dark:text-gray-300 max-w-2xl mx-auto">
+                    Three simple steps to your perfect local experience
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="text-center p-8 bg-white dark:bg-dark-card rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                    <div class="feature-icon bg-primary-brown/10 text-primary-brown dark:bg-primary-brown/20 mx-auto">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 dark:text-white">1. Find Your Experience</h3>
+                    <p class="text-neutral-dark/70 dark:text-gray-400">
+                        Browse our curated collection of tours by destination, interest, or guide expertise. Filter by price, duration, and group size.
+                    </p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="text-center p-8 bg-white dark:bg-dark-card rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                    <div class="feature-icon bg-secondary-green/10 text-secondary-green dark:bg-secondary-green/20 mx-auto">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 dark:text-white">2. Book & Connect</h3>
+                    <p class="text-neutral-dark/70 dark:text-gray-400">
+                        Securely book your tour online and connect directly with your local guide. Ask questions and customize your experience.
+                    </p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="text-center p-8 bg-white dark:bg-dark-card rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+                    <div class="feature-icon bg-accent-orange/10 text-accent-orange dark:bg-accent-orange/20 mx-auto">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 dark:text-white">3. Explore & Enjoy</h3>
+                    <p class="text-neutral-dark/70 dark:text-gray-400">
+                        Meet your guide and embark on an unforgettable journey. Discover hidden gems and create memories that last a lifetime.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Guides Section -->
+    <section id="guides" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">
+                    Meet Our <span class="text-accent-orange">Local Guides</span>
+                </h2>
+                <p class="text-neutral-dark/70 dark:text-gray-300 max-w-2xl mx-auto">
+                    Passionate locals who love sharing their knowledge, stories, and hidden gems with travelers
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Guide 1 -->
+                <div class="bg-white dark:bg-dark-card rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 border-4 border-primary-brown/20 dark:border-primary-brown/30">
+                        <img src="/assets/Guide.jpg" 
+                             alt="Guide Marco" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold mb-1 dark:text-white">Marco</h3>
+                    <p class="text-primary-brown font-medium mb-3">Historic City Expert</p>
+                    <p class="text-neutral-dark/70 dark:text-gray-400 text-sm mb-4">
+                        Born and raised in the city, Marco knows every hidden alley and untold story.
+                    </p>
+                    <div class="rating-stars mb-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="text-neutral-dark/50 dark:text-gray-500 text-sm">
+                        <i class="fas fa-map-marker-alt mr-1"></i> Rome, Italy
+                    </div>
+                </div>
+                
+                <!-- Guide 2 -->
+                <div class="bg-white dark:bg-dark-card rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 border-4 border-secondary-green/20 dark:border-secondary-green/30">
+                        <img src="/assets/Guide1.jpg" 
+                             alt="Guide Sophia" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold mb-1 dark:text-white">Sophia</h3>
+                    <p class="text-secondary-green font-medium mb-3">Nature & Hiking Guide</p>
+                    <p class="text-neutral-dark/70 dark:text-gray-400 text-sm mb-4">
+                        Environmental scientist with 10+ years of hiking experience in the Alps.
+                    </p>
+                    <div class="rating-stars mb-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="text-neutral-dark/50 dark:text-gray-500 text-sm">
+                        <i class="fas fa-map-marker-alt mr-1"></i> Interlaken, Switzerland
+                    </div>
+                </div>
+                
+                <!-- Guide 3 -->
+                <div class="bg-white dark:bg-dark-card rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 border-4 border-accent-orange/20 dark:border-accent-orange/30">
+                        <img src="/assets/Guide2.jpg" 
+                             alt="Guide Kenji" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold mb-1 dark:text-white">Kenji</h3>
+                    <p class="text-accent-orange font-medium mb-3">Food Culture Specialist</p>
+                    <p class="text-neutral-dark/70 dark:text-gray-400 text-sm mb-4">
+                        Former chef who now shares his passion for Japanese culinary traditions.
+                    </p>
+                    <div class="rating-stars mb-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="text-neutral-dark/50 dark:text-gray-500 text-sm">
+                        <i class="fas fa-map-marker-alt mr-1"></i> Tokyo, Japan
+                    </div>
+                </div>
+                
+                <!-- Guide 4 -->
+                <div class="bg-white dark:bg-dark-card rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition-shadow">
+                    <div class="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 border-4 border-secondary-green/20 dark:border-secondary-green/30">
+                        <img src="/assets/Guide3.jpg" 
+                             alt="Guide Maria" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold mb-1 dark:text-white">Maria</h3>
+                    <p class="text-secondary-green font-medium mb-3">Art & Architecture Guide</p>
+                    <p class="text-neutral-dark/70 dark:text-gray-400 text-sm mb-4">
+                        Art historian with a passion for Barcelona's modernist architecture and street art.
+                    </p>
+                    <div class="rating-stars mb-4">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="text-neutral-dark/50 dark:text-gray-500 text-sm">
+                        <i class="fas fa-map-marker-alt mr-1"></i> Barcelona, Spain
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="adventure-btn px-8">
+                    <i class="fas fa-users mr-2"></i> Browse All Guides
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-neutral-light dark:bg-gray-900/50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">
+                    Traveler <span class="text-primary-brown">Stories</span>
+                </h2>
+                <p class="text-neutral-dark/70 dark:text-gray-300 max-w-2xl mx-auto">
+                    See what our travelers say about their experiences with Groww Tour
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="/assets/test.jpg" 
+                                 alt="Sarah M." class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold dark:text-white">Sarah M.</h4>
+                            <p class="text-neutral-dark/50 dark:text-gray-400 text-sm">From Canada</p>
+                        </div>
+                    </div>
+                    <p class="text-neutral-dark/80 dark:text-gray-300 mb-4">
+                        "Marco's historic tour of Rome was incredible! He showed us places we would never have found on our own. The stories he shared brought the city to life."
+                    </p>
+                    <div class="rating-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="/assets/test1.jpg" 
+                                 alt="James K." class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold dark:text-white">James K.</h4>
+                            <p class="text-neutral-dark/50 dark:text-gray-400 text-sm">From Australia</p>
+                        </div>
+                    </div>
+                    <p class="text-neutral-dark/80 dark:text-gray-300 mb-4">
+                        "Sophia's hiking tour in Switzerland was the highlight of our trip. Her knowledge of the local flora and fauna made the experience educational and fun."
+                    </p>
+                    <div class="rating-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="/assets/test2.jpg" 
+                                 alt="Lisa T." class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold dark:text-white">Lisa T.</h4>
+                            <p class="text-neutral-dark/50 dark:text-gray-400 text-sm">From USA</p>
+                        </div>
+                    </div>
+                    <p class="text-neutral-dark/80 dark:text-gray-300 mb-4">
+                        "Kenji's food tour in Tokyo was an absolute delight! We tried dishes we would never have ordered on our own and learned so much about Japanese food culture."
+                    </p>
+                    <div class="rating-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-r from-primary-brown to-accent-orange text-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-display font-bold mb-6">
+                    Ready for Your Next Adventure?
+                </h2>
+                <p class="text-xl opacity-90 mb-10">
+                    Join thousands of travelers who have discovered the world through the eyes of a local.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#" class="bg-white text-primary-brown font-bold px-8 py-4 rounded-full hover:bg-neutral-light transition shadow-lg">
+                        <i class="fas fa-search mr-2"></i> Explore Tours
+                    </a>
+                    <a href="#" class="bg-transparent border-2 border-white text-white font-bold px-8 py-4 rounded-full hover:bg-white/10 transition">
+                        <i class="fas fa-user-plus mr-2"></i> Become a Guide
+                    </a>
+                </div>
+                
+                <p class="mt-10 opacity-80">
+                    <i class="fas fa-shield-alt mr-2"></i> Secure booking • Best price guarantee • 24/7 customer support
+                </p>
+            </div>
+        </div>
+    </section>
+
+   <!-- Footer -->
+<footer class="py-16">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+            <!-- Company Info -->
+            <div class="text-center md:text-left">
+                <div class="flex items-center justify-center md:justify-start space-x-3 mb-6">
+                    <div class="w-10 h-10 bg-primary-brown rounded-lg flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
+                        <i class="fas fa-map-marked-alt text-white text-lg"></i>
+                    </div>
+                    <div>
+                       <span class="text-2xl font-display font-bold tracking-tight text-neutral-dark dark:text-white">Groww</span>
+                        <span class="text-2xl font-display font-bold tracking-tight text-primary-brown">Tour</span>
+                    </div>
+                </div>
+                <p class="mb-6 opacity-80 dark:opacity-70 text-center md:text-left">
+                    Connecting travelers with passionate local guides for authentic experiences around the world since 2015.
+                </p>
+                <div class="flex space-x-4 justify-center md:justify-start">
+                    <a href="#" class="social-icon facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-icon twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-icon instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-icon linkedin">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="social-icon youtube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+            
+           <!-- Quick Links -->
+            <div class="text-center md:text-left">
+                <h3 class="text-neutral-dark dark:text-white text-xl font-bold mb-6">Quick Links</h3>
+                <ul class="space-y-3">
+                    <li><a class='hover:text-primary-brown transition block' href='index.html'>Home</a></li>
+                    <li><a class='hover:text-primary-brown transition block' href='about.html'>About</a></li>
+                    <li><a class='hover:text-primary-brown transition block' href='service.html'>Services</a></li>
+                    <li><a class='hover:text-primary-brown transition block' href='book.html'>Book Now</a></li>
+                    <li><a class='hover:text-primary-brown transition block' href='contact.html'>Contact Us</a></li>
+                </ul>
+            </div>
+            
+            <!-- Tour Types -->
+            <div class="text-center md:text-left">
+                <h3 class="text-neutral-dark dark:text-white text-xl font-bold mb-6">Tour Types</h3>
+                <ul class="space-y-3">
+                    <li><a href="service.html" class="hover:text-primary-brown transition block">Adventure Tours</a></li>
+                    <li><a href="service.html" class="hover:text-primary-brown transition block">Cultural Tours</a></li>
+                    <li><a href="service.html" class="hover:text-primary-brown transition block">Food Tours</a></li>
+                    <li><a href="service.html" class="hover:text-primary-brown transition block">Nature Tours</a></li>
+                    <li><a href="service.html" class="hover:text-primary-brown transition block">City Tours</a></li>
+                    <li><a href="service.html" class="hover:text-primary-brown transition block">Custom Tours</a></li>
+                </ul>
+            </div>
+        
+            
+            <!-- Contact Info -->
+            <div class="text-center md:text-left">
+                <h3 class="text-neutral-dark dark:text-white text-xl font-bold mb-6">Contact Info</h3>
+                <ul class="space-y-4">
+                    <li class="flex items-start justify-center md:justify-start">
+                        <i class="fas fa-map-marker-alt text-primary-brown mt-1 mr-3"></i>
+                        <span class="text-center md:text-left">123 Adventure Street, Travel District, NY 10001</span>
+                    </li>
+                    <li class="flex items-center justify-center md:justify-start">
+                        <i class="fas fa-phone text-primary-brown mr-3"></i>
+                        <span>+1 (555) 123-4567</span>
+                    </li>
+                    <li class="flex items-center justify-center md:justify-start">
+                        <i class="fas fa-envelope text-primary-brown mr-3"></i>
+                        <span>hello@growwtour.com</span>
+                    </li>
+                    <li class="flex items-center justify-center md:justify-start">
+                        <i class="fas fa-clock text-primary-brown mr-3"></i>
+                        <span>Mon - Fri: 9:00 - 18:00</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Bottom Bar -->
+        <div class="mt-12 pt-8 border-t text-center">
+            <p class="text-sm opacity-75 dark:opacity-70">
+                &copy; 2026 Groww Tour. All rights reserved. Crafted with 
+                <i class="fas fa-heart text-primary-brown mx-1"></i> and purpose.
+            </p>
+        </div>
+    </div>
+</footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme Toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = themeToggle?.querySelector('.fa-moon');
+            const themeIconSun = themeToggle?.querySelector('.fa-sun');
+            
+            const mobileThemeToggle = document.getElementById('theme-toggle-mobile');
+            const mobileThemeIcon = mobileThemeToggle?.querySelector('.fa-moon');
+            const mobileThemeIconSun = mobileThemeToggle?.querySelector('.fa-sun');
+            
+            function toggleTheme() {
+                document.documentElement.classList.toggle('dark');
+                
+                if (document.documentElement.classList.contains('dark')) {
+                    // Update desktop theme toggle
+                    if (themeIcon) themeIcon.classList.add('hidden');
+                    if (themeIconSun) themeIconSun.classList.remove('hidden');
+                    if (themeToggle) themeToggle.classList.add('active');
+                    
+                    // Update mobile theme toggle
+                    if (mobileThemeIcon) mobileThemeIcon.classList.add('hidden');
+                    if (mobileThemeIconSun) mobileThemeIconSun.classList.remove('hidden');
+                    if (mobileThemeToggle) mobileThemeToggle.classList.add('active');
+                    
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    // Update desktop theme toggle
+                    if (themeIcon) themeIcon.classList.remove('hidden');
+                    if (themeIconSun) themeIconSun.classList.add('hidden');
+                    if (themeToggle) themeToggle.classList.remove('active');
+                    
+                    // Update mobile theme toggle
+                    if (mobileThemeIcon) mobileThemeIcon.classList.remove('hidden');
+                    if (mobileThemeIconSun) mobileThemeIconSun.classList.add('hidden');
+                    if (mobileThemeToggle) mobileThemeToggle.classList.remove('active');
+                    
+                    localStorage.setItem('theme', 'light');
+                }
+            }
+            
+            if (themeToggle) {
+                themeToggle.addEventListener('click', toggleTheme);
+            }
+            
+            if (mobileThemeToggle) {
+                mobileThemeToggle.addEventListener('click', toggleTheme);
+            }
+            
+            // Check saved theme
+            if (localStorage.getItem('theme') === 'dark') {
+                document.documentElement.classList.add('dark');
+                if (themeIcon) themeIcon.classList.add('hidden');
+                if (themeIconSun) themeIconSun.classList.remove('hidden');
+                if (themeToggle) themeToggle.classList.add('active');
+                if (mobileThemeIcon) mobileThemeIcon.classList.add('hidden');
+                if (mobileThemeIconSun) mobileThemeIconSun.classList.remove('hidden');
+                if (mobileThemeToggle) mobileThemeToggle.classList.add('active');
+            }
+            
+            // RTL Toggle
+            const rtlToggle = document.getElementById('rtl-toggle');
+            const mobileRtlToggle = document.getElementById('rtl-toggle-mobile');
+            
+            function toggleRTL() {
+                if (document.documentElement.dir === 'rtl') {
+                    document.documentElement.dir = 'ltr';
+                    document.documentElement.lang = 'en';
+                    if (rtlToggle) {
+                        rtlToggle.textContent = '⇄';
+                        rtlToggle.classList.remove('active');
+                    }
+                    if (mobileRtlToggle) {
+                        mobileRtlToggle.textContent = '⇄';
+                        mobileRtlToggle.classList.remove('active');
+                    }
+                    localStorage.setItem('dir', 'ltr');
+                } else {
+                    document.documentElement.dir = 'rtl';
+                    document.documentElement.lang = 'ar';
+                    if (rtlToggle) {
+                        rtlToggle.textContent = '⇄';
+                        rtlToggle.classList.add('active');
+                    }
+                    if (mobileRtlToggle) {
+                        mobileRtlToggle.textContent = '⇄';
+                        mobileRtlToggle.classList.add('active');
+                    }
+                    localStorage.setItem('dir', 'rtl');
+                }
+            }
+            
+            if (rtlToggle) {
+                rtlToggle.addEventListener('click', toggleRTL);
+            }
+            
+            if (mobileRtlToggle) {
+                mobileRtlToggle.addEventListener('click', toggleRTL);
+            }
+            
+            // Check saved RTL
+            if (localStorage.getItem('dir') === 'rtl') {
+                document.documentElement.dir = 'rtl';
+                document.documentElement.lang = 'ar';
+                if (rtlToggle) {
+                    rtlToggle.textContent = '⇄';
+                    rtlToggle.classList.add('active');
+                }
+                if (mobileRtlToggle) {
+                    mobileRtlToggle.textContent = '⇄';
+                    mobileRtlToggle.classList.add('active');
+                }
+            }
+            
+            // Mobile Menu - SIMPLE TOGGLE
+            const mobileToggle = document.getElementById('mobile-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileToggleIcon = document.querySelector('#mobile-toggle i');
+            
+            mobileToggle.addEventListener('click', () => {
+                const isOpening = !mobileMenu.classList.contains('open');
+                
+                if (isOpening) {
+                    // Open menu
+                    mobileMenu.classList.add('open');
+                    mobileToggleIcon.classList.remove('fa-bars');
+                    mobileToggleIcon.classList.add('fa-times');
+                    
+                    // Lock background scrolling
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    // Close menu
+                    mobileMenu.classList.remove('open');
+                    mobileToggleIcon.classList.remove('fa-times');
+                    mobileToggleIcon.classList.add('fa-bars');
+                    
+                    // Unlock background scrolling
+                    document.body.style.overflow = '';
+                    
+                    // Close all dropdowns
+                    document.querySelectorAll('.mobile-dropdown-content').forEach(content => {
+                        content.classList.remove('show');
+                    });
+                }
+            });
+            
+            // Mobile Dropdown Toggle - SIMPLE
+            document.querySelectorAll('.mobile-dropdown-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const dropdown = e.target.closest('.mobile-dropdown');
+                    const content = dropdown.querySelector('.mobile-dropdown-content');
+                    const icon = dropdown.querySelector('.fa-chevron-down');
+                    
+                    // Toggle current dropdown
+                    const isOpening = !content.classList.contains('show');
+                    content.classList.toggle('show');
+                    
+                    // Rotate icon
+                    if (content.classList.contains('show')) {
+                        icon.style.transform = 'rotate(180deg)';
+                    } else {
+                        icon.style.transform = 'rotate(0deg)';
+                    }
+                    
+                    // Close other dropdowns if opening this one
+                    if (isOpening) {
+                        document.querySelectorAll('.mobile-dropdown-content').forEach(otherContent => {
+                            if (otherContent !== content) {
+                                otherContent.classList.remove('show');
+                                const otherIcon = otherContent.parentElement.querySelector('.fa-chevron-down');
+                                if (otherIcon) {
+                                    otherIcon.style.transform = 'rotate(0deg)';
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+            
+            // Close mobile menu when clicking on links
+            document.querySelectorAll('.mobile-menu-item, .mobile-dropdown-item').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    // Don't close if it's a dropdown toggle button
+                    if (!e.target.closest('.mobile-dropdown-btn')) {
+                        mobileMenu.classList.remove('open');
+                        mobileToggleIcon.classList.remove('fa-times');
+                        mobileToggleIcon.classList.add('fa-bars');
+                        document.body.style.overflow = '';
+                    }
+                });
+            });
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('#mobile-menu') && !e.target.closest('#mobile-toggle')) {
+                    if (mobileMenu.classList.contains('open')) {
+                        mobileMenu.classList.remove('open');
+                        mobileToggleIcon.classList.remove('fa-times');
+                        mobileToggleIcon.classList.add('fa-bars');
+                        document.body.style.overflow = '';
+                        
+                        // Close all dropdowns
+                        document.querySelectorAll('.mobile-dropdown-content').forEach(content => {
+                            content.classList.remove('show');
+                            const icon = content.parentElement.querySelector('.fa-chevron-down');
+                            if (icon) {
+                                icon.style.transform = 'rotate(0deg)';
+                            }
+                        });
+                    }
+                }
+            });
+            
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href === '#') return;
+                    
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu if open
+                        if (mobileMenu.classList.contains('open')) {
+                            mobileMenu.classList.remove('open');
+                            mobileToggleIcon.classList.remove('fa-times');
+                            mobileToggleIcon.classList.add('fa-bars');
+                            document.body.style.overflow = '';
+                        }
+                    }
+                });
+            });
+            
+            // Tour card hover effect enhancement
+            document.querySelectorAll('.tour-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

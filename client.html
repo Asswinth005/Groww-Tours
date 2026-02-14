@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Dashboard | Groww Tour</title>
+    <link rel="icon" type="asset/jpeg" href="assets/growwpark_logo.jpg">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-brown': '#8D6E63',
+                        'secondary-green': '#4CAF50',
+                        'accent-orange': '#82736e',
+                        'background-cream': '#FAF5EF',
+                        'neutral-dark': '#5D4037',
+                        'neutral-light': '#EFEBE9',
+                        'dark-bg': '#1a1a1a',
+                        'dark-card': '#2d2d2d'
+                    },
+                    fontFamily: {
+                        'sans': ['Space Grotesk', 'system-ui', 'sans-serif'],
+                        'display': ['Syne', 'sans-serif']
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            background-color: #FAF5EF;
+            color: #5D4037;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .dark body {
+            background-color: #1a1a1a;
+            color: #e5e5e5;
+        }
+        
+        /* Hide scrollbar */
+        body::-webkit-scrollbar { display: none; }
+        body { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Toggle button */
+        .toggle-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #EFEBE9;
+            color: #5D4037;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .dark .toggle-btn {
+            background: #374151;
+            color: #9CA3AF;
+        }
+        .toggle-btn:hover {
+            background: #8D6E63;
+            color: white;
+        }
+        .toggle-btn.active {
+            background: #8D6E63;
+            color: white;
+        }
+        
+        /* Dashboard card - matching right side height */
+        .dashboard-card {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(141, 110, 99, 0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .dark .dashboard-card {
+            background: #2d2d2d;
+            border-color: #404040;
+        }
+        .dashboard-card:hover {
+            box-shadow: 0 15px 30px rgba(141, 110, 99, 0.08);
+            border-color: #8D6E63;
+        }
+        
+        /* Stat card */
+        .stat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem 1.25rem;
+            border: 1px solid rgba(141, 110, 99, 0.1);
+            transition: all 0.3s ease;
+        }
+        .dark .stat-card {
+            background: #2d2d2d;
+            border-color: #404040;
+        }
+        .stat-card:hover {
+            border-color: #8D6E63;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(141, 110, 99, 0.1);
+        }
+        
+        /* Sidebar item - LARGER, MORE PROMINENT */
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            padding: 1.1rem 1.5rem;
+            border-radius: 18px;
+            color: #5D4037;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+            font-size: 1.05rem;
+        }
+        .dark .sidebar-item {
+            color: #e5e5e5;
+        }
+        .sidebar-item:hover {
+            background: rgba(141, 110, 99, 0.1);
+            color: #8D6E63;
+            transform: translateX(5px);
+        }
+        .sidebar-item.active {
+            background: #8D6E63;
+            color: white;
+            box-shadow: 0 8px 15px rgba(141, 110, 99, 0.2);
+        }
+        .dark .sidebar-item.active {
+            background: #8D6E63;
+            color: white;
+        }
+        
+        /* Left sidebar - BIGGER */
+        .sidebar-wrapper {
+            padding-right: 0.5rem;
+        }
+        
+        /* Order item */
+        .order-item {
+            border-bottom: 1px solid rgba(141, 110, 99, 0.1);
+            padding: 1.25rem 0;
+        }
+        .order-item:last-child {
+            border-bottom: none;
+        }
+        
+        /* Badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .status-confirmed {
+            background: rgba(76, 175, 80, 0.1);
+            color: #2E7D32;
+        }
+        .status-pending {
+            background: rgba(141, 110, 99, 0.1);
+            color: #5D4037;
+        }
+        .status-cancelled {
+            background: rgba(211, 47, 47, 0.1);
+            color: #B71C1C;
+        }
+        .dark .status-confirmed {
+            background: rgba(76, 175, 80, 0.2);
+            color: #A5D6A7;
+        }
+        .dark .status-pending {
+            background: rgba(141, 110, 99, 0.2);
+            color: #BCAAA4;
+        }
+        .dark .status-cancelled {
+            background: rgba(211, 47, 47, 0.2);
+            color: #EF9A9A;
+        }
+        
+        /* Message item */
+        .message-item {
+            padding: 1.25rem;
+            border-radius: 18px;
+            transition: all 0.2s ease;
+        }
+        .message-item:hover {
+            background: rgba(141, 110, 99, 0.05);
+        }
+        .message-item.unread {
+            background: rgba(141, 110, 99, 0.08);
+            border-left: 4px solid #8D6E63;
+        }
+        
+        /* Form input - larger */
+        .dashboard-input {
+            width: 100%;
+            padding: 0.9rem 1.25rem;
+            background: #F9FAFB;
+            border: 1.5px solid #EFEBE9;
+            border-radius: 14px;
+            color: #5D4037;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+        .dark .dashboard-input {
+            background: #374151;
+            border-color: #4B5563;
+            color: #e5e5e5;
+        }
+        .dashboard-input:focus {
+            outline: none;
+            border-color: #8D6E63;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(141, 110, 99, 0.1);
+        }
+        .dark .dashboard-input:focus {
+            background: #2d2d2d;
+            border-color: #8D6E63;
+        }
+        
+        /* Save button */
+        .save-btn {
+            background: #8D6E63;
+            color: white;
+            font-weight: 600;
+            padding: 0.9rem 2.5rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+        .save-btn:hover {
+            background: #6D4C41;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(141, 110, 99, 0.3);
+        }
+        
+        /* Logout button */
+        .logout-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 0.9rem;
+            border-radius: 14px;
+            background: rgba(211, 47, 47, 0.1);
+            color: #B71C1C;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .dark .logout-btn {
+            background: rgba(211, 47, 47, 0.2);
+            color: #EF9A9A;
+        }
+        .logout-btn:hover {
+            background: #B71C1C;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(183, 28, 28, 0.2);
+        }
+        
+        /* Saved item card */
+        .saved-item-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.25rem;
+            border-radius: 18px;
+            border: 1px solid rgba(141, 110, 99, 0.1);
+            transition: all 0.3s ease;
+            background: white;
+        }
+        .dark .saved-item-card {
+            background: #2d2d2d;
+            border-color: #404040;
+        }
+        .saved-item-card:hover {
+            border-color: #8D6E63;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(141, 110, 99, 0.12);
+        }
+        
+        /* Toggle switch */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 52px;
+            height: 28px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .3s;
+            border-radius: 34px;
+        }
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+        input:checked + .toggle-slider {
+            background-color: #8D6E63;
+        }
+        input:checked + .toggle-slider:before {
+            transform: translateX(24px);
+        }
+        
+        /* RTL support */
+        [dir="rtl"] .ml-2 { margin-left: 0; margin-right: 0.5rem; }
+        [dir="rtl"] .mr-2 { margin-right: 0; margin-left: 0.5rem; }
+        [dir="rtl"] .ml-3 { margin-left: 0; margin-right: 0.75rem; }
+        [dir="rtl"] .mr-3 { margin-right: 0; margin-left: 0.75rem; }
+        [dir="rtl"] .ml-4 { margin-left: 0; margin-right: 1rem; }
+        [dir="rtl"] .mr-4 { margin-right: 0; margin-left: 1rem; }
+        [dir="rtl"] .space-x-2 > :not([hidden]) ~ :not([hidden]) { --tw-space-x-reverse: 1; }
+        [dir="rtl"] .space-x-3 > :not([hidden]) ~ :not([hidden]) { --tw-space-x-reverse: 1; }
+        [dir="rtl"] .space-x-4 > :not([hidden]) ~ :not([hidden]) { --tw-space-x-reverse: 1; }
+        [dir="rtl"] .sidebar-item:hover { transform: translateX(-5px); }
+    </style>
+</head>
+<body class="bg-background-cream dark:bg-dark-bg p-6 md:p-8">
+
+    <!-- Theme & RTL Controls with Logo -->
+    <div class="flex justify-between items-center mb-8">
+        <!-- Logo - EXACT COPY FROM REFERENCE -->
+        <a class='flex items-center space-x-3 group' href='index.html'>
+            <div class="w-10 h-10 bg-primary-brown rounded-lg flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
+                <i class="fas fa-map-marked-alt text-white text-lg"></i>
+            </div>
+            <div>
+                <span class="text-2xl font-display font-bold tracking-tight text-neutral-dark dark:text-white">Groww</span>
+                <span class="text-2xl font-display font-bold tracking-tight text-primary-brown">Tour</span>
+            </div>
+        </a>
+        <div class="flex items-center gap-3">
+            <button id="theme-toggle" class="toggle-btn" title="Toggle theme">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun hidden"></i>
+            </button>
+            <button id="rtl-toggle" class="toggle-btn" title="Toggle RTL/LTR">
+                <i class="fas fa-exchange-alt"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Dashboard Main Container -->
+    <div class="max-w-7xl mx-auto">
+        
+        <!-- Welcome Header -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+            <div>
+                <h1 class="text-3xl md:text-4xl font-display font-bold dark:text-white">
+                    Welcome back, <span class="text-primary-brown">John!</span>
+                </h1>
+                <p class="text-neutral-dark/70 dark:text-gray-400 mt-1 text-lg">
+                    Manage your bookings, messages, and account settings
+                </p>
+            </div>
+            <div class="mt-4 md:mt-0 flex items-center gap-4 bg-white dark:bg-dark-card px-5 py-3 rounded-2xl shadow-sm border border-neutral-light/50 dark:border-gray-700">
+                <div class="flex -space-x-2">
+                    <img src="/assets/per5.jpg" alt="Avatar" class="w-12 h-12 rounded-full border-2 border-white dark:border-dark-card">
+                </div>
+                <div>
+                    <p class="font-semibold dark:text-white text-lg">John Doe</p>
+                    <p class="text-xs text-neutral-dark/60 dark:text-gray-400">Member since 2024</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Cards - Larger and more prominent -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-5 mb-8">
+            <div class="stat-card flex items-center p-5">
+                <div class="w-12 h-12 bg-primary-brown/10 rounded-xl flex items-center justify-center mr-4">
+                    <i class="fas fa-suitcase text-primary-brown text-xl"></i>
+                </div>
+                <div>
+                    <p class="text-3xl font-bold dark:text-white">6</p>
+                    <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Total Trips</p>
+                </div>
+            </div>
+            <div class="stat-card flex items-center p-5">
+                <div class="w-12 h-12 bg-secondary-green/10 rounded-xl flex items-center justify-center mr-4">
+                    <i class="fas fa-clock text-secondary-green text-xl"></i>
+                </div>
+                <div>
+                    <p class="text-3xl font-bold dark:text-white">2</p>
+                    <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Upcoming</p>
+                </div>
+            </div>
+            <div class="stat-card flex items-center p-5">
+                <div class="w-12 h-12 bg-primary-brown/10 rounded-xl flex items-center justify-center mr-4">
+                    <i class="fas fa-heart text-primary-brown text-xl"></i>
+                </div>
+                <div>
+                    <p class="text-3xl font-bold dark:text-white">12</p>
+                    <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Saved</p>
+                </div>
+            </div>
+            <div class="stat-card flex items-center p-5">
+                <div class="w-12 h-12 bg-accent-orange/10 rounded-xl flex items-center justify-center mr-4">
+                    <i class="fas fa-envelope text-accent-orange text-xl"></i>
+                </div>
+                <div>
+                    <p class="text-3xl font-bold dark:text-white">3</p>
+                    <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Unread</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Dashboard Grid: Left Side BIGGER, Right Side Adjusted -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- ============ LEFT SIDEBAR - BIGGER, UNSTICKY ============ -->
+            <div class="lg:col-span-4 xl:col-span-4">
+                <div class="sidebar-wrapper">
+                    <div class="dashboard-card">
+                        <div class="flex flex-col space-y-1">
+                            
+                            <!-- Profile Management - BIGGER -->
+                            <div class="sidebar-item active" data-section="profile">
+                                <i class="fas fa-user-circle w-7 text-2xl"></i>
+                                <span class="ml-4 font-semibold text-lg">Profile Management</span>
+                            </div>
+                            
+                            <!-- Order History -->
+                            <div class="sidebar-item" data-section="orders">
+                                <i class="fas fa-suitcase w-7 text-2xl"></i>
+                                <span class="ml-4 font-semibold text-lg">Order History</span>
+                            </div>
+                            
+                            <!-- Saved Items -->
+                            <div class="sidebar-item" data-section="saved">
+                                <i class="fas fa-heart w-7 text-2xl"></i>
+                                <span class="ml-4 font-semibold text-lg">Saved Items</span>
+                            </div>
+                            
+                            <!-- Messages -->
+                            <div class="sidebar-item" data-section="messages">
+                                <i class="fas fa-envelope w-7 text-2xl"></i>
+                                <span class="ml-4 font-semibold text-lg">Messages</span>
+                                <span class="ml-auto bg-primary-brown text-white text-xs px-2.5 py-1.5 rounded-full font-bold">3</span>
+                            </div>
+                            
+                            <!-- Settings -->
+                            <div class="sidebar-item" data-section="settings">
+                                <i class="fas fa-cog w-7 text-2xl"></i>
+                                <span class="ml-4 font-semibold text-lg">Settings</span>
+                            </div>
+                            
+                            <!-- Logout -->
+                            <div class="sidebar-item" data-section="logout">
+                                <i class="fas fa-sign-out-alt w-7 text-2xl"></i>
+                                <span class="ml-4 font-semibold text-lg">Logout</span>
+                            </div>
+                        </div>
+                        
+                        <!-- User Info Card - BIGGER -->
+                        <div class="mt-8 pt-6 border-t border-neutral-light/50 dark:border-gray-700">
+                            <div class="flex items-center">
+                                <img src="/assets/per5.jpg" alt="User" class="w-16 h-16 rounded-full object-cover border-3 border-primary-brown">
+                                <div class="ml-4">
+                                    <p class="font-bold dark:text-white text-xl">John Doe</p>
+                                    <p class="text-sm text-neutral-dark/60 dark:text-gray-400">john.doe@example.com</p>
+                                    <p class="text-xs text-primary-brown mt-1.5 font-semibold">✨ Traveler since 2024</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Quick Action Buttons -->
+                        <div class="mt-6 flex gap-3">
+                            <button class="flex-1 bg-primary-brown/10 text-primary-brown py-3 px-4 rounded-xl font-semibold text-sm hover:bg-primary-brown hover:text-white transition">
+                                <i class="fas fa-headset mr-2"></i> Support
+                            </button>
+                            <button class="flex-1 bg-primary-brown/10 text-primary-brown py-3 px-4 rounded-xl font-semibold text-sm hover:bg-primary-brown hover:text-white transition">
+                                <i class="fas fa-gift mr-2"></i> Refer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============ RIGHT CONTENT AREA - ADJUSTED TO FIT ============ -->
+            <div class="lg:col-span-8 xl:col-span-8">
+                
+                <!-- ===== 1. PROFILE MANAGEMENT SECTION ===== -->
+                <div id="profile-section" class="dashboard-section active">
+                    <div class="dashboard-card">
+                        <h2 class="text-2xl font-display font-bold mb-7 dark:text-white flex items-center">
+                            <i class="fas fa-user-circle text-primary-brown mr-3 text-2xl"></i>
+                            Profile Management
+                        </h2>
+                        
+                        <div class="grid md:grid-cols-12 gap-8">
+                            <!-- Avatar - Centered -->
+                            <div class="md:col-span-3 flex flex-col items-center">
+                                <div class="relative">
+                                    <img src="assets/per5.jpg" alt="Profile" class="w-32 h-32 rounded-full object-cover border-4 border-primary-brown/30">
+                                    <button class="absolute bottom-0 right-0 w-10 h-10 bg-primary-brown rounded-full flex items-center justify-center text-white hover:bg-opacity-90 transition shadow-lg">
+                                        <i class="fas fa-camera"></i>
+                                    </button>
+                                </div>
+                                <p class="mt-4 font-bold text-xl dark:text-white">John Doe</p>
+                                <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Member since 2024</p>
+                                <span class="mt-2 px-4 py-1.5 bg-primary-brown/10 text-primary-brown rounded-full text-xs font-semibold">Verified Account</span>
+                            </div>
+                            
+                            <!-- Form - Larger, better spaced -->
+                            <div class="md:col-span-9 space-y-5">
+                                <div class="grid md:grid-cols-2 gap-5">
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2 dark:text-gray-300">Full Name</label>
+                                        <input type="text" class="dashboard-input" value="John Doe">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2 dark:text-gray-300">Email Address</label>
+                                        <input type="email" class="dashboard-input" value="john.doe@example.com">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2 dark:text-gray-300">Phone Number</label>
+                                        <input type="tel" class="dashboard-input" value="+1 (555) 123-4567">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium mb-2 dark:text-gray-300">Location</label>
+                                        <input type="text" class="dashboard-input" value="New York, USA">
+                                    </div>
+                                    <div class="md:col-span-2">
+                                        <label class="block text-sm font-medium mb-2 dark:text-gray-300">Bio</label>
+                                        <textarea rows="4" class="dashboard-input">Travel enthusiast, food lover, and adventure seeker. Exploring the world one local experience at a time.</textarea>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex justify-end mt-4">
+                                    <button class="save-btn px-10">
+                                        <i class="fas fa-save mr-2"></i> Save Changes
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Change Password - Larger -->
+                        <div class="mt-10 pt-8 border-t border-neutral-light/50 dark:border-gray-700">
+                            <h3 class="text-xl font-bold mb-5 dark:text-white flex items-center">
+                                <i class="fas fa-key text-primary-brown mr-2"></i>
+                                Change Password
+                            </h3>
+                            <div class="grid md:grid-cols-3 gap-5">
+                                <div>
+                                    <input type="password" class="dashboard-input" placeholder="Current Password">
+                                </div>
+                                <div>
+                                    <input type="password" class="dashboard-input" placeholder="New Password">
+                                </div>
+                                <div>
+                                    <input type="password" class="dashboard-input" placeholder="Confirm New Password">
+                                </div>
+                            </div>
+                            <div class="flex justify-end mt-5">
+                                <button class="save-btn px-10">
+                                    <i class="fas fa-key mr-2"></i> Update Password
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== 2. ORDER HISTORY SECTION ===== -->
+                <div id="orders-section" class="dashboard-section hidden">
+                    <div class="dashboard-card">
+                        <h2 class="text-2xl font-display font-bold mb-7 dark:text-white flex items-center">
+                            <i class="fas fa-suitcase text-primary-brown mr-3 text-2xl"></i>
+                            Order History
+                        </h2>
+                        
+                        <!-- Filters - Larger -->
+                        <div class="flex flex-wrap gap-3 mb-7">
+                            <button class="px-5 py-2.5 rounded-full text-sm font-bold bg-primary-brown text-white shadow-md">All</button>
+                            <button class="px-5 py-2.5 rounded-full text-sm font-medium bg-white dark:bg-dark-card border border-neutral-light dark:border-gray-700 hover:bg-primary-brown/10 transition">Upcoming</button>
+                            <button class="px-5 py-2.5 rounded-full text-sm font-medium bg-white dark:bg-dark-card border border-neutral-light dark:border-gray-700 hover:bg-primary-brown/10 transition">Completed</button>
+                            <button class="px-5 py-2.5 rounded-full text-sm font-medium bg-white dark:bg-dark-card border border-neutral-light dark:border-gray-700 hover:bg-primary-brown/10 transition">Cancelled</button>
+                        </div>
+                        
+                        <!-- Orders List - Larger -->
+                        <div class="space-y-5">
+                            <!-- Order 1 -->
+                            <div class="order-item">
+                                <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+                                    <div class="flex items-start gap-4">
+                                        <img src="assets/ord.jpg" alt="Tour" class="w-20 h-20 rounded-xl object-cover shadow-md">
+                                        <div>
+                                            <h4 class="font-bold text-lg dark:text-white">Alpine Summits Expedition</h4>
+                                            <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Switzerland • 8 days</p>
+                                            <div class="flex items-center mt-2">
+                                                <span class="status-badge status-confirmed">
+                                                    <i class="fas fa-check-circle mr-1"></i> Confirmed
+                                                </span>
+                                                <span class="text-xs text-neutral-dark/50 dark:text-gray-500 ml-3">#GW-2468-01</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-5 mt-4 md:mt-0">
+                                        <span class="font-bold text-xl text-primary-brown">$299</span>
+                                        <button class="text-primary-brown hover:underline text-sm font-semibold">View Details</button>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-5 mt-3 text-sm text-neutral-dark/60 dark:text-gray-400">
+                                    <span><i class="fas fa-calendar mr-1"></i> Feb 5, 2026</span>
+                                    <span><i class="fas fa-user mr-1"></i> Guide Sophia</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Order 2 -->
+                            <div class="order-item">
+                                <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+                                    <div class="flex items-start gap-4">
+                                        <img src="assets/ord1.jpg" alt="Tour" class="w-20 h-20 rounded-xl object-cover shadow-md">
+                                        <div>
+                                            <h4 class="font-bold text-lg dark:text-white">Ancient Rome Walking Tour</h4>
+                                            <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Italy • 3 hours</p>
+                                            <div class="flex items-center mt-2">
+                                                <span class="status-badge status-confirmed">
+                                                    <i class="fas fa-check-circle mr-1"></i> Confirmed
+                                                </span>
+                                                <span class="text-xs text-neutral-dark/50 dark:text-gray-500 ml-3">#GW-3157-02</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-5 mt-4 md:mt-0">
+                                        <span class="font-bold text-xl text-primary-brown">$89</span>
+                                        <button class="text-primary-brown hover:underline text-sm font-semibold">View Details</button>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-5 mt-3 text-sm text-neutral-dark/60 dark:text-gray-400">
+                                    <span><i class="fas fa-calendar mr-1"></i> Mar 12, 2026</span>
+                                    <span><i class="fas fa-user mr-1"></i> Guide Marco</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Order 3 -->
+                            <div class="order-item">
+                                <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+                                    <div class="flex items-start gap-4">
+                                        <img src="assets/nat.jpg" alt="Tour" class="w-20 h-20 rounded-xl object-cover shadow-md">
+                                        <div>
+                                            <h4 class="font-bold text-lg dark:text-white">Rainforest Canopy & Waterfalls</h4>
+                                            <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Costa Rica • 5 days</p>
+                                            <div class="flex items-center mt-2">
+                                                <span class="status-badge status-pending">
+                                                    <i class="fas fa-clock mr-1"></i> Pending
+                                                </span>
+                                                <span class="text-xs text-neutral-dark/50 dark:text-gray-500 ml-3">#GW-4289-03</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-5 mt-4 md:mt-0">
+                                        <span class="font-bold text-xl text-primary-brown">$189</span>
+                                        <button class="text-primary-brown hover:underline text-sm font-semibold">View Details</button>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-5 mt-3 text-sm text-neutral-dark/60 dark:text-gray-400">
+                                    <span><i class="fas fa-calendar mr-1"></i> Apr 20, 2026</span>
+                                    <span><i class="fas fa-user mr-1"></i> Guide Carlos</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-7 text-center">
+                            <button class="text-primary-brown font-semibold hover:underline text-base">
+                                View All 12 Orders <i class="fas fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== 3. SAVED ITEMS SECTION ===== -->
+                <div id="saved-section" class="dashboard-section hidden">
+                    <div class="dashboard-card">
+                        <h2 class="text-2xl font-display font-bold mb-7 dark:text-white flex items-center">
+                            <i class="fas fa-heart text-primary-brown mr-3 text-2xl"></i>
+                            Saved Items
+                        </h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <!-- Saved Item 1 -->
+                            <div class="saved-item-card">
+                                <img src="assets/item1.jpg" alt="Tour" class="w-24 h-24 rounded-xl object-cover">
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-lg dark:text-white">Torres del Paine Circuit</h4>
+                                    <p class="text-xs text-neutral-dark/60 dark:text-gray-400">Chile • 10 days</p>
+                                    <div class="flex items-center justify-between mt-3">
+                                        <span class="font-bold text-primary-brown text-xl">$449</span>
+                                        <div class="flex gap-2">
+                                            <button class="w-9 h-9 bg-primary-brown/10 rounded-lg flex items-center justify-center text-primary-brown hover:bg-primary-brown hover:text-white transition">
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </button>
+                                            <button class="w-9 h-9 bg-red-50 dark:bg-red-900/20 rounded-lg flex items-center justify-center text-red-500 hover:bg-red-500 hover:text-white transition">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Saved Item 2 -->
+                            <div class="saved-item-card">
+                                <img src="assets/item2.jpg" alt="Tour" class="w-24 h-24 rounded-xl object-cover">
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-lg dark:text-white">Tsukiji Sushi Making Class</h4>
+                                    <p class="text-xs text-neutral-dark/60 dark:text-gray-400">Japan • 4 hours</p>
+                                    <div class="flex items-center justify-between mt-3">
+                                        <span class="font-bold text-primary-brown text-xl">$120</span>
+                                        <div class="flex gap-2">
+                                            <button class="w-9 h-9 bg-primary-brown/10 rounded-lg flex items-center justify-center text-primary-brown hover:bg-primary-brown hover:text-white transition">
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </button>
+                                            <button class="w-9 h-9 bg-red-50 dark:bg-red-900/20 rounded-lg flex items-center justify-center text-red-500 hover:bg-red-500 hover:text-white transition">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Saved Item 3 -->
+                            <div class="saved-item-card">
+                                <img src="assets/des2.jpg" alt="Tour" class="w-24 h-24 rounded-xl object-cover">
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-lg dark:text-white">Paris Croissant & Pastry Tour</h4>
+                                    <p class="text-xs text-neutral-dark/60 dark:text-gray-400">France • 3 hours</p>
+                                    <div class="flex items-center justify-between mt-3">
+                                        <span class="font-bold text-primary-brown text-xl">$95</span>
+                                        <div class="flex gap-2">
+                                            <button class="w-9 h-9 bg-primary-brown/10 rounded-lg flex items-center justify-center text-primary-brown hover:bg-primary-brown hover:text-white transition">
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </button>
+                                            <button class="w-9 h-9 bg-red-50 dark:bg-red-900/20 rounded-lg flex items-center justify-center text-red-500 hover:bg-red-500 hover:text-white transition">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Saved Item 4 -->
+                            <div class="saved-item-card">
+                                <img src="assets/cul2.jpg" alt="Tour" class="w-24 h-24 rounded-xl object-cover">
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-lg dark:text-white">Gaudí Architecture Tour</h4>
+                                    <p class="text-xs text-neutral-dark/60 dark:text-gray-400">Spain • 3 hours</p>
+                                    <div class="flex items-center justify-between mt-3">
+                                        <span class="font-bold text-primary-brown text-xl">$79</span>
+                                        <div class="flex gap-2">
+                                            <button class="w-9 h-9 bg-primary-brown/10 rounded-lg flex items-center justify-center text-primary-brown hover:bg-primary-brown hover:text-white transition">
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </button>
+                                            <button class="w-9 h-9 bg-red-50 dark:bg-red-900/20 rounded-lg flex items-center justify-center text-red-500 hover:bg-red-500 hover:text-white transition">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-7 text-center">
+                            <button class="text-primary-brown font-semibold hover:underline text-base">
+                                Browse More Tours <i class="fas fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== 4. MESSAGES SECTION ===== -->
+                <div id="messages-section" class="dashboard-section hidden">
+                    <div class="dashboard-card">
+                        <h2 class="text-2xl font-display font-bold mb-7 dark:text-white flex items-center">
+                            <i class="fas fa-envelope text-primary-brown mr-3 text-2xl"></i>
+                            Messages
+                            <span class="ml-4 bg-primary-brown text-white text-xs px-2.5 py-1.5 rounded-full font-bold">3 unread</span>
+                        </h2>
+                        
+                        <div class="space-y-4">
+                            <!-- Message 1 - Unread -->
+                            <div class="message-item unread">
+                                <div class="flex items-start gap-4">
+                                    <img src="assets/per.jpg" alt="Guide" class="w-12 h-12 rounded-full object-cover border-2 border-primary-brown">
+                                    <div class="flex-1">
+                                        <div class="flex justify-between items-center">
+                                            <h4 class="font-bold text-lg dark:text-white">Sophia Müller</h4>
+                                            <span class="text-xs text-neutral-dark/50 dark:text-gray-500">2 hours ago</span>
+                                        </div>
+                                        <p class="text-sm text-neutral-dark/70 dark:text-gray-400">Swiss Alps Guide</p>
+                                        <p class="text-base mt-2 dark:text-gray-300">Hi John! I'm looking forward to our Alpine trek. Just checking if you have any dietary restrictions...</p>
+                                        <span class="inline-block mt-3 text-xs bg-primary-brown text-white px-3 py-1.5 rounded-full font-semibold">New</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Message 2 - Unread -->
+                            <div class="message-item unread">
+                                <div class="flex items-start gap-4">
+                                    <img src="assets/per2.jpg" alt="Guide" class="w-12 h-12 rounded-full object-cover border-2 border-primary-brown">
+                                    <div class="flex-1">
+                                        <div class="flex justify-between items-center">
+                                            <h4 class="font-bold text-lg dark:text-white">Marco Rossi</h4>
+                                            <span class="text-xs text-neutral-dark/50 dark:text-gray-500">Yesterday</span>
+                                        </div>
+                                        <p class="text-sm text-neutral-dark/70 dark:text-gray-400">Rome Cultural Tour</p>
+                                        <p class="text-base mt-2 dark:text-gray-300">Your booking for the Ancient Rome Walking Tour is confirmed! We'll meet at the Colosseum metro station...</p>
+                                        <span class="inline-block mt-3 text-xs bg-primary-brown text-white px-3 py-1.5 rounded-full font-semibold">New</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Message 3 - Read -->
+                            <div class="message-item">
+                                <div class="flex items-start gap-4">
+                                    <img src="assets/test2.jpg" alt="Support" class="w-12 h-12 rounded-full object-cover">
+                                    <div class="flex-1">
+                                        <div class="flex justify-between items-center">
+                                            <h4 class="font-bold text-lg dark:text-white">Groww Tour Support</h4>
+                                            <span class="text-xs text-neutral-dark/50 dark:text-gray-500">3 days ago</span>
+                                        </div>
+                                        <p class="text-sm text-neutral-dark/70 dark:text-gray-400">Customer Service</p>
+                                        <p class="text-base mt-2 dark:text-gray-300">Thank you for your recent booking! Here's everything you need to know before your trip...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-7 text-center">
+                            <button class="text-primary-brown font-semibold hover:underline text-base">
+                                View All Messages <i class="fas fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== 5. SETTINGS SECTION ===== -->
+                <div id="settings-section" class="dashboard-section hidden">
+                    <div class="dashboard-card">
+                        <h2 class="text-2xl font-display font-bold mb-7 dark:text-white flex items-center">
+                            <i class="fas fa-cog text-primary-brown mr-3 text-2xl"></i>
+                            Settings
+                        </h2>
+                        
+                        <div class="space-y-8">
+                            <!-- Notification Settings -->
+                            <div>
+                                <h3 class="text-xl font-bold mb-5 dark:text-white flex items-center">
+                                    <i class="fas fa-bell text-primary-brown mr-2"></i>
+                                    Notifications
+                                </h3>
+                                <div class="space-y-4 bg-neutral-light/30 dark:bg-gray-800/30 p-5 rounded-2xl">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <p class="font-bold dark:text-white text-lg">Email Notifications</p>
+                                            <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Receive booking confirmations and updates</p>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <p class="font-bold dark:text-white text-lg">SMS Notifications</p>
+                                            <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Get text alerts for urgent updates</p>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <p class="font-bold dark:text-white text-lg">Promotional Emails</p>
+                                            <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Receive offers and travel inspiration</p>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Privacy Settings -->
+                            <div>
+                                <h3 class="text-xl font-bold mb-5 dark:text-white flex items-center">
+                                    <i class="fas fa-shield-alt text-primary-brown mr-2"></i>
+                                    Privacy
+                                </h3>
+                                <div class="space-y-4 bg-neutral-light/30 dark:bg-gray-800/30 p-5 rounded-2xl">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <p class="font-bold dark:text-white text-lg">Profile Visibility</p>
+                                            <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Make your profile visible to guides</p>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" checked>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <p class="font-bold dark:text-white text-lg">Share Travel History</p>
+                                            <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Allow guides to see your past tours</p>
+                                        </div>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-end mt-6">
+                                <button class="save-btn px-12 py-3 text-base">
+                                    <i class="fas fa-save mr-2"></i> Save Settings
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== 6. LOGOUT SECTION ===== -->
+                              <!-- ===== 6. LOGOUT SECTION ===== -->
+                <div id="logout-section" class="dashboard-section hidden">
+                    <div class="dashboard-card text-center py-12">
+                        <div class="w-28 h-28 bg-primary-brown/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-sign-out-alt text-5xl text-primary-brown"></i>
+                        </div>
+                        <h2 class="text-4xl font-display font-bold mb-4 dark:text-white">Logout</h2>
+                        <p class="text-neutral-dark/70 dark:text-gray-400 text-lg max-w-md mx-auto mb-10">
+                            Are you sure you want to sign out? You'll need to log in again to access your dashboard.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <a href="login.html" class="logout-btn px-10 py-4 text-base inline-flex items-center justify-center">
+                                <i class="fas fa-sign-out-alt mr-2"></i> Yes, Logout
+                            </a>
+                            <button class="px-10 py-4 border-2 border-primary-brown text-primary-brown rounded-full font-bold hover:bg-primary-brown hover:text-white transition text-base">
+                                Cancel
+                            </button>
+                       
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript - Theme, RTL, and Section Toggle -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // ============ THEME TOGGLE ============
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = themeToggle?.querySelector('.fa-moon');
+            const themeIconSun = themeToggle?.querySelector('.fa-sun');
+            
+            function toggleTheme() {
+                document.documentElement.classList.toggle('dark');
+                const isDark = document.documentElement.classList.contains('dark');
+                
+                if (isDark) {
+                    if (themeIcon) themeIcon.classList.add('hidden');
+                    if (themeIconSun) themeIconSun.classList.remove('hidden');
+                    if (themeToggle) themeToggle.classList.add('active');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    if (themeIcon) themeIcon.classList.remove('hidden');
+                    if (themeIconSun) themeIconSun.classList.add('hidden');
+                    if (themeToggle) themeToggle.classList.remove('active');
+                    localStorage.setItem('theme', 'light');
+                }
+            }
+            
+            if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+            
+            if (localStorage.getItem('theme') === 'dark') {
+                document.documentElement.classList.add('dark');
+                if (themeIcon) themeIcon.classList.add('hidden');
+                if (themeIconSun) themeIconSun.classList.remove('hidden');
+                if (themeToggle) themeToggle.classList.add('active');
+            }
+            
+            // ============ RTL TOGGLE ============
+            const rtlToggle = document.getElementById('rtl-toggle');
+            
+            function toggleRTL() {
+                if (document.documentElement.dir === 'rtl') {
+                    document.documentElement.dir = 'ltr';
+                    document.documentElement.lang = 'en';
+                    if (rtlToggle) rtlToggle.classList.remove('active');
+                    localStorage.setItem('dir', 'ltr');
+                } else {
+                    document.documentElement.dir = 'rtl';
+                    document.documentElement.lang = 'ar';
+                    if (rtlToggle) rtlToggle.classList.add('active');
+                    localStorage.setItem('dir', 'rtl');
+                }
+            }
+            
+            if (rtlToggle) rtlToggle.addEventListener('click', toggleRTL);
+            
+            if (localStorage.getItem('dir') === 'rtl') {
+                document.documentElement.dir = 'rtl';
+                document.documentElement.lang = 'ar';
+                if (rtlToggle) rtlToggle.classList.add('active');
+            }
+            
+            // ============ DASHBOARD SECTION TOGGLE ============
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+            const sections = {
+                profile: document.getElementById('profile-section'),
+                orders: document.getElementById('orders-section'),
+                saved: document.getElementById('saved-section'),
+                messages: document.getElementById('messages-section'),
+                settings: document.getElementById('settings-section'),
+                logout: document.getElementById('logout-section')
+            };
+            
+            // Hide all sections
+            function hideAllSections() {
+                Object.values(sections).forEach(section => {
+                    if (section) section.classList.add('hidden');
+                });
+            }
+            
+            // Remove active class from all sidebar items
+            function removeActiveClass() {
+                sidebarItems.forEach(item => {
+                    item.classList.remove('active');
+                });
+            }
+            
+            // Add click event to sidebar items
+            sidebarItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const section = this.dataset.section;
+                    
+                    // Special handling for logout - show confirmation
+                    if (section === 'logout') {
+                        removeActiveClass();
+                        this.classList.add('active');
+                        hideAllSections();
+                        if (sections.logout) sections.logout.classList.remove('hidden');
+                        return;
+                    }
+                    
+                    // Normal section switching
+                    removeActiveClass();
+                    this.classList.add('active');
+                    hideAllSections();
+                    
+                    if (section === 'profile' && sections.profile) sections.profile.classList.remove('hidden');
+                    if (section === 'orders' && sections.orders) sections.orders.classList.remove('hidden');
+                    if (section === 'saved' && sections.saved) sections.saved.classList.remove('hidden');
+                    if (section === 'messages' && sections.messages) sections.messages.classList.remove('hidden');
+                    if (section === 'settings' && sections.settings) sections.settings.classList.remove('hidden');
+                });
+            });
+            
+            // Cancel button in logout section
+            const cancelBtn = document.querySelector('#logout-section .border-2');
+            if (cancelBtn) {
+                cancelBtn.addEventListener('click', function() {
+                    // Switch back to profile
+                    removeActiveClass();
+                    document.querySelector('.sidebar-item[data-section="profile"]').classList.add('active');
+                    hideAllSections();
+                    if (sections.profile) sections.profile.classList.remove('hidden');
+                });
+            }
+            
+           
+            
+            // Save buttons
+            document.querySelectorAll('.save-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    alert('Changes saved successfully! (Demo)');
+                });
+            });
+            
+            // Delete saved item buttons
+            document.querySelectorAll('.fa-trash-alt').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const item = this.closest('.saved-item-card');
+                    if (item) {
+                        item.remove();
+                        alert('Item removed from saved list');
+                    }
+                });
+            });
+            
+            // Add to cart buttons
+            document.querySelectorAll('.fa-shopping-cart').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    alert('Added to cart! (Demo)');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
