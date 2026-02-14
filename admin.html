@@ -36,6 +36,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Poppins Font for Messages -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -310,31 +312,65 @@
         [dir="rtl"] .space-x-3 > :not([hidden]) ~ :not([hidden]) { --tw-space-x-reverse: 1; }
         [dir="rtl"] .space-x-4 > :not([hidden]) ~ :not([hidden]) { --tw-space-x-reverse: 1; }
         [dir="rtl"] .sidebar-item:hover { transform: translateX(-5px); }
+        
+        /* Mobile fixes */
+        @media (max-width: 640px) {
+            .dashboard-card {
+                padding: 1.25rem;
+            }
+            .stat-card {
+                padding: 1rem;
+            }
+            .stat-card .text-3xl {
+                font-size: 1.5rem;
+            }
+            .admin-input {
+                padding: 0.75rem 1rem;
+            }
+            .flex.gap-3.mb-6 {
+                gap: 0.5rem;
+            }
+            .px-5.py-2.5 {
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+                font-size: 0.75rem;
+            }
+            .grid-cols-2.sm\:flex {
+                gap: 0.5rem;
+            }
+            .w-full.sm\:w-auto {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
     </style>
 </head>
-<body class="bg-background-cream dark:bg-dark-bg p-6 md:p-8">
+<body class="bg-background-cream dark:bg-dark-bg p-4 sm:p-6 md:p-8">
 
     <!-- ============  HEADER ============ -->
     <div class="header">
         <div class="flex justify-between items-center">
             <!-- Logo -->
-            <a class='flex items-center space-x-3 group' href='index.html'>
-                <div class="w-10 h-10 bg-primary-brown rounded-lg flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
-                    <i class="fas fa-map-marked-alt text-white text-lg"></i>
+            <a class='flex items-center space-x-2 sm:space-x-3 group' href='index.html'>
+                <div class="w-8 h-8 sm:w-10 sm:h-10 bg-primary-brown rounded-lg flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
+                    <i class="fas fa-map-marked-alt text-white text-base sm:text-lg"></i>
                 </div>
                 <div>
-                    <span class="text-2xl font-display font-bold tracking-tight text-neutral-dark dark:text-white">Groww</span>
-                    <span class="text-2xl font-display font-bold tracking-tight text-primary-brown">Tour</span>
+                    <span class="text-xl sm:text-2xl font-display font-bold tracking-tight text-neutral-dark dark:text-white">Groww</span>
+                    <span class="text-xl sm:text-2xl font-display font-bold tracking-tight text-primary-brown">Tour</span>
                 </div>
             </a>
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-2 sm:gap-3">
                 
-                <button id="theme-toggle" class="toggle-btn" title="Toggle theme">
-                    <i class="fas fa-moon"></i>
-                    <i class="fas fa-sun hidden"></i>
+                <button id="theme-toggle" class="toggle-btn w-8 h-8 sm:w-10 sm:h-10" title="Toggle theme">
+                    <i class="fas fa-moon text-sm sm:text-base"></i>
+                    <i class="fas fa-sun hidden text-sm sm:text-base"></i>
                 </button>
-                <button id="rtl-toggle" class="toggle-btn" title="Toggle RTL/LTR">
-                    <i class="fas fa-exchange-alt"></i>
+                <button id="rtl-toggle" class="toggle-btn w-8 h-8 sm:w-10 sm:h-10" title="Toggle RTL/LTR">
+                    <i class="fas fa-exchange-alt text-sm sm:text-base"></i>
                 </button>
             </div>
         </div>
@@ -344,86 +380,86 @@
     <div class="max-w-7xl mx-auto">
         
         <!-- Welcome Header -->
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 sm:mb-8">
             <div>
-                <h1 class="text-3xl md:text-4xl font-display font-bold dark:text-white">
+                <h1 class="text-2xl sm:text-3xl md:text-4xl font-display font-bold dark:text-white">
                     Admin <span class="text-primary-brown">Dashboard</span>
                 </h1>
-                <p class="text-neutral-dark/70 dark:text-gray-400 mt-1 text-lg">
+                <p class="text-sm sm:text-base md:text-lg text-neutral-dark/70 dark:text-gray-400 mt-1">
                     Manage your platform, users, content, and analytics
                 </p>
             </div>
-            <div class="mt-4 md:mt-0 flex items-center gap-4 bg-white dark:bg-dark-card px-5 py-3 rounded-2xl shadow-sm border border-neutral-light/50 dark:border-gray-700">
-                <div class="w-12 h-12 bg-primary-brown/20 rounded-full flex items-center justify-center">
-                    <i class="fas fa-user-tie text-2xl text-primary-brown"></i>
+            <div class="mt-4 md:mt-0 flex items-center gap-3 sm:gap-4 bg-white dark:bg-dark-card px-4 sm:px-5 py-2 sm:py-3 rounded-2xl shadow-sm border border-neutral-light/50 dark:border-gray-700">
+                <div class="w-8 h-8 sm:w-10 sm:h-10 bg-primary-brown/20 rounded-full flex items-center justify-center">
+                    <i class="fas fa-user-tie text-lg sm:text-xl text-primary-brown"></i>
                 </div>
                 <div>
-                    <p class="font-semibold dark:text-white text-lg">Admin User</p>
-                    <p class="text-xs text-neutral-dark/60 dark:text-gray-400">admin@growwtour.com</p>
+                    <p class="font-semibold dark:text-white text-base sm:text-lg">Admin User</p>
+                    <p class="text-xs text-neutral-dark/60 dark:text-gray-400 truncate max-w-[120px] sm:max-w-none">admin@growwtour.com</p>
                 </div>
             </div>
         </div>
 
         <!-- Main Dashboard Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
             
             <!-- ============ SIDEBAR - 7 SECTIONS ============ -->
             <div class="lg:col-span-3 xl:col-span-3">
-                <div class="dashboard-card">
+                <div class="dashboard-card p-4 sm:p-6 lg:p-8">
                     <div class="flex flex-col space-y-1">
                         
                         <!-- Overview / Statistics -->
-                        <div class="sidebar-item active" data-section="overview">
-                            <i class="fas fa-chart-pie w-7 text-2xl"></i>
-                            <span class="ml-4 font-semibold text-lg">Overview</span>
+                        <div class="sidebar-item active py-3 sm:py-4 px-3 sm:px-5" data-section="overview">
+                            <i class="fas fa-chart-pie w-5 sm:w-7 text-xl sm:text-2xl"></i>
+                            <span class="ml-3 sm:ml-4 font-semibold text-base sm:text-lg">Overview</span>
                         </div>
                         
                         <!-- User Management -->
-                        <div class="sidebar-item" data-section="users">
-                            <i class="fas fa-users w-6 text-2xl"></i>
-                            <span class="ml-4 font-semibold text-lg">User Management</span>
+                        <div class="sidebar-item py-3 sm:py-4 px-3 sm:px-5" data-section="users">
+                            <i class="fas fa-users w-5 sm:w-7 text-xl sm:text-2xl"></i>
+                            <span class="ml-3 sm:ml-4 font-semibold text-base sm:text-lg">User Mgmt</span>
                         </div>
                         
                         <!-- Content Management -->
-                        <div class="sidebar-item" data-section="content">
-                            <i class="fas fa-file-alt w-7 text-2xl"></i>
-                            <span class="ml-4 font-semibold text-lg">Content Management</span>
+                        <div class="sidebar-item py-3 sm:py-4 px-3 sm:px-5" data-section="content">
+                            <i class="fas fa-file-alt w-5 sm:w-7 text-xl sm:text-2xl"></i>
+                            <span class="ml-3 sm:ml-4 font-semibold text-base sm:text-lg">Content Mgmt</span>
                         </div>
                         
                         <!-- Orders / Bookings -->
-                        <div class="sidebar-item" data-section="orders">
-                            <i class="fas fa-shopping-cart w-7 text-2xl"></i>
-                            <span class="ml-4 font-semibold text-lg">Orders / Bookings</span>
+                        <div class="sidebar-item py-3 sm:py-4 px-3 sm:px-5" data-section="orders">
+                            <i class="fas fa-shopping-cart w-5 sm:w-7 text-xl sm:text-2xl"></i>
+                            <span class="ml-3 sm:ml-4 font-semibold text-base sm:text-lg">Orders / Bookings</span>
                         </div>
                         
                         <!-- Messages / Notifications -->
-                        <div class="sidebar-item" data-section="messages">
-                            <i class="fas fa-envelope w-7 text-2xl"></i>
-                            <span class="ml-4 font-semibold text-lg">Messages</span>
-                            <span class="ml-auto bg-primary-brown text-white text-xs px-2.5 py-1.5 rounded-full font-bold">5</span>
+                        <div class="sidebar-item py-3 sm:py-4 px-3 sm:px-5" data-section="messages">
+                            <i class="fas fa-envelope w-5 sm:w-7 text-xl sm:text-2xl"></i>
+                            <span class="ml-3 sm:ml-4 font-semibold text-base sm:text-lg">Messages</span>
+                            <span class="ml-auto bg-primary-brown text-white text-xs px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-full font-bold">5</span>
                         </div>
                         
                         <!-- Settings / Configuration -->
-                        <div class="sidebar-item" data-section="settings">
-                            <i class="fas fa-cog w-7 text-2xl"></i>
-                            <span class="ml-4 font-semibold text-lg">Settings</span>
+                        <div class="sidebar-item py-3 sm:py-4 px-3 sm:px-5" data-section="settings">
+                            <i class="fas fa-cog w-5 sm:w-7 text-xl sm:text-2xl"></i>
+                            <span class="ml-3 sm:ml-4 font-semibold text-base sm:text-lg">Settings</span>
                         </div>
                         
                         <!-- Reports / Analytics -->
-                        <div class="sidebar-item" data-section="reports">
-                            <i class="fas fa-chart-line w-7 text-2xl"></i>
-                            <span class="ml-4 font-semibold text-lg">Reports</span>
+                        <div class="sidebar-item py-3 sm:py-4 px-3 sm:px-5" data-section="reports">
+                            <i class="fas fa-chart-line w-5 sm:w-7 text-xl sm:text-2xl"></i>
+                            <span class="ml-3 sm:ml-4 font-semibold text-base sm:text-lg">Reports</span>
                         </div>
                     </div>
                     
                     <!-- Admin Info -->
-                    <div class="mt-8 pt-6 border-t border-neutral-light/50 dark:border-gray-700">
+                    <div class="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-neutral-light/50 dark:border-gray-700">
                         <div class="flex items-center">
-                            <div class="w-12 h-12 bg-primary-brown/20 rounded-full flex items-center justify-center">
-                                <i class="fas fa-user-cog text-2xl text-primary-brown"></i>
+                            <div class="w-8 h-8 sm:w-10 sm:h-10 bg-primary-brown/20 rounded-full flex items-center justify-center">
+                                <i class="fas fa-user-cog text-lg sm:text-xl text-primary-brown"></i>
                             </div>
-                            <div class="ml-4">
-                                <p class="font-bold dark:text-white">Admin</p>
+                            <div class="ml-3 sm:ml-4">
+                                <p class="font-bold dark:text-white text-sm sm:text-base">Admin</p>
                                 <p class="text-xs text-neutral-dark/60 dark:text-gray-400">Super Admin</p>
                                 <p class="text-xs text-primary-brown mt-1 font-semibold"> Full Access 🔑</p>
                             </div>
@@ -437,115 +473,115 @@
                 
                 <!-- ===== 1. OVERVIEW / STATISTICS SECTION ===== -->
                 <div id="overview-section" class="dashboard-section active">
-                    <div class="dashboard-card">
-                        <h2 class="text-2xl font-display font-bold mb-7 dark:text-white flex items-center">
-                            <i class="fas fa-chart-pie text-primary-brown mr-3 text-2xl"></i>
+                    <div class="dashboard-card p-4 sm:p-6 lg:p-8">
+                        <h2 class="text-xl sm:text-2xl font-display font-bold mb-5 sm:mb-7 dark:text-white flex items-center">
+                            <i class="fas fa-chart-pie text-primary-brown mr-2 sm:mr-3 text-xl sm:text-2xl"></i>
                             Overview & Statistics
                         </h2>
                         
-                                               <!-- Stats Cards - Mobile: 1 column, Tablet: 2 columns, Desktop: 4 columns -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                            <div class="stat-card p-5">
+                        <!-- Stats Cards -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
+                            <div class="stat-card p-3 sm:p-5">
                                 <div class="flex items-center justify-between">
                                     <div>
-                                        <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Total Users</p>
-                                        <p class="text-3xl font-bold dark:text-white mt-1">2,547</p>
-                                        <p class="text-xs text-secondary-green mt-2">+12% this month</p>
+                                        <p class="text-xs sm:text-sm text-neutral-dark/60 dark:text-gray-400">Total Users</p>
+                                        <p class="text-2xl sm:text-3xl font-bold dark:text-white mt-1">2,547</p>
+                                        <p class="text-xs text-secondary-green mt-1 sm:mt-2">+12% this month</p>
                                     </div>
-                                    <div class="w-12 h-12 bg-primary-brown/10 rounded-xl flex items-center justify-center">
-                                        <i class="fas fa-users text-primary-brown text-xl"></i>
+                                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-primary-brown/10 rounded-xl flex items-center justify-center">
+                                        <i class="fas fa-users text-primary-brown text-base sm:text-xl"></i>
                                     </div>
                                 </div>
                             </div>
-                            <div class="stat-card p-5">
+                            <div class="stat-card p-3 sm:p-5">
                                 <div class="flex items-center justify-between">
                                     <div>
-                                        <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Total Bookings</p>
-                                        <p class="text-3xl font-bold dark:text-white mt-1">1,892</p>
-                                        <p class="text-xs text-secondary-green mt-2">+8% this month</p>
+                                        <p class="text-xs sm:text-sm text-neutral-dark/60 dark:text-gray-400">Total Bookings</p>
+                                        <p class="text-2xl sm:text-3xl font-bold dark:text-white mt-1">1,892</p>
+                                        <p class="text-xs text-secondary-green mt-1 sm:mt-2">+8% this month</p>
                                     </div>
-                                    <div class="w-12 h-12 bg-primary-brown/10 rounded-xl flex items-center justify-center">
-                                        <i class="fas fa-shopping-cart text-primary-brown text-xl"></i>
+                                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-primary-brown/10 rounded-xl flex items-center justify-center">
+                                        <i class="fas fa-shopping-cart text-primary-brown text-base sm:text-xl"></i>
                                     </div>
                                 </div>
                             </div>
-                            <div class="stat-card p-5">
+                            <div class="stat-card p-3 sm:p-5">
                                 <div class="flex items-center justify-between">
                                     <div>
-                                        <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Active Tours</p>
-                                        <p class="text-3xl font-bold dark:text-white mt-1">156</p>
-                                        <p class="text-xs text-secondary-green mt-2">+5 new</p>
+                                        <p class="text-xs sm:text-sm text-neutral-dark/60 dark:text-gray-400">Active Tours</p>
+                                        <p class="text-2xl sm:text-3xl font-bold dark:text-white mt-1">156</p>
+                                        <p class="text-xs text-secondary-green mt-1 sm:mt-2">+5 new</p>
                                     </div>
-                                    <div class="w-12 h-12 bg-primary-brown/10 rounded-xl flex items-center justify-center">
-                                        <i class="fas fa-map-marked-alt text-primary-brown text-xl"></i>
+                                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-primary-brown/10 rounded-xl flex items-center justify-center">
+                                        <i class="fas fa-map-marked-alt text-primary-brown text-base sm:text-xl"></i>
                                     </div>
                                 </div>
                             </div>
-                            <div class="stat-card p-5">
+                            <div class="stat-card p-3 sm:p-5">
                                 <div class="flex items-center justify-between">
                                     <div>
-                                        <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Revenue</p>
-                                        <p class="text-3xl font-bold dark:text-white mt-1">$124K</p>
-                                        <p class="text-xs text-secondary-green mt-2">+23% vs last month</p>
+                                        <p class="text-xs sm:text-sm text-neutral-dark/60 dark:text-gray-400">Revenue</p>
+                                        <p class="text-2xl sm:text-3xl font-bold dark:text-white mt-1">$124K</p>
+                                        <p class="text-xs text-secondary-green mt-1 sm:mt-2">+23% vs last month</p>
                                     </div>
-                                    <div class="w-12 h-12 bg-primary-brown/10 rounded-xl flex items-center justify-center">
-                                        <i class="fas fa-dollar-sign text-primary-brown text-xl"></i>
+                                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-primary-brown/10 rounded-xl flex items-center justify-center">
+                                        <i class="fas fa-dollar-sign text-primary-brown text-base sm:text-xl"></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
                         <!-- Charts Row -->
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div class="bg-neutral-light/30 dark:bg-gray-800/30 p-5 rounded-2xl">
-                                <h3 class="font-bold text-lg mb-4 dark:text-white">Weekly Bookings</h3>
-                                <div class="chart-container">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                            <div class="bg-neutral-light/30 dark:bg-gray-800/30 p-3 sm:p-5 rounded-2xl">
+                                <h3 class="font-bold text-base sm:text-lg mb-3 sm:mb-4 dark:text-white">Weekly Bookings</h3>
+                                <div class="chart-container h-[200px] sm:h-[250px] md:h-[300px]">
                                     <canvas id="bookingsChart"></canvas>
                                 </div>
                             </div>
-                            <div class="bg-neutral-light/30 dark:bg-gray-800/30 p-5 rounded-2xl">
-                                <h3 class="font-bold text-lg mb-4 dark:text-white">Revenue by Category</h3>
-                                <div class="chart-container">
+                            <div class="bg-neutral-light/30 dark:bg-gray-800/30 p-3 sm:p-5 rounded-2xl">
+                                <h3 class="font-bold text-base sm:text-lg mb-3 sm:mb-4 dark:text-white">Revenue by Category</h3>
+                                <div class="chart-container h-[200px] sm:h-[250px] md:h-[300px]">
                                     <canvas id="revenueChart"></canvas>
                                 </div>
                             </div>
                         </div>
                         
                         <!-- Recent Activity -->
-                        <div class="mt-8">
-                            <h3 class="font-bold text-lg mb-4 dark:text-white">Recent Activity</h3>
-                            <div class="space-y-3">
-                                <div class="flex items-center justify-between p-4 bg-neutral-light/30 dark:bg-gray-800/30 rounded-xl">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-10 h-10 bg-primary-brown/10 rounded-full flex items-center justify-center">
-                                            <i class="fas fa-user-plus text-primary-brown"></i>
+                        <div class="mt-6 sm:mt-8">
+                            <h3 class="font-bold text-base sm:text-lg mb-3 sm:mb-4 dark:text-white">Recent Activity</h3>
+                            <div class="space-y-2 sm:space-y-3">
+                                <div class="flex items-center justify-between p-3 sm:p-4 bg-neutral-light/30 dark:bg-gray-800/30 rounded-xl">
+                                    <div class="flex items-center gap-2 sm:gap-3">
+                                        <div class="w-8 h-8 sm:w-10 sm:h-10 bg-primary-brown/10 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-user-plus text-primary-brown text-sm sm:text-base"></i>
                                         </div>
                                         <div>
-                                            <p class="font-semibold dark:text-white">New user registered</p>
+                                            <p class="font-semibold dark:text-white text-sm sm:text-base">New user registered</p>
                                             <p class="text-xs text-neutral-dark/60 dark:text-gray-400">Sarah Johnson • 5 min ago</p>
                                         </div>
                                     </div>
                                     <span class="text-xs text-primary-brown font-semibold">View</span>
                                 </div>
-                                <div class="flex items-center justify-between p-4 bg-neutral-light/30 dark:bg-gray-800/30 rounded-xl">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-10 h-10 bg-primary-brown/10 rounded-full flex items-center justify-center">
-                                            <i class="fas fa-shopping-cart text-primary-brown"></i>
+                                <div class="flex items-center justify-between p-3 sm:p-4 bg-neutral-light/30 dark:bg-gray-800/30 rounded-xl">
+                                    <div class="flex items-center gap-2 sm:gap-3">
+                                        <div class="w-8 h-8 sm:w-10 sm:h-10 bg-primary-brown/10 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-shopping-cart text-primary-brown text-sm sm:text-base"></i>
                                         </div>
                                         <div>
-                                            <p class="font-semibold dark:text-white">New booking #GW-4821</p>
+                                            <p class="font-semibold dark:text-white text-sm sm:text-base">New booking #GW-4821</p>
                                             <p class="text-xs text-neutral-dark/60 dark:text-gray-400">Alpine Summits Expedition • 15 min ago</p>
                                         </div>
                                     </div>
                                     <span class="text-xs text-primary-brown font-semibold">View</span>
                                 </div>
-                                <div class="flex items-center justify-between p-4 bg-neutral-light/30 dark:bg-gray-800/30 rounded-xl">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-10 h-10 bg-primary-brown/10 rounded-full flex items-center justify-center">
-                                            <i class="fas fa-star text-primary-brown"></i>
+                                <div class="flex items-center justify-between p-3 sm:p-4 bg-neutral-light/30 dark:bg-gray-800/30 rounded-xl">
+                                    <div class="flex items-center gap-2 sm:gap-3">
+                                        <div class="w-8 h-8 sm:w-10 sm:h-10 bg-primary-brown/10 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-star text-primary-brown text-sm sm:text-base"></i>
                                         </div>
                                         <div>
-                                            <p class="font-semibold dark:text-white">New review posted</p>
+                                            <p class="font-semibold dark:text-white text-sm sm:text-base">New review posted</p>
                                             <p class="text-xs text-neutral-dark/60 dark:text-gray-400">5 stars • Ancient Rome Tour • 1 hour ago</p>
                                         </div>
                                     </div>
@@ -556,120 +592,121 @@
                     </div>
                 </div>
 
-                <!-- ===== 2. USER MANAGEMENT SECTION ===== -->
+                <!-- ===== 2. USER MANAGEMENT SECTION (SCROLL REMOVED) ===== -->
                 <div id="users-section" class="dashboard-section hidden">
-                    <div class="dashboard-card">
-                        <h2 class="text-2xl font-display font-bold mb-7 dark:text-white flex items-center">
-                            <i class="fas fa-users text-primary-brown mr-3 text-2xl"></i>
-                            User Management
+                    <div class="dashboard-card p-4 sm:p-6 lg:p-8">
+                            <h2 class="text-xl sm:text-2xl font-bold mb-5 sm:mb-7 dark:text-white flex items-center" style="font-family: 'Poppins', sans-serif;">
+                            <i class="fas fa-users text-primary-brown mr-2 sm:mr-3 text-xl sm:text-2xl"></i>
+                            <span class="font-medium">User Management</span>
                         </h2>
                         
                         <!-- Filters & Search -->
-                        <div class="flex flex-wrap gap-3 mb-6">
-                            <button class="px-5 py-2.5 rounded-full text-sm font-bold bg-primary-brown text-white shadow-md">All Users</button>
-                            <button class="px-5 py-2.5 rounded-full text-sm font-medium bg-white dark:bg-dark-card border border-neutral-light dark:border-gray-700 hover:bg-primary-brown/10 transition">Admins</button>
-                            <button class="px-5 py-2.5 rounded-full text-sm font-medium bg-white dark:bg-dark-card border border-neutral-light dark:border-gray-700 hover:bg-primary-brown/10 transition">Guides</button>
-                            <button class="px-5 py-2.5 rounded-full text-sm font-medium bg-white dark:bg-dark-card border border-neutral-light dark:border-gray-700 hover:bg-primary-brown/10 transition">Travelers</button>
-                            <div class="flex-1 min-w-[200px]">
-                                <input type="text" placeholder="Search users..." class="admin-input py-2.5">
+                        <div class="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
+                            <button class="px-3 sm:px-5 py-1.5 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold bg-primary-brown text-white shadow-md">All Users</button>
+                            <button class="px-3 sm:px-5 py-1.5 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium bg-white dark:bg-dark-card border border-neutral-light dark:border-gray-700 hover:bg-primary-brown/10 transition">Admins</button>
+                            <button class="px-3 sm:px-5 py-1.5 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium bg-white dark:bg-dark-card border border-neutral-light dark:border-gray-700 hover:bg-primary-brown/10 transition">Guides</button>
+                            <button class="px-3 sm:px-5 py-1.5 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium bg-white dark:bg-dark-card border border-neutral-light dark:border-gray-700 hover:bg-primary-brown/10 transition">Travelers</button>
+                            <div class="w-full sm:flex-1 min-w-[200px] mt-2 sm:mt-0">
+                                <input type="text" placeholder="Search users..." class="admin-input py-1.5 sm:py-2.5 text-sm">
                             </div>
                         </div>
                         
-                        <!-- Users Table -->
-                        <div class="overflow-x-auto">
-                            <table class="w-full">
-                                <thead class="table-header">
-                                    <tr>
-                                        <th class="text-left p-3">User</th>
-                                        <th class="text-left p-3">Role</th>
-                                        <th class="text-left p-3">Status</th>
-                                        <th class="text-left p-3">Joined</th>
-                                        <th class="text-left p-3">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="table-row">
-                                        <td class="p-3">
-                                            <div class="flex items-center gap-3">
-                                                <img src="/assets/per.jpg" class="w-10 h-10 rounded-full object-cover">
-                                                <div>
-                                                    <p class="font-semibold dark:text-white">Sophia Müller</p>
-                                                    <p class="text-xs text-neutral-dark/60">sophia@example.com</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="p-3">Guide</td>
-                                        <td class="p-3"><span class="status-badge status-active">Active</span></td>
-                                        <td class="p-3">Jan 15, 2024</td>
-                                        <td class="p-3">
-                                            <button class="text-primary-brown hover:underline text-sm">Edit</button>
-                                            <button class="text-red-500 hover:underline text-sm ml-3">Suspend</button>
-                                        </td>
-                                    </tr>
-                                    <tr class="table-row">
-                                        <td class="p-3">
-                                            <div class="flex items-center gap-3">
-                                                <img src="/assets/trust.jpg" class="w-10 h-10 rounded-full object-cover">
-                                                <div>
-                                                    <p class="font-semibold dark:text-white">Marco Rossi</p>
-                                                    <p class="text-xs text-neutral-dark/60">marco@example.com</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="p-3">Guide</td>
-                                        <td class="p-3"><span class="status-badge status-active">Active</span></td>
-                                        <td class="p-3">Feb 3, 2024</td>
-                                        <td class="p-3">
-                                            <button class="text-primary-brown hover:underline text-sm">Edit</button>
-                                            <button class="text-red-500 hover:underline text-sm ml-3">Suspend</button>
-                                        </td>
-                                    </tr>
-                                    <tr class="table-row">
-                                        <td class="p-3">
-                                            <div class="flex items-center gap-3">
-                                                <img src="/assets/per4.jpg" class="w-10 h-10 rounded-full object-cover">
-                                                <div>
-                                                    <p class="font-semibold dark:text-white">John Doe</p>
-                                                    <p class="text-xs text-neutral-dark/60">john@example.com</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="p-3">Traveler</td>
-                                        <td class="p-3"><span class="status-badge status-active">Active</span></td>
-                                        <td class="p-3">Mar 20, 2024</td>
-                                        <td class="p-3">
-                                            <button class="text-primary-brown hover:underline text-sm">Edit</button>
-                                            <button class="text-red-500 hover:underline text-sm ml-3">Suspend</button>
-                                        </td>
-                                    </tr>
-                                    <tr class="table-row">
-                                        <td class="p-3">
-                                            <div class="flex items-center gap-3">
-                                                <img src="/assets/Guide3.jpg" class="w-10 h-10 rounded-full object-cover">
-                                                <div>
-                                                    <p class="font-semibold dark:text-white">Emma Watson</p>
-                                                    <p class="text-xs text-neutral-dark/60">emma@example.com</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="p-3">Traveler</td>
-                                        <td class="p-3"><span class="status-badge status-pending">Pending</span></td>
-                                        <td class="p-3">Apr 2, 2024</td>
-                                        <td class="p-3">
-                                            <button class="text-primary-brown hover:underline text-sm">Approve</button>
-                                            <button class="text-red-500 hover:underline text-sm ml-3">Reject</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <!-- Users Table - NO SCROLL, FULL LAYOUT -->
+                        <div class="overflow-x-auto -mx-4 sm:mx-0">
+                            <div class="inline-block min-w-full align-middle">
+                                <div class="border border-neutral-light/20 dark:border-gray-700 rounded-lg">
+                                    <table class="min-w-full divide-y divide-neutral-light/30 dark:divide-gray-700">
+                                        <thead class="table-header">
+                                            <tr>
+                                                <th class="text-left p-2 sm:p-3 text-xs sm:text-sm">User</th>
+                                                <th class="text-left p-2 sm:p-3 text-xs sm:text-sm">Role</th>
+                                                <th class="text-left p-2 sm:p-3 text-xs sm:text-sm">Status</th>
+                                                <th class="text-left p-2 sm:p-3 text-xs sm:text-sm hidden sm:table-cell">Joined</th>
+                                                <th class="text-left p-2 sm:p-3 text-xs sm:text-sm">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="table-row">
+                                                <td class="p-2 sm:p-3">
+                                                    <div class="flex items-center gap-2 sm:gap-3">
+                                                        <img src="/assets/per.jpg" class="w-6 h-6 sm:w-8 sm:h-8 rounded-full object-cover">
+                                                        <div>
+                                                            <p class="font-semibold dark:text-white text-xs sm:text-sm">Sophia Müller</p>
+                                                            <p class="text-xs text-neutral-dark/60 hidden sm:block">sophia@example.com</p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm">Guide</td>
+                                                <td class="p-2 sm:p-3"><span class="status-badge status-active text-xs px-2 sm:px-3 py-1">Active</span></td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm hidden sm:table-cell">Jan 15, 2024</td>
+                                                <td class="p-2 sm:p-3">
+                                                    <button class="text-red-500 hover:underline text-xs ml-2">Suspend</button>
+                                                </td>
+                                            </tr>
+                                            <tr class="table-row">
+                                                <td class="p-2 sm:p-3">
+                                                    <div class="flex items-center gap-2 sm:gap-3">
+                                                        <img src="/assets/trust.jpg" class="w-6 h-6 sm:w-8 sm:h-8 rounded-full object-cover">
+                                                        <div>
+                                                            <p class="font-semibold dark:text-white text-xs sm:text-sm">Marco Rossi</p>
+                                                            <p class="text-xs text-neutral-dark/60 hidden sm:block">marco@example.com</p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm">Guide</td>
+                                                <td class="p-2 sm:p-3"><span class="status-badge status-active text-xs px-2 sm:px-3 py-1">Active</span></td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm hidden sm:table-cell">Feb 3, 2024</td>
+                                                <td class="p-2 sm:p-3">
+                                                    <button class="text-red-500 hover:underline text-xs ml-2">Approve</button>
+                                                </td>
+                                            </tr>
+                                            <tr class="table-row">
+                                                <td class="p-2 sm:p-3">
+                                                    <div class="flex items-center gap-2 sm:gap-3">
+                                                        <img src="/assets/per4.jpg" class="w-6 h-6 sm:w-8 sm:h-8 rounded-full object-cover">
+                                                        <div>
+                                                            <p class="font-semibold dark:text-white text-xs sm:text-sm">John Doe</p>
+                                                            <p class="text-xs text-neutral-dark/60 hidden sm:block">john@example.com</p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm">Traveler</td>
+                                                <td class="p-2 sm:p-3"><span class="status-badge status-active text-xs px-2 sm:px-3 py-1">Active</span></td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm hidden sm:table-cell">Mar 20, 2024</td>
+                                                <td class="p-2 sm:p-3">
+                                                    <button class="text-red-500 hover:underline text-xs ml-2">Suspend</button>
+                                                </td>
+                                            </tr>
+                                            <tr class="table-row">
+                                                <td class="p-2 sm:p-3">
+                                                    <div class="flex items-center gap-2 sm:gap-3">
+                                                        <img src="/assets/Guide3.jpg" class="w-6 h-6 sm:w-8 sm:h-8 rounded-full object-cover">
+                                                        <div>
+                                                            <p class="font-semibold dark:text-white text-xs sm:text-sm">Emma Watson</p>
+                                                            <p class="text-xs text-neutral-dark/60 hidden sm:block">emma@example.com</p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm">Traveler</td>
+                                                <td class="p-2 sm:p-3"><span class="status-badge status-pending text-xs px-2 sm:px-3 py-1">Pending</span></td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm hidden sm:table-cell">Apr 2, 2024</td>
+                                                <td class="p-2 sm:p-3">
+                                                    <button class="text-red-500 hover:underline text-xs ml-2">Reject</button>
+                                                </td>
+                                            </tr>
+                                           
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                         
-                        <div class="mt-6 flex justify-between items-center">
-                            <p class="text-sm text-neutral-dark/60">Showing 1-4 of 24 users</p>
-                            <div class="flex gap-2">
-                                <button class="px-4 py-2 border rounded-lg hover:bg-primary-brown/10">1</button>
-                                <button class="px-4 py-2 border rounded-lg hover:bg-primary-brown/10">2</button>
-                                <button class="px-4 py-2 border rounded-lg hover:bg-primary-brown/10">3</button>
+                        <div class="mt-4 sm:mt-6 flex flex-col sm:flex-row justify-between items-center gap-3">
+                            <p class="text-xs sm:text-sm text-neutral-dark/60">Showing 1-8 of 24 users</p>
+                            <div class="flex gap-1 sm:gap-2">
+                                <button class="px-2 sm:px-3 py-1 sm:py-2 border rounded-lg hover:bg-primary-brown/10 text-xs sm:text-sm">1</button>
+                                <button class="px-2 sm:px-3 py-1 sm:py-2 border rounded-lg hover:bg-primary-brown/10 text-xs sm:text-sm">2</button>
+                                <button class="px-2 sm:px-3 py-1 sm:py-2 border rounded-lg hover:bg-primary-brown/10 text-xs sm:text-sm">3</button>
                             </div>
                         </div>
                     </div>
@@ -677,111 +714,111 @@
 
                 <!-- ===== 3. CONTENT MANAGEMENT SECTION ===== -->
                 <div id="content-section" class="dashboard-section hidden">
-                    <div class="dashboard-card">
-                        <h2 class="text-2xl font-display font-bold mb-7 dark:text-white flex items-center">
-                            <i class="fas fa-file-alt text-primary-brown mr-3 text-2xl"></i>
-                            Content Management
+                    <div class="dashboard-card p-4 sm:p-6 lg:p-8">
+                             <h2 class="text-xl sm:text-2xl font-bold mb-5 sm:mb-7 dark:text-white flex items-center" style="font-family: 'Poppins', sans-serif;">
+                            <i class="fas fa-file-alt text-primary-brown mr-2 sm:mr-3 text-xl sm:text-2xl"></i>
+                            <span class="font-medium">Content Management</span>
                         </h2>
                         
-                        <div class="grid md:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                             <!-- Tours Content -->
-                            <div class="bg-neutral-light/30 dark:bg-gray-800/30 p-6 rounded-2xl">
-                                <div class="flex items-center justify-between mb-4">
-                                    <h3 class="font-bold text-lg dark:text-white">Tours</h3>
-                                    <span class="text-primary-brown font-semibold">156 active</span>
+                            <div class="bg-neutral-light/30 dark:bg-gray-800/30 p-4 sm:p-6 rounded-2xl">
+                                <div class="flex items-center justify-between mb-3 sm:mb-4">
+                                    <h3 class="font-bold text-base sm:text-lg dark:text-white">Tours</h3>
+                                    <span class="text-primary-brown font-semibold text-sm sm:text-base">156 active</span>
                                 </div>
-                                <div class="space-y-3">
-                                    <div class="flex justify-between items-center">
+                                <div class="space-y-2 sm:space-y-3">
+                                    <div class="flex justify-between items-center text-sm sm:text-base">
                                         <span>Adventure Tours</span>
                                         <span class="font-semibold">45</span>
                                     </div>
-                                    <div class="flex justify-between items-center">
+                                    <div class="flex justify-between items-center text-sm sm:text-base">
                                         <span>Cultural Tours</span>
                                         <span class="font-semibold">38</span>
                                     </div>
-                                    <div class="flex justify-between items-center">
+                                    <div class="flex justify-between items-center text-sm sm:text-base">
                                         <span>Food Tours</span>
                                         <span class="font-semibold">32</span>
                                     </div>
-                                    <div class="flex justify-between items-center">
+                                    <div class="flex justify-between items-center text-sm sm:text-base">
                                         <span>Nature Tours</span>
                                         <span class="font-semibold">41</span>
                                     </div>
                                 </div>
-                                <button class="w-full mt-4 py-3 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold hover:bg-primary-brown hover:text-white transition">
+                                <button class="w-full mt-4 py-2 sm:py-3 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold text-sm sm:text-base hover:bg-primary-brown hover:text-white transition">
                                     Manage Tours
                                 </button>
                             </div>
                             
                             <!-- Guides Content -->
-                            <div class="bg-neutral-light/30 dark:bg-gray-800/30 p-6 rounded-2xl">
-                                <div class="flex items-center justify-between mb-4">
-                                    <h3 class="font-bold text-lg dark:text-white">Guides</h3>
-                                    <span class="text-primary-brown font-semibold">84 active</span>
+                            <div class="bg-neutral-light/30 dark:bg-gray-800/30 p-4 sm:p-6 rounded-2xl">
+                                <div class="flex items-center justify-between mb-3 sm:mb-4">
+                                    <h3 class="font-bold text-base sm:text-lg dark:text-white">Guides</h3>
+                                    <span class="text-primary-brown font-semibold text-sm sm:text-base">84 active</span>
                                 </div>
-                                <div class="space-y-3">
-                                    <div class="flex justify-between items-center">
+                                <div class="space-y-2 sm:space-y-3">
+                                    <div class="flex justify-between items-center text-sm sm:text-base">
                                         <span>Adventure Guides</span>
                                         <span class="font-semibold">28</span>
                                     </div>
-                                    <div class="flex justify-between items-center">
+                                    <div class="flex justify-between items-center text-sm sm:text-base">
                                         <span>Cultural Guides</span>
                                         <span class="font-semibold">22</span>
                                     </div>
-                                    <div class="flex justify-between items-center">
+                                    <div class="flex justify-between items-center text-sm sm:text-base">
                                         <span>Food Guides</span>
                                         <span class="font-semibold">18</span>
                                     </div>
-                                    <div class="flex justify-between items-center">
+                                    <div class="flex justify-between items-center text-sm sm:text-base">
                                         <span>Nature Guides</span>
                                         <span class="font-semibold">16</span>
                                     </div>
                                 </div>
-                                <button class="w-full mt-4 py-3 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold hover:bg-primary-brown hover:text-white transition">
+                                <button class="w-full mt-4 py-2 sm:py-3 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold text-sm sm:text-base hover:bg-primary-brown hover:text-white transition">
                                     Manage Guides
                                 </button>
                             </div>
                             
                             <!-- Blog Posts -->
-                            <div class="bg-neutral-light/30 dark:bg-gray-800/30 p-6 rounded-2xl">
-                                <h3 class="font-bold text-lg mb-4 dark:text-white">Blog Posts</h3>
-                                <div class="space-y-3">
-                                    <div class="flex items-center justify-between">
+                            <div class="bg-neutral-light/30 dark:bg-gray-800/30 p-4 sm:p-6 rounded-2xl">
+                                <h3 class="font-bold text-base sm:text-lg mb-3 sm:mb-4 dark:text-white">Blog Posts</h3>
+                                <div class="space-y-2 sm:space-y-3">
+                                    <div class="flex items-center justify-between text-sm sm:text-base">
                                         <span>Published</span>
                                         <span class="font-semibold">24</span>
                                     </div>
-                                    <div class="flex items-center justify-between">
+                                    <div class="flex items-center justify-between text-sm sm:text-base">
                                         <span>Drafts</span>
                                         <span class="font-semibold">8</span>
                                     </div>
-                                    <div class="flex items-center justify-between">
+                                    <div class="flex items-center justify-between text-sm sm:text-base">
                                         <span>Pending Review</span>
                                         <span class="font-semibold">5</span>
                                     </div>
                                 </div>
-                                <button class="w-full mt-4 py-3 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold hover:bg-primary-brown hover:text-white transition">
+                                <button class="w-full mt-4 py-2 sm:py-3 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold text-sm sm:text-base hover:bg-primary-brown hover:text-white transition">
                                     Manage Blog
                                 </button>
                             </div>
                             
                             <!-- Media Library -->
-                            <div class="bg-neutral-light/30 dark:bg-gray-800/30 p-6 rounded-2xl">
-                                <h3 class="font-bold text-lg mb-4 dark:text-white">Media Library</h3>
-                                <div class="space-y-3">
-                                    <div class="flex items-center justify-between">
+                            <div class="bg-neutral-light/30 dark:bg-gray-800/30 p-4 sm:p-6 rounded-2xl">
+                                <h3 class="font-bold text-base sm:text-lg mb-3 sm:mb-4 dark:text-white">Media Library</h3>
+                                <div class="space-y-2 sm:space-y-3">
+                                    <div class="flex items-center justify-between text-sm sm:text-base">
                                         <span>Images</span>
                                         <span class="font-semibold">1,247</span>
                                     </div>
-                                    <div class="flex items-center justify-between">
+                                    <div class="flex items-center justify-between text-sm sm:text-base">
                                         <span>Videos</span>
                                         <span class="font-semibold">89</span>
                                     </div>
-                                    <div class="flex items-center justify-between">
+                                    <div class="flex items-center justify-between text-sm sm:text-base">
                                         <span>Documents</span>
                                         <span class="font-semibold">156</span>
                                     </div>
                                 </div>
-                                <button class="w-full mt-4 py-3 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold hover:bg-primary-brown hover:text-white transition">
+                                <button class="w-full mt-4 py-2 sm:py-3 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold text-sm sm:text-base hover:bg-primary-brown hover:text-white transition">
                                     Manage Media
                                 </button>
                             </div>
@@ -789,179 +826,234 @@
                     </div>
                 </div>
 
-                <!-- ===== 4. ORDERS / BOOKINGS SECTION ===== -->
+                <!-- ===== 4. ORDERS / BOOKINGS SECTION (SCROLL REMOVED) ===== -->
                 <div id="orders-section" class="dashboard-section hidden">
-                    <div class="dashboard-card">
-                        <h2 class="text-2xl font-display font-bold mb-7 dark:text-white flex items-center">
-                            <i class="fas fa-shopping-cart text-primary-brown mr-3 text-2xl"></i>
+                    <div class="dashboard-card p-4 sm:p-6 lg:p-8">
+                        <h2 class="text-xl sm:text-2xl font-display font-bold mb-5 sm:mb-7 dark:text-white flex items-center">
+                            <i class="fas fa-shopping-cart text-primary-brown mr-2 sm:mr-3 text-xl sm:text-2xl"></i>
                             Orders / Bookings
                         </h2>
                         
                         <!-- Filters -->
-                        <div class="flex flex-wrap gap-3 mb-6">
-                            <button class="px-5 py-2.5 rounded-full text-sm font-bold bg-primary-brown text-white shadow-md">All</button>
-                            <button class="px-5 py-2.5 rounded-full text-sm font-medium bg-white dark:bg-dark-card border border-neutral-light dark:border-gray-700 hover:bg-primary-brown/10 transition">Confirmed</button>
-                            <button class="px-5 py-2.5 rounded-full text-sm font-medium bg-white dark:bg-dark-card border border-neutral-light dark:border-gray-700 hover:bg-primary-brown/10 transition">Pending</button>
-                            <button class="px-5 py-2.5 rounded-full text-sm font-medium bg-white dark:bg-dark-card border border-neutral-light dark:border-gray-700 hover:bg-primary-brown/10 transition">Completed</button>
-                            <button class="px-5 py-2.5 rounded-full text-sm font-medium bg-white dark:bg-dark-card border border-neutral-light dark:border-gray-700 hover:bg-primary-brown/10 transition">Cancelled</button>
+                        <div class="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
+                            <button class="px-3 sm:px-5 py-1.5 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold bg-primary-brown text-white shadow-md">All</button>
+                            <button class="px-3 sm:px-5 py-1.5 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium bg-white dark:bg-dark-card border border-neutral-light dark:border-gray-700 hover:bg-primary-brown/10 transition">Confirmed</button>
+                            <button class="px-3 sm:px-5 py-1.5 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium bg-white dark:bg-dark-card border border-neutral-light dark:border-gray-700 hover:bg-primary-brown/10 transition">Pending</button>
+                            <button class="px-3 sm:px-5 py-1.5 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium bg-white dark:bg-dark-card border border-neutral-light dark:border-gray-700 hover:bg-primary-brown/10 transition">Completed</button>
+                            <button class="px-3 sm:px-5 py-1.5 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium bg-white dark:bg-dark-card border border-neutral-light dark:border-gray-700 hover:bg-primary-brown/10 transition">Cancelled</button>
                         </div>
                         
-                        <!-- Bookings Table -->
-                        <div class="overflow-x-auto">
-                            <table class="w-full">
-                                <thead class="table-header">
-                                    <tr>
-                                        <th class="text-left p-3">Booking ID</th>
-                                        <th class="text-left p-3">Customer</th>
-                                        <th class="text-left p-3">Tour</th>
-                                        <th class="text-left p-3">Date</th>
-                                        <th class="text-left p-3">Amount</th>
-                                        <th class="text-left p-3">Status</th>
-                                        <th class="text-left p-3">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="table-row">
-                                        <td class="p-3 font-mono">#GW-2468</td>
-                                        <td class="p-3">John Doe</td>
-                                        <td class="p-3">Alpine Summits</td>
-                                        <td class="p-3">Feb 5, 2026</td>
-                                        <td class="p-3 font-semibold">$299</td>
-                                        <td class="p-3"><span class="status-badge status-active">Confirmed</span></td>
-                                        <td class="p-3">
-                                            <button class="text-primary-brown hover:underline text-sm">View</button>
-                                            <button class="text-primary-brown hover:underline text-sm ml-2">Edit</button>
-                                        </td>
-                                    </tr>
-                                    <tr class="table-row">
-                                        <td class="p-3 font-mono">#GW-3157</td>
-                                        <td class="p-3">Sarah Johnson</td>
-                                        <td class="p-3">Ancient Rome</td>
-                                        <td class="p-3">Mar 12, 2026</td>
-                                        <td class="p-3 font-semibold">$89</td>
-                                        <td class="p-3"><span class="status-badge status-active">Confirmed</span></td>
-                                        <td class="p-3">
-                                            <button class="text-primary-brown hover:underline text-sm">View</button>
-                                            <button class="text-primary-brown hover:underline text-sm ml-2">Edit</button>
-                                        </td>
-                                    </tr>
-                                    <tr class="table-row">
-                                        <td class="p-3 font-mono">#GW-4289</td>
-                                        <td class="p-3">Michael Chen</td>
-                                        <td class="p-3">Rainforest Trek</td>
-                                        <td class="p-3">Apr 20, 2026</td>
-                                        <td class="p-3 font-semibold">$189</td>
-                                        <td class="p-3"><span class="status-badge status-pending">Pending</span></td>
-                                        <td class="p-3">
-                                            <button class="text-primary-brown hover:underline text-sm">Approve</button>
-                                            <button class="text-red-500 hover:underline text-sm ml-2">Cancel</button>
-                                        </td>
-                                    </tr>
-                                    <tr class="table-row">
-                                        <td class="p-3 font-mono">#GW-5632</td>
-                                        <td class="p-3">Emma Watson</td>
-                                        <td class="p-3">Paris Food Tour</td>
-                                        <td class="p-3">May 3, 2026</td>
-                                        <td class="p-3 font-semibold">$95</td>
-                                        <td class="p-3"><span class="status-badge status-completed">Completed</span></td>
-                                        <td class="p-3">
-                                            <button class="text-primary-brown hover:underline text-sm">View</button>
-                                            <button class="text-primary-brown hover:underline text-sm ml-2">Receipt</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <!-- Bookings Table - NO SCROLL, FULL LAYOUT -->
+                        <div class="overflow-x-auto -mx-4 sm:mx-0">
+                            <div class="inline-block min-w-full align-middle">
+                                <div class="border border-neutral-light/20 dark:border-gray-700 rounded-lg">
+                                    <table class="min-w-full divide-y divide-neutral-light/30 dark:divide-gray-700">
+                                        <thead class="table-header">
+                                            <tr>
+                                                <th class="text-left p-2 sm:p-3 text-xs sm:text-sm">Booking ID</th>
+                                                <th class="text-left p-2 sm:p-3 text-xs sm:text-sm">Customer</th>
+                                                <th class="text-left p-2 sm:p-3 text-xs sm:text-sm hidden sm:table-cell">Tour</th>
+                                                <th class="text-left p-2 sm:p-3 text-xs sm:text-sm hidden md:table-cell">Date</th>
+                                                <th class="text-left p-2 sm:p-3 text-xs sm:text-sm">Amount</th>
+                                                <th class="text-left p-2 sm:p-3 text-xs sm:text-sm">Status</th>
+                                                <th class="text-left p-2 sm:p-3 text-xs sm:text-sm">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="table-row">
+                                                <td class="p-2 sm:p-3 font-mono text-xs sm:text-sm">#GW-2468</td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm">John Doe</td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm hidden sm:table-cell">Alpine Summits</td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm hidden md:table-cell">Feb 5, 2026</td>
+                                                <td class="p-2 sm:p-3 font-semibold text-xs sm:text-sm">$299</td>
+                                                <td class="p-2 sm:p-3"><span class="status-badge status-active text-xs px-2 py-1">Confirmed</span></td>
+                                                <td class="p-2 sm:p-3">
+                                                    <button class="text-primary-brown hover:underline text-xs">View</button>
+                                                </td>
+                                            </tr>
+                                            <tr class="table-row">
+                                                <td class="p-2 sm:p-3 font-mono text-xs sm:text-sm">#GW-3157</td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm">Sarah Johnson</td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm hidden sm:table-cell">Ancient Rome</td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm hidden md:table-cell">Mar 12, 2026</td>
+                                                <td class="p-2 sm:p-3 font-semibold text-xs sm:text-sm">$89</td>
+                                                <td class="p-2 sm:p-3"><span class="status-badge status-active text-xs px-2 py-1">Confirmed</span></td>
+                                                <td class="p-2 sm:p-3">
+                                                    <button class="text-primary-brown hover:underline text-xs">View</button>
+                                                </td>
+                                            </tr>
+                                            <tr class="table-row">
+                                                <td class="p-2 sm:p-3 font-mono text-xs sm:text-sm">#GW-4289</td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm">Michael Chen</td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm hidden sm:table-cell">Rainforest Trek</td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm hidden md:table-cell">Apr 20, 2026</td>
+                                                <td class="p-2 sm:p-3 font-semibold text-xs sm:text-sm">$189</td>
+                                                <td class="p-2 sm:p-3"><span class="status-badge status-pending text-xs px-2 py-1">Pending</span></td>
+                                                <td class="p-2 sm:p-3">
+                                                    <button class="text-primary-brown hover:underline text-xs">Approve</button>
+                                                </td>
+                                            </tr>
+                                            <tr class="table-row">
+                                                <td class="p-2 sm:p-3 font-mono text-xs sm:text-sm">#GW-5632</td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm">Emma Watson</td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm hidden sm:table-cell">Paris Food Tour</td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm hidden md:table-cell">May 3, 2026</td>
+                                                <td class="p-2 sm:p-3 font-semibold text-xs sm:text-sm">$95</td>
+                                                <td class="p-2 sm:p-3"><span class="status-badge status-completed text-xs px-2 py-1">Completed</span></td>
+                                                <td class="p-2 sm:p-3">
+                                                    <button class="text-primary-brown hover:underline text-xs">View</button>
+                                                </td>
+                                            </tr>
+                                            <tr class="table-row">
+                                                <td class="p-2 sm:p-3 font-mono text-xs sm:text-sm">#GW-5891</td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm">David Kim</td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm hidden sm:table-cell">Tokyo Food Tour</td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm hidden md:table-cell">Jun 15, 2026</td>
+                                                <td class="p-2 sm:p-3 font-semibold text-xs sm:text-sm">$120</td>
+                                                <td class="p-2 sm:p-3"><span class="status-badge status-pending text-xs px-2 py-1">Pending</span></td>
+                                                <td class="p-2 sm:p-3">
+                                                    <button class="text-primary-brown hover:underline text-xs">View</button>
+                                                </td>
+                                            </tr>
+                                            <tr class="table-row">
+                                                <td class="p-2 sm:p-3 font-mono text-xs sm:text-sm">#GW-6123</td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm">Lisa Chen</td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm hidden sm:table-cell">Bali Yoga Retreat</td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm hidden md:table-cell">Jul 8, 2026</td>
+                                                <td class="p-2 sm:p-3 font-semibold text-xs sm:text-sm">$259</td>
+                                                <td class="p-2 sm:p-3"><span class="status-badge status-active text-xs px-2 py-1">Confirmed</span></td>
+                                                <td class="p-2 sm:p-3">
+                                                    <button class="text-primary-brown hover:underline text-xs">View</button>
+                                                </td>
+                                            </tr>
+                                            <tr class="table-row">
+                                                <td class="p-2 sm:p-3 font-mono text-xs sm:text-sm">#GW-6457</td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm">Robert Brown</td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm hidden sm:table-cell">Patagonia Trek</td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm hidden md:table-cell">Aug 20, 2026</td>
+                                                <td class="p-2 sm:p-3 font-semibold text-xs sm:text-sm">$449</td>
+                                                <td class="p-2 sm:p-3"><span class="status-badge status-active text-xs px-2 py-1">Confirmed</span></td>
+                                                <td class="p-2 sm:p-3">
+                                                    <button class="text-primary-brown hover:underline text-xs">View</button>
+                                                </td>
+                                            </tr>
+                                            <tr class="table-row">
+                                                <td class="p-2 sm:p-3 font-mono text-xs sm:text-sm">#GW-6789</td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm">Maria Garcia</td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm hidden sm:table-cell">Barcelona Art Tour</td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm hidden md:table-cell">Sep 5, 2026</td>
+                                                <td class="p-2 sm:p-3 font-semibold text-xs sm:text-sm">$79</td>
+                                                <td class="p-2 sm:p-3"><span class="status-badge status-pending text-xs px-2 py-1">Pending</span></td>
+                                                <td class="p-2 sm:p-3">
+                                                    <button class="text-primary-brown hover:underline text-xs">View</button>
+                                                </td>
+                                            </tr>
+                                            <tr class="table-row">
+                                                <td class="p-2 sm:p-3 font-mono text-xs sm:text-sm">#GW-7012</td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm">James Wilson</td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm hidden sm:table-cell">Iceland Aurora</td>
+                                                <td class="p-2 sm:p-3 text-xs sm:text-sm hidden md:table-cell">Oct 12, 2026</td>
+                                                <td class="p-2 sm:p-3 font-semibold text-xs sm:text-sm">$329</td>
+                                                <td class="p-2 sm:p-3"><span class="status-badge status-completed text-xs px-2 py-1">Completed</span></td>
+                                                <td class="p-2 sm:p-3">
+                                                    <button class="text-primary-brown hover:underline text-xs">View</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- ===== 5. MESSAGES / NOTIFICATIONS SECTION ===== -->
                 <div id="messages-section" class="dashboard-section hidden">
-                    <div class="dashboard-card">
-                        <h2 class="text-xl sm:text-2xl font-display font-bold mb-5 dark:text-white flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 w-full">
-    <div class="flex items-center gap-2" style="font-family: 'Poppins', sans-serif;">
-    <i class="fas fa-envelope text-primary-brown text-xl sm:text-2xl"></i>
-    <span class="font-medium">Messages & Notifications</span>
-</div>
-    <div class="flex items-center justify-between sm:justify-start w-full sm:w-auto">
-        <span class="text-xs text-neutral-dark/50 dark:text-gray-400 sm:hidden">Unread:</span>
-        <span class="bg-primary-brown text-white text-xs px-3 py-1.5 rounded-full font-bold ml-auto sm:ml-0">5 unread</span>
-    </div>
-</h2>
+                    <div class="dashboard-card p-4 sm:p-6 lg:p-8">
+                        <h2 class="text-lg sm:text-xl md:text-2xl font-display font-bold mb-4 sm:mb-5 dark:text-white flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 w-full">
+                            <div class="flex items-center gap-2" style="font-family: 'Poppins', sans-serif;">
+                                <i class="fas fa-envelope text-primary-brown text-lg sm:text-xl md:text-2xl"></i>
+                                <span class="font-medium text-base sm:text-lg md:text-xl">Messages & Notifications</span>
+                            </div>
+                            <div class="flex items-center justify-between sm:justify-start w-full sm:w-auto">
+                                <span class="text-xs text-neutral-dark/50 dark:text-gray-400 sm:hidden">Unread:</span>
+                                <span class="bg-primary-brown text-white text-xs px-2 sm:px-3 py-1 sm:py-1.5 rounded-full font-bold ml-auto sm:ml-3">5 unread</span>
+                            </div>
+                        </h2>
                         
-                        <div class="grid md:grid-cols-3 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
                             <!-- Messages List -->
-                            <div class="md:col-span-2 space-y-4">
-                                <div class="message-item unread p-4 bg-neutral-light/30 dark:bg-gray-800/30 rounded-xl">
-                                    <div class="flex items-start gap-3">
-                                        <img src="assets/per.jpg" class="w-12 h-12 rounded-full">
-                                        <div class="flex-1">
-                                            <div class="flex justify-between">
-                                                <h4 class="font-bold dark:text-white">Sophia Muller</h4>
-                                                <span class="text-xs text-neutral-dark/50">2 hours ago</span>
+                            <div class="md:col-span-2 space-y-3 sm:space-y-4">
+                                <div class="message-item unread p-3 sm:p-4 bg-neutral-light/30 dark:bg-gray-800/30 rounded-xl">
+                                    <div class="flex items-start gap-2 sm:gap-3">
+                                        <img src="assets/per.jpg" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full">
+                                        <div class="flex-1 min-w-0">
+                                            <div class="flex justify-between items-center">
+                                                <h4 class="font-bold dark:text-white text-sm sm:text-base truncate">Sophia Muller</h4>
+                                                <span class="text-xs text-neutral-dark/50 ml-1">2h</span>
                                             </div>
-                                            <p class="text-sm text-neutral-dark/70">Guide Application</p>
-                                            <p class="text-sm mt-1">I would like to apply as a hiking guide in Switzerland...</p>
+                                            <p class="text-xs text-neutral-dark/70 truncate">Guide Application</p>
+                                            <p class="text-xs mt-1 line-clamp-2 sm:line-clamp-1">I would like to apply as a hiking guide in Switzerland...</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="message-item unread p-4 bg-neutral-light/30 dark:bg-gray-800/30 rounded-xl">
-                                    <div class="flex items-start gap-3">
-                                        <img src="/assets/test1.jpg" class="w-12 h-12 rounded-full">
-                                        <div class="flex-1">
-                                            <div class="flex justify-between">
-                                                <h4 class="font-bold dark:text-white">Marco Rossi</h4>
-                                                <span class="text-xs text-neutral-dark/50">Yesterday</span>
+                                <div class="message-item unread p-3 sm:p-4 bg-neutral-light/30 dark:bg-gray-800/30 rounded-xl">
+                                    <div class="flex items-start gap-2 sm:gap-3">
+                                        <img src="/assets/test1.jpg" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full">
+                                        <div class="flex-1 min-w-0">
+                                            <div class="flex justify-between items-center">
+                                                <h4 class="font-bold dark:text-white text-sm sm:text-base truncate">Marco Rossi</h4>
+                                                <span class="text-xs text-neutral-dark/50 ml-1">1d</span>
                                             </div>
-                                            <p class="text-sm text-neutral-dark/70">Booking Question</p>
-                                            <p class="text-sm mt-1">Can I reschedule my Rome tour to next week?</p>
+                                            <p class="text-xs text-neutral-dark/70 truncate">Booking Question</p>
+                                            <p class="text-xs mt-1 line-clamp-2 sm:line-clamp-1">Can I reschedule my Rome tour to next week?</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="message-item p-4 bg-neutral-light/30 dark:bg-gray-800/30 rounded-xl">
-                                    <div class="flex items-start gap-3">
-                                        <img src="assets/trust1.jpg" class="w-12 h-12 rounded-full">
-                                        <div class="flex-1">
-                                            <div class="flex justify-between">
-                                                <h4 class="font-bold dark:text-white">Support System</h4>
-                                                <span class="text-xs text-neutral-dark/50">3 days ago</span>
+                                <div class="message-item p-3 sm:p-4 bg-neutral-light/30 dark:bg-gray-800/30 rounded-xl">
+                                    <div class="flex items-start gap-2 sm:gap-3">
+                                        <img src="assets/trust1.jpg" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full">
+                                        <div class="flex-1 min-w-0">
+                                            <div class="flex justify-between items-center">
+                                                <h4 class="font-bold dark:text-white text-sm sm:text-base truncate">Support System</h4>
+                                                <span class="text-xs text-neutral-dark/50 ml-1">3d</span>
                                             </div>
-                                            <p class="text-sm text-neutral-dark/70">New ticket #2847</p>
-                                            <p class="text-sm mt-1">Payment issue reported by user...</p>
+                                            <p class="text-xs text-neutral-dark/70 truncate">New ticket #2847</p>
+                                            <p class="text-xs mt-1 line-clamp-2 sm:line-clamp-1">Payment issue reported by user...</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             
                             <!-- Quick Actions -->
-                            <div class="space-y-4">
-                                <div class="bg-neutral-light/30 dark:bg-gray-800/30 p-6 rounded-2xl">
-                                    <h3 class="font-bold text-lg mb-4 dark:text-white">Quick Actions</h3>
-                                    <div class="space-y-3">
-                                        <button class="w-full py-3 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold hover:bg-primary-brown hover:text-white transition">
-                                            <i class="fas fa-envelope mr-2"></i> New Message
+                            <div class="space-y-3 sm:space-y-4">
+                                <div class="bg-neutral-light/30 dark:bg-gray-800/30 p-4 sm:p-6 rounded-2xl">
+                                    <h3 class="font-bold text-sm sm:text-lg mb-3 sm:mb-4 dark:text-white">Quick Actions</h3>
+                                    <div class="space-y-2 sm:space-y-3">
+                                        <button class="w-full py-2 sm:py-3 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold text-xs sm:text-sm hover:bg-primary-brown hover:text-white transition">
+                                            <i class="fas fa-envelope mr-1 sm:mr-2"></i> New Message
                                         </button>
-                                        <button class="w-full py-3 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold hover:bg-primary-brown hover:text-white transition">
-                                            <i class="fas fa-bell mr-2"></i> Send Notification
+                                        <button class="w-full py-2 sm:py-3 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold text-xs sm:text-sm hover:bg-primary-brown hover:text-white transition">
+                                            <i class="fas fa-bell mr-1 sm:mr-2"></i> Send Notification
                                         </button>
-                                        <button class="w-full py-3 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold hover:bg-primary-brown hover:text-white transition">
-                                            <i class="fas fa-cog mr-2"></i> Notification Settings
+                                        <button class="w-full py-2 sm:py-3 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold text-xs sm:text-sm hover:bg-primary-brown hover:text-white transition">
+                                            <i class="fas fa-cog mr-1 sm:mr-2"></i> Settings
                                         </button>
                                     </div>
                                 </div>
                                 
-                                <div class="bg-neutral-light/30 dark:bg-gray-800/30 p-6 rounded-2xl">
-                                    <h3 class="font-bold text-lg mb-4 dark:text-white">Stats</h3>
-                                    <div class="space-y-2">
-                                        <div class="flex justify-between">
+                                <div class="bg-neutral-light/30 dark:bg-gray-800/30 p-4 sm:p-6 rounded-2xl">
+                                    <h3 class="font-bold text-sm sm:text-lg mb-3 sm:mb-4 dark:text-white">Stats</h3>
+                                    <div class="space-y-1 sm:space-y-2">
+                                        <div class="flex justify-between text-xs sm:text-sm">
                                             <span>Unread</span>
                                             <span class="font-bold text-primary-brown">5</span>
                                         </div>
-                                        <div class="flex justify-between">
+                                        <div class="flex justify-between text-xs sm:text-sm">
                                             <span>Total</span>
                                             <span class="font-bold">28</span>
                                         </div>
-                                        <div class="flex justify-between">
+                                        <div class="flex justify-between text-xs sm:text-sm">
                                             <span>Response Rate</span>
                                             <span class="font-bold text-secondary-green">98%</span>
                                         </div>
@@ -974,44 +1066,44 @@
 
                 <!-- ===== 6. SETTINGS / CONFIGURATION SECTION ===== -->
                 <div id="settings-section" class="dashboard-section hidden">
-                    <div class="dashboard-card">
-                        <h2 class="text-2xl font-display font-bold mb-7 dark:text-white flex items-center">
-                            <i class="fas fa-cog text-primary-brown mr-3 text-2xl"></i>
+                    <div class="dashboard-card p-4 sm:p-6 lg:p-8">
+                        <h2 class="text-xl sm:text-2xl font-display font-bold mb-5 sm:mb-7 dark:text-white flex items-center">
+                            <i class="fas fa-cog text-primary-brown mr-2 sm:mr-3 text-xl sm:text-2xl"></i>
                             Settings & Configuration
                         </h2>
                         
-                        <div class="space-y-8">
+                        <div class="space-y-6 sm:space-y-8">
                             <!-- General Settings -->
                             <div>
-                                <h3 class="text-xl font-bold mb-5 dark:text-white">General Settings</h3>
-                                <div class="grid md:grid-cols-2 gap-5">
+                                <h3 class="text-lg sm:text-xl font-bold mb-4 sm:mb-5 dark:text-white">General Settings</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-5">
                                     <div>
-                                        <label class="block text-sm font-medium mb-2">Site Name</label>
-                                        <input type="text" class="admin-input" value="Groww Tour">
+                                        <label class="block text-xs sm:text-sm font-medium mb-1 sm:mb-2">Site Name</label>
+                                        <input type="text" class="admin-input py-2 sm:py-3 text-sm" value="Groww Tour">
                                     </div>
                                     <div>
-                                        <label class="block text-sm font-medium mb-2">Site URL</label>
-                                        <input type="text" class="admin-input" value="https://growwtour.com">
+                                        <label class="block text-xs sm:text-sm font-medium mb-1 sm:mb-2">Site URL</label>
+                                        <input type="text" class="admin-input py-2 sm:py-3 text-sm" value="https://growwtour.com">
                                     </div>
                                     <div>
-                                        <label class="block text-sm font-medium mb-2">Admin Email</label>
-                                        <input type="email" class="admin-input" value="admin@growwtour.com">
+                                        <label class="block text-xs sm:text-sm font-medium mb-1 sm:mb-2">Admin Email</label>
+                                        <input type="email" class="admin-input py-2 sm:py-3 text-sm" value="admin@growwtour.com">
                                     </div>
                                     <div>
-                                        <label class="block text-sm font-medium mb-2">Support Email</label>
-                                        <input type="email" class="admin-input" value="support@growwtour.com">
+                                        <label class="block text-xs sm:text-sm font-medium mb-1 sm:mb-2">Support Email</label>
+                                        <input type="email" class="admin-input py-2 sm:py-3 text-sm" value="support@growwtour.com">
                                     </div>
                                 </div>
                             </div>
                             
                             <!-- Payment Settings -->
                             <div>
-                                <h3 class="text-xl font-bold mb-5 dark:text-white">Payment Configuration</h3>
-                                <div class="space-y-4 bg-neutral-light/30 dark:bg-gray-800/30 p-5 rounded-2xl">
+                                <h3 class="text-lg sm:text-xl font-bold mb-4 sm:mb-5 dark:text-white">Payment Configuration</h3>
+                                <div class="space-y-3 sm:space-y-4 bg-neutral-light/30 dark:bg-gray-800/30 p-3 sm:p-5 rounded-2xl">
                                     <div class="flex items-center justify-between">
                                         <div>
-                                            <p class="font-bold dark:text-white">Stripe</p>
-                                            <p class="text-sm text-neutral-dark/60">Accept credit card payments</p>
+                                            <p class="font-bold dark:text-white text-sm sm:text-base">Stripe</p>
+                                            <p class="text-xs text-neutral-dark/60">Accept credit card payments</p>
                                         </div>
                                         <label class="toggle-switch">
                                             <input type="checkbox" checked>
@@ -1020,8 +1112,8 @@
                                     </div>
                                     <div class="flex items-center justify-between">
                                         <div>
-                                            <p class="font-bold dark:text-white">PayPal</p>
-                                            <p class="text-sm text-neutral-dark/60">Accept PayPal payments</p>
+                                            <p class="font-bold dark:text-white text-sm sm:text-base">PayPal</p>
+                                            <p class="text-xs text-neutral-dark/60">Accept PayPal payments</p>
                                         </div>
                                         <label class="toggle-switch">
                                             <input type="checkbox" checked>
@@ -1030,10 +1122,10 @@
                                     </div>
                                     <div class="flex items-center justify-between">
                                         <div>
-                                            <p class="font-bold dark:text-white">Currency</p>
-                                            <p class="text-sm text-neutral-dark/60">Default: USD</p>
+                                            <p class="font-bold dark:text-white text-sm sm:text-base">Currency</p>
+                                            <p class="text-xs text-neutral-dark/60">Default: USD</p>
                                         </div>
-                                        <select class="bg-transparent border border-primary-brown/30 rounded-lg p-2">
+                                        <select class="bg-transparent border border-primary-brown/30 rounded-lg p-1 sm:p-2 text-sm">
                                             <option>USD</option>
                                             <option>EUR</option>
                                             <option>GBP</option>
@@ -1044,30 +1136,30 @@
                             
                             <!-- Email Settings -->
                             <div>
-                                <h3 class="text-xl font-bold mb-5 dark:text-white">Email Configuration</h3>
-                                <div class="grid md:grid-cols-2 gap-5">
+                                <h3 class="text-lg sm:text-xl font-bold mb-4 sm:mb-5 dark:text-white">Email Configuration</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-5">
                                     <div>
-                                        <label class="block text-sm font-medium mb-2">SMTP Host</label>
-                                        <input type="text" class="admin-input" value="smtp.gmail.com">
+                                        <label class="block text-xs sm:text-sm font-medium mb-1 sm:mb-2">SMTP Host</label>
+                                        <input type="text" class="admin-input py-2 sm:py-3 text-sm" value="smtp.gmail.com">
                                     </div>
                                     <div>
-                                        <label class="block text-sm font-medium mb-2">SMTP Port</label>
-                                        <input type="text" class="admin-input" value="587">
+                                        <label class="block text-xs sm:text-sm font-medium mb-1 sm:mb-2">SMTP Port</label>
+                                        <input type="text" class="admin-input py-2 sm:py-3 text-sm" value="587">
                                     </div>
                                     <div>
-                                        <label class="block text-sm font-medium mb-2">Username</label>
-                                        <input type="text" class="admin-input" value="noreply@growwtour.com">
+                                        <label class="block text-xs sm:text-sm font-medium mb-1 sm:mb-2">Username</label>
+                                        <input type="text" class="admin-input py-2 sm:py-3 text-sm" value="noreply@growwtour.com">
                                     </div>
                                     <div>
-                                        <label class="block text-sm font-medium mb-2">Password</label>
-                                        <input type="password" class="admin-input" value="********">
+                                        <label class="block text-xs sm:text-sm font-medium mb-1 sm:mb-2">Password</label>
+                                        <input type="password" class="admin-input py-2 sm:py-3 text-sm" value="********">
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="flex justify-end">
-                                <button class="admin-btn px-12 py-3">
-                                    <i class="fas fa-save mr-2"></i> Save Settings
+                                <button class="admin-btn px-6 sm:px-8 lg:px-10 py-2 sm:py-3 text-sm sm:text-base">
+                                    <i class="fas fa-save mr-1 sm:mr-2"></i> Save Settings
                                 </button>
                             </div>
                         </div>
@@ -1076,87 +1168,88 @@
 
                 <!-- ===== 7. REPORTS / ANALYTICS SECTION ===== -->
                 <div id="reports-section" class="dashboard-section hidden">
-                    <div class="dashboard-card">
-                        <h2 class="text-2xl font-display font-bold mb-7 dark:text-white flex items-center">
-                            <i class="fas fa-chart-line text-primary-brown mr-3 text-2xl"></i>
+                    <div class="dashboard-card p-4 sm:p-6 lg:p-8">
+                        <h2 class="text-xl sm:text-2xl font-display font-bold mb-5 sm:mb-7 dark:text-white flex items-center">
+                            <i class="fas fa-chart-line text-primary-brown mr-2 sm:mr-3 text-xl sm:text-2xl"></i>
                             Reports & Analytics
                         </h2>
                         
-                       <!-- Date Range - 2x2 on mobile, flex row on desktop -->
-                    <div class="grid grid-cols-2 sm:flex sm:flex-row gap-2 sm:gap-3 mb-6">
-                        <button class="w-full sm:w-auto px-5 py-2.5 rounded-full text-sm font-bold bg-primary-brown text-white">Last 7 Days</button>
-                        <button class="w-full sm:w-auto px-5 py-2.5 rounded-full text-sm font-medium bg-white dark:bg-dark-card border hover:bg-primary-brown/10">Last 30 Days</button>
-                        <button class="w-full sm:w-auto px-5 py-2.5 rounded-full text-sm font-medium bg-white dark:bg-dark-card border hover:bg-primary-brown/10">This Month</button>
-                        <button class="w-full sm:w-auto px-5 py-2.5 rounded-full text-sm font-medium bg-white dark:bg-dark-card border hover:bg-primary-brown/10">Custom</button>
-                    </div>
+                        <!-- Date Range -->
+                        <div class="grid grid-cols-2 sm:flex sm:flex-row gap-1 sm:gap-3 mb-4 sm:mb-6">
+                            <button class="w-full sm:w-auto px-2 sm:px-5 py-1.5 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold bg-primary-brown text-white">7 Days</button>
+                            <button class="w-full sm:w-auto px-2 sm:px-5 py-1.5 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium bg-white dark:bg-dark-card border hover:bg-primary-brown/10">30 Days</button>
+                            <button class="w-full sm:w-auto px-2 sm:px-5 py-1.5 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium bg-white dark:bg-dark-card border hover:bg-primary-brown/10">Month</button>
+                            <button class="w-full sm:w-auto px-2 sm:px-5 py-1.5 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium bg-white dark:bg-dark-card border hover:bg-primary-brown/10">Custom</button>
+                        </div>
+                        
                         <!-- Summary Cards -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                            <div class="stat-card p-4">
-                                <p class="text-sm text-neutral-dark/60">Revenue</p>
-                                <p class="text-2xl font-bold dark:text-white">$24.5K</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
+                            <div class="stat-card p-3 sm:p-4">
+                                <p class="text-xs sm:text-sm text-neutral-dark/60">Revenue</p>
+                                <p class="text-lg sm:text-xl lg:text-2xl font-bold dark:text-white">$24.5K</p>
                                 <p class="text-xs text-secondary-green">+15.3%</p>
                             </div>
-                            <div class="stat-card p-4">
-                                <p class="text-sm text-neutral-dark/60">Bookings</p>
-                                <p class="text-2xl font-bold dark:text-white">342</p>
+                            <div class="stat-card p-3 sm:p-4">
+                                <p class="text-xs sm:text-sm text-neutral-dark/60">Bookings</p>
+                                <p class="text-lg sm:text-xl lg:text-2xl font-bold dark:text-white">342</p>
                                 <p class="text-xs text-secondary-green">+8.2%</p>
                             </div>
-                            <div class="stat-card p-4">
-                                <p class="text-sm text-neutral-dark/60">New Users</p>
-                                <p class="text-2xl font-bold dark:text-white">89</p>
+                            <div class="stat-card p-3 sm:p-4">
+                                <p class="text-xs sm:text-sm text-neutral-dark/60">New Users</p>
+                                <p class="text-lg sm:text-xl lg:text-2xl font-bold dark:text-white">89</p>
                                 <p class="text-xs text-secondary-green">+12.5%</p>
                             </div>
-                            <div class="stat-card p-4">
-                                <p class="text-sm text-neutral-dark/60">Conversion</p>
-                                <p class="text-2xl font-bold dark:text-white">4.8%</p>
+                            <div class="stat-card p-3 sm:p-4">
+                                <p class="text-xs sm:text-sm text-neutral-dark/60">Conversion</p>
+                                <p class="text-lg sm:text-xl lg:text-2xl font-bold dark:text-white">4.8%</p>
                                 <p class="text-xs text-secondary-green">+0.6%</p>
                             </div>
                         </div>
                         
                         <!-- Export Buttons -->
-                        <div class="flex gap-3 mb-6">
-                            <button class="px-5 py-2.5 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold hover:bg-primary-brown hover:text-white transition">
-                                <i class="fas fa-file-pdf mr-2"></i> Export PDF
+                        <div class="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
+                            <button class="px-3 sm:px-5 py-1.5 sm:py-2.5 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold text-xs sm:text-sm hover:bg-primary-brown hover:text-white transition">
+                                <i class="fas fa-file-pdf mr-1 sm:mr-2"></i> PDF
                             </button>
-                            <button class="px-5 py-2.5 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold hover:bg-primary-brown hover:text-white transition">
-                                <i class="fas fa-file-excel mr-2"></i> Export CSV
+                            <button class="px-3 sm:px-5 py-1.5 sm:py-2.5 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold text-xs sm:text-sm hover:bg-primary-brown hover:text-white transition">
+                                <i class="fas fa-file-excel mr-1 sm:mr-2"></i> CSV
                             </button>
-                            <button class="px-5 py-2.5 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold hover:bg-primary-brown hover:text-white transition">
-                                <i class="fas fa-print mr-2"></i> Print
+                            <button class="px-3 sm:px-5 py-1.5 sm:py-2.5 bg-primary-brown/10 text-primary-brown rounded-xl font-semibold text-xs sm:text-sm hover:bg-primary-brown hover:text-white transition">
+                                <i class="fas fa-print mr-1 sm:mr-2"></i> Print
                             </button>
                         </div>
                         
                         <!-- Reports List -->
-                        <div class="space-y-3">
-                            <div class="flex items-center justify-between p-4 bg-neutral-light/30 dark:bg-gray-800/30 rounded-xl">
-                                <div class="flex items-center gap-3">
-                                    <i class="fas fa-chart-bar text-primary-brown text-xl"></i>
+                        <div class="space-y-2 sm:space-y-3">
+                            <div class="flex items-center justify-between p-3 sm:p-4 bg-neutral-light/30 dark:bg-gray-800/30 rounded-xl">
+                                <div class="flex items-center gap-2 sm:gap-3">
+                                    <i class="fas fa-chart-bar text-primary-brown text-base sm:text-xl"></i>
                                     <div>
-                                        <p class="font-semibold dark:text-white">Monthly Revenue Report</p>
+                                        <p class="font-semibold dark:text-white text-sm sm:text-base">Monthly Revenue Report</p>
                                         <p class="text-xs text-neutral-dark/60">January 2026</p>
                                     </div>
                                 </div>
-                                <button class="text-primary-brown hover:underline">Download</button>
+                                <button class="text-primary-brown hover:underline text-xs sm:text-sm">Download</button>
                             </div>
-                            <div class="flex items-center justify-between p-4 bg-neutral-light/30 dark:bg-gray-800/30 rounded-xl">
-                                <div class="flex items-center gap-3">
-                                    <i class="fas fa-users text-primary-brown text-xl"></i>
+                            <div class="flex items-center justify-between p-3 sm:p-4 bg-neutral-light/30 dark:bg-gray-800/30 rounded-xl">
+                                <div class="flex items-center gap-2 sm:gap-3">
+                                    <i class="fas fa-users text-primary-brown text-base sm:text-xl"></i>
                                     <div>
-                                        <p class="font-semibold dark:text-white">User Growth Analysis</p>
+                                        <p class="font-semibold dark:text-white text-sm sm:text-base">User Growth Analysis</p>
                                         <p class="text-xs text-neutral-dark/60">Q1 2026</p>
                                     </div>
                                 </div>
-                                <button class="text-primary-brown hover:underline">Download</button>
+                                <button class="text-primary-brown hover:underline text-xs sm:text-sm">Download</button>
                             </div>
-                            <div class="flex items-center justify-between p-4 bg-neutral-light/30 dark:bg-gray-800/30 rounded-xl">
-                                <div class="flex items-center gap-3">
-                                    <i class="fas fa-map-marked-alt text-primary-brown text-xl"></i>
+                            <div class="flex items-center justify-between p-3 sm:p-4 bg-neutral-light/30 dark:bg-gray-800/30 rounded-xl">
+                                <div class="flex items-center gap-2 sm:gap-3">
+                                    <i class="fas fa-map-marked-alt text-primary-brown text-base sm:text-xl"></i>
                                     <div>
-                                        <p class="font-semibold dark:text-white">Popular Tours Report</p>
+                                        <p class="font-semibold dark:text-white text-sm sm:text-base">Popular Tours Report</p>
                                         <p class="text-xs text-neutral-dark/60">February 2026</p>
                                     </div>
                                 </div>
-                                <button class="text-primary-brown hover:underline">Download</button>
+                                <button class="text-primary-brown hover:underline text-xs sm:text-sm">Download</button>
                             </div>
                         </div>
                     </div>
