@@ -58,13 +58,23 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            position: relative;
         }
         .dark body {
             background-color: #1a1a1a;
             color: #e5e5e5;
         }
         
-        /* toggle buttons — now placed at bottom of card */
+        /* toggle buttons — original style preserved, now positioned top-right */
+        .theme-toggle-wrapper {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 8px;
+        }
+        
         .toggle-btn {
             width: 42px; 
             height: 42px; 
@@ -89,14 +99,14 @@
         }
         .dark .toggle-btn:hover { 
             background: #4B5563; 
-            color: #E5E7EB; 
+            color: #E5E5E5; 
         }
         .toggle-btn.active { 
             background: #8D6E63; 
             color: white; 
         }
 
-        /* LOGIN CARD — centered logo, toggles at bottom */
+        /* LOGIN CARD — centered logo, toggles removed from bottom */
         .login-card {
             background: white;
             border-radius: 36px;
@@ -214,6 +224,10 @@
         [dir="rtl"] .login-input { padding: 0.85rem 3rem 0.85rem 1.2rem; }
         [dir="rtl"] .input-icon { left: auto; right: 1.1rem; }
         [dir="rtl"] .fa-arrow-right { transform: scaleX(-1); }
+        [dir="rtl"] .theme-toggle-wrapper {
+            right: auto;
+            left: 20px;
+        }
         
         /* hidden utility */
         .hidden { display: none; }
@@ -244,14 +258,36 @@
                 padding: 1.8rem 1.5rem;
             }
         }
+
+        /* for very small screens, adjust toggle position */
+        @media (max-width: 480px) {
+            .theme-toggle-wrapper {
+                top: 12px;
+                right: 12px;
+            }
+            [dir="rtl"] .theme-toggle-wrapper {
+                left: 12px;
+            }
+        }
     </style>
 </head>
 <body class="pattern-soft">
 
+    <!-- ===== THEME TOGGLES - NOW AT TOP-RIGHT OUTSIDE CONTAINER ===== -->
+    <div class="theme-toggle-wrapper">
+        <button id="theme-toggle" class="toggle-btn" title="Dark / Light">
+            <i class="fas fa-moon"></i>
+            <i class="fas fa-sun hidden"></i>
+        </button>
+        <button id="rtl-toggle" class="toggle-btn" title="RTL / LTR">
+            ⇄
+        </button>
+    </div>
+
     <!-- ===== EVERYTHING INSIDE LOGIN CARD ===== -->
     <div class="container-tight">
         
-        <!-- LOGIN CARD — centered logo, no nav, toggles at bottom -->
+        <!-- LOGIN CARD — centered logo, no nav, toggles removed from bottom -->
         <div class="login-card animate-fade-in">
             
             <!-- ===== LOGO - CENTERED (redirects to index.html) ===== -->
@@ -312,7 +348,6 @@
                     <div class="relative flex justify-center text-xs">
                         <span class="bg-white dark:bg-dark-card px-4 py-0.5 text-neutral-dark/50 dark:text-gray-400 rounded-full">
                             New to Groww or continue with
-
                         </span>
                     </div>
                 </div>
@@ -329,16 +364,6 @@
             
             <!-- ===== CONTINUE WITH - GOOGLE & APPLE IN SAME ROW ===== -->
             <div class="mt-6 space-y-3">
-                <!-- divider “or continue with” -->
-                <div class="relative">
-                    <div class="absolute inset-0 flex items-center">
-                        <div class="w-full border-t border-neutral-light dark:border-gray-700"></div>
-                    </div>
-                    <div class="relative flex justify-center text-xs">
-                        
-                    </div>
-                </div>
-                
                 <!-- Google + Apple buttons side by side in one row -->
                 <div class="social-btn-row">
                     <!-- Google button — redirects to index.html (demo) -->
@@ -355,19 +380,7 @@
                 </div>
             </div>
             
-            <!-- ===== DARK/LIGHT & RTL TOGGLES - BOTTOM OF CARD ===== -->
-            <div class="mt-8 flex items-center justify-center gap-4 pt-2 border-t border-neutral-light/60 dark:border-gray-800/60">
-                <button id="theme-toggle" class="toggle-btn" title="Dark / Light">
-                    <i class="fas fa-moon"></i>
-                    <i class="fas fa-sun hidden"></i>
-                </button>
-                <button id="rtl-toggle" class="toggle-btn" title="RTL / LTR">
-                    ⇄
-                </button>
-            </div>
-            
-            <!-- tiny brand fingerprint -->
-           
+            <!-- toggles removed from here - now at top-right -->
         </div>
 
         <!-- subtle trust badges -->
@@ -450,9 +463,6 @@
                     });
                 }
             });
-            
-            // NO MORE SOCIAL LOGIN ALERTS — they redirect directly
-            // NO MORE SIGN IN ALERT — form submits to index.html
         })();
     </script>
 </body>
