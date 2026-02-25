@@ -248,7 +248,7 @@
         .mobile-dropdown-item {
             display: block;
             padding: 0.75rem 2.5rem;
-            font-size: 0.95rem;
+            font-size: 0.95rem; /* INCREASED */
             color: #6B7280;
             transition: all 0.2s ease;
             border-bottom: 1px solid #F9FAFB;
@@ -426,6 +426,7 @@
             cursor: pointer;
             transition: all 0.2s ease;
             border: 1px solid transparent;
+            font-size: 0.95rem; /* INCREASED */
         }
         .dark .calendar-day { background: #374151; color: #e5e5e5; }
         .calendar-day:hover { border-color: #8D6E63; background: white; }
@@ -437,11 +438,11 @@
         /* Time slot */
         .time-slot {
             display: inline-block;
-            padding: 0.5rem 1.25rem;
+            padding: 0.6rem 1.5rem; /* INCREASED padding */
             background: #F9FAFB;
             border-radius: 50px;
-            margin: 0.25rem;
-            font-size: 0.9rem;
+            margin: 0.35rem;
+            font-size: 1rem; /* INCREASED from 0.9rem */
             cursor: pointer;
             transition: all 0.2s ease;
             border: 1px solid transparent;
@@ -529,6 +530,7 @@
             padding: 1rem 2rem;
             border-radius: 50px;
             transition: all 0.3s ease;
+            font-size: 1rem; /* ADDED */
         }
         .dark .booking-btn-outline { color: #e5e5e5; border-color: #8D6E63; }
         .booking-btn-outline:hover { background: #8D6E63; color: white; }
@@ -541,12 +543,12 @@
             border-radius: 50px;
             color: #8D6E63;
             font-weight: 500;
-            font-size: 0.9rem;
+            font-size: 0.95rem; /* INCREASED */
             border: 1px solid rgba(141,110,99,0.2);
         }
         .dark .contact-badge { background: rgba(141,110,99,0.2); color: #e5e5e5; border-color: rgba(141,110,99,0.3); }
         
-        /* ============ DESTINATION CARD STYLES - FILL THE EMPTY SPACE ============ */
+        /* ============ DESTINATION CARD STYLES ============ */
         .destination-card {
             transition: all 0.3s ease;
             border-radius: 16px;
@@ -564,6 +566,112 @@
             display: flex;
             gap: 0.75rem;
         }
+        
+        /* ============ INCREASED TEXT SIZES ============ */
+        /* Base text size increases */
+        .text-xs {
+            font-size: 0.85rem !important; /* Increased from 0.75rem */
+        }
+        
+        .text-sm {
+            font-size: 0.95rem !important; /* Increased from 0.875rem */
+        }
+        
+        /* Calendar weekday labels */
+        .calendar-grid .text-center.text-xs {
+            font-size: 0.9rem !important;
+        }
+        
+        /* Time slot text already increased above */
+        
+        /* Booking summary text */
+        .tour-summary p, .tour-summary span {
+            font-size: 1rem;
+        }
+        
+        /* Confirmation preview text */
+        #confirmation-details p {
+            font-size: 0.95rem;
+        }
+        
+        #confirmation-details span {
+            font-size: 0.95rem;
+        }
+        
+        /* Destination cards text */
+        .group .text-xs.font-medium {
+            font-size: 0.9rem !important;
+        }
+        
+        .group .text-\[10px\] {
+            font-size: 0.8rem !important;
+        }
+        
+        .group .text-xs.font-bold {
+            font-size: 0.9rem !important;
+        }
+        
+        /* Travel tip text */
+        .text-\[11px\] {
+            font-size: 0.85rem !important;
+        }
+        
+        /* Step indicator text */
+        .step-item span.text-sm {
+            font-size: 0.95rem !important;
+        }
+        
+        /* Tour card text */
+        .tour-card p.text-sm {
+            font-size: 0.95rem !important;
+        }
+        
+        .tour-card .text-xs {
+            font-size: 0.9rem !important;
+        }
+        
+        /* Form labels */
+        label.text-sm {
+            font-size: 0.95rem !important;
+        }
+        
+        /* Footer text */
+        footer p.text-sm {
+            font-size: 0.95rem !important;
+        }
+        
+        footer ul li span {
+            font-size: 0.95rem !important;
+        }
+        
+        footer .text-xs {
+            font-size: 0.9rem !important;
+        }
+        
+        /* Contact info text */
+        .contact-badge {
+            font-size: 0.95rem;
+        }
+        
+        /* Secure confirmation card text */
+        .bg-white p.text-xs {
+            font-size: 0.9rem !important;
+        }
+        
+        /* Mobile menu text */
+        .mobile-menu-item {
+            font-size: 1rem !important;
+        }
+        
+        .mobile-dropdown-item {
+            font-size: 0.95rem !important;
+        }
+        
+        /* Auth buttons */
+        .auth-btn {
+            font-size: 0.95rem !important;
+        }
+        
         @media (max-width: 640px) {
             .booking-card {
                 padding: 1.5rem;
@@ -572,12 +680,12 @@
                 gap: 0.25rem;
             }
             .step-item span {
-                font-size: 0.7rem;
+                font-size: 0.85rem; /* INCREASED from 0.7rem */
             }
             .step-circle {
                 width: 28px;
                 height: 28px;
-                font-size: 0.8rem;
+                font-size: 0.9rem; /* INCREASED from 0.8rem */
             }
             .confirmation-buttons {
                 flex-direction: column;
@@ -779,7 +887,7 @@
             <div class="max-w-4xl mx-auto text-center animate-slide-up">
                 <div class="inline-flex items-center px-5 py-3 bg-white/15 backdrop-blur-md rounded-full mb-6 border border-white/20">
                     <i class="fas fa-calendar-check mr-2 text-secondary-green"></i>
-                    <span class="font-medium">Secure your spot – real‑time availability</span>
+                    <span class="font-medium text-base md:text-lg">Secure your spot – real‑time availability</span>
                 </div>
                 
                 <h1 class="text-5xl md:text-6xl font-display font-bold mb-6">
@@ -816,7 +924,7 @@
                 <div class="step-line"></div>
                 <div class="step-item active" id="step1">
                     <div class="step-circle">1</div>
-                    <span class="text-sm font-medium dark:text-gray-300">Select Tour</span>
+                    <span class="text-sm font-medium dark:text-gray-300 ">Select Tour</span>
                 </div>
                 <div class="step-item" id="step2">
                     <div class="step-circle">2</div>
@@ -849,10 +957,10 @@
                                     <img src="/assets/Tour.jpg" alt="Historic City Tour" class="w-16 h-16 rounded-xl object-cover mr-4">
                                     <div>
                                         <h3 class="font-bold dark:text-white">Historic City Tour</h3>
-                                        <p class="text-sm text-neutral-dark/70 dark:text-gray-400">3h • max 8</p>
+                                        <p class="text-neutral-dark/70 dark:text-gray-400 text-sm">3h • max 8</p>
                                         <div class="flex items-center mt-1">
                                             <span class="text-primary-brown font-bold">$45</span>
-                                            <span class="text-xs text-neutral-dark/50 dark:text-gray-500 ml-2">/ person</span>
+                                            <span class="text-neutral-dark/50 dark:text-gray-500 text-xs ml-2">/ person</span>
                                         </div>
                                     </div>
                                 </div>
@@ -866,10 +974,10 @@
                                     <img src="/assets/Tour1.jpg" alt="Mountain Trail" class="w-16 h-16 rounded-xl object-cover mr-4">
                                     <div>
                                         <h3 class="font-bold dark:text-white">Mountain Trail</h3>
-                                        <p class="text-sm text-neutral-dark/70 dark:text-gray-400">6h • max 6</p>
+                                        <p class="text-neutral-dark/70 dark:text-gray-400 text-sm">6h • max 6</p>
                                         <div class="flex items-center mt-1">
                                             <span class="text-primary-brown font-bold">$75</span>
-                                            <span class="text-xs text-neutral-dark/50 dark:text-gray-500 ml-2">/ person</span>
+                                            <span class="text-neutral-dark/50 dark:text-gray-500 text-xs ml-2">/ person</span>
                                         </div>
                                     </div>
                                 </div>
@@ -879,10 +987,10 @@
                                     <img src="/assets/Tour2.jpg" alt="Food Tour" class="w-16 h-16 rounded-xl object-cover mr-4">
                                     <div>
                                         <h3 class="font-bold dark:text-white">Street Food Tour</h3>
-                                        <p class="text-sm text-neutral-dark/70 dark:text-gray-400">4h • max 10</p>
+                                        <p class="text-neutral-dark/70 dark:text-gray-400 text-sm">4h • max 10</p>
                                         <div class="flex items-center mt-1">
                                             <span class="text-primary-brown font-bold">$60</span>
-                                            <span class="text-xs text-neutral-dark/50 dark:text-gray-500 ml-2">/ person</span>
+                                            <span class="text-neutral-dark/50 dark:text-gray-500 text-xs ml-2">/ person</span>
                                         </div>
                                     </div>
                                 </div>
@@ -892,10 +1000,10 @@
                                     <img src="/assets/tour3.jpg" alt="Cultural Tour" class="w-16 h-16 rounded-xl object-cover mr-4">
                                     <div>
                                         <h3 class="font-bold dark:text-white">Art & Culture</h3>
-                                        <p class="text-sm text-neutral-dark/70 dark:text-gray-400">3h • max 12</p>
+                                        <p class="text-neutral-dark/70 dark:text-gray-400 text-sm">3h • max 12</p>
                                         <div class="flex items-center mt-1">
                                             <span class="text-primary-brown font-bold">$50</span>
-                                            <span class="text-xs text-neutral-dark/50 dark:text-gray-500 ml-2">/ person</span>
+                                            <span class="text-neutral-dark/50 dark:text-gray-500 text-xs ml-2">/ person</span>
                                         </div>
                                     </div>
                                 </div>
@@ -923,27 +1031,27 @@
                             
                             <!-- Calendar grid -->
                             <div class="calendar-grid mb-2">
-                                <div class="text-center text-xs font-medium text-neutral-dark/60 dark:text-gray-400 py-2">Mon</div>
-                                <div class="text-center text-xs font-medium text-neutral-dark/60 dark:text-gray-400 py-2">Tue</div>
-                                <div class="text-center text-xs font-medium text-neutral-dark/60 dark:text-gray-400 py-2">Wed</div>
-                                <div class="text-center text-xs font-medium text-neutral-dark/60 dark:text-gray-400 py-2">Thu</div>
-                                <div class="text-center text-xs font-medium text-neutral-dark/60 dark:text-gray-400 py-2">Fri</div>
-                                <div class="text-center text-xs font-medium text-neutral-dark/60 dark:text-gray-400 py-2">Sat</div>
-                                <div class="text-center text-xs font-medium text-neutral-dark/60 dark:text-gray-400 py-2">Sun</div>
+                                <div class="text-center text-sm font-medium text-neutral-dark/60 dark:text-gray-400 py-2">Mon</div>
+                                <div class="text-center text-sm font-medium text-neutral-dark/60 dark:text-gray-400 py-2">Tue</div>
+                                <div class="text-center text-sm font-medium text-neutral-dark/60 dark:text-gray-400 py-2">Wed</div>
+                                <div class="text-center text-sm font-medium text-neutral-dark/60 dark:text-gray-400 py-2">Thu</div>
+                                <div class="text-center text-sm font-medium text-neutral-dark/60 dark:text-gray-400 py-2">Fri</div>
+                                <div class="text-center text-sm font-medium text-neutral-dark/60 dark:text-gray-400 py-2">Sat</div>
+                                <div class="text-center text-sm font-medium text-neutral-dark/60 dark:text-gray-400 py-2">Sun</div>
                             </div>
                             <div class="calendar-grid" id="calendar-days">
                                 <!-- Days will be populated by JavaScript -->
                             </div>
                             
-                            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-4 mt-6 text-xs sm:text-sm">
-                            <div class="flex items-center whitespace-nowrap"><span class="w-3 h-3 bg-green-500/50 rounded-full mr-1.5 sm:mr-2"></span> Available</div>
-                            <div class="flex items-center whitespace-nowrap"><span class="w-3 h-3 bg-primary-brown rounded-full mr-1.5 sm:mr-2"></span> Selected</div>
-                            <div class="flex items-center whitespace-nowrap"><span class="w-3 h-3 bg-gray-300 dark:bg-gray-600 rounded-full mr-1.5 sm:mr-2"></span> Unavailable</div>
-                        </div>
+                            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-4 mt-6">
+                                <div class="flex items-center whitespace-nowrap"><span class="w-3 h-3 bg-green-500/50 rounded-full mr-2"></span> <span class="text-sm">Available</span></div>
+                                <div class="flex items-center whitespace-nowrap"><span class="w-3 h-3 bg-primary-brown rounded-full mr-2"></span> <span class="text-sm">Selected</span></div>
+                                <div class="flex items-center whitespace-nowrap"><span class="w-3 h-3 bg-gray-300 dark:bg-gray-600 rounded-full mr-2"></span> <span class="text-sm">Unavailable</span></div>
+                            </div>
                             
                             <!-- Time slots -->
                             <div class="mt-8">
-                                <h4 class="font-semibold mb-3 dark:text-white" id="selected-date-display">Available time slots for Feb 5, 2026</h4>
+                                <h4 class="font-semibold mb-3 dark:text-white text-base" id="selected-date-display">Available time slots for Feb 5, 2026</h4>
                                 <div id="time-slots-container">
                                     <span class="time-slot available" data-time="09:00 AM">09:00 AM</span>
                                     <span class="time-slot available selected" data-time="10:30 AM">10:30 AM</span>
@@ -1013,7 +1121,7 @@
                     </div>
                 </div>
                 
-                <!-- ============ RIGHT COLUMN - YOUR BOOKING + DESTINATION CARDS (FILLS ALL EMPTY SPACE) ============ -->
+                <!-- ============ RIGHT COLUMN - YOUR BOOKING + DESTINATION CARDS ============ -->
                 <div class="lg:col-span-1">
                     <div class="booking-card">
                         <!-- Your Booking Summary -->
@@ -1024,7 +1132,7 @@
                                 <img src="/assets/Tour1.jpg" alt="Mountain Trail" class="w-16 h-16 rounded-xl object-cover mr-4" id="summary-image">
                                 <div>
                                     <h4 class="font-bold dark:text-white" id="summary-tour-name">Mountain Trail & Waterfall</h4>
-                                    <p class="text-sm text-neutral-dark/70 dark:text-gray-400" id="summary-guide-duration">with Sophia • 6 hours</p>
+                                    <p class="text-neutral-dark/70 dark:text-gray-400 text-sm" id="summary-guide-duration">with Sophia • 6 hours</p>
                                 </div>
                             </div>
                             <div class="flex justify-between py-2 border-b border-neutral-light/50 dark:border-gray-700">
@@ -1051,12 +1159,10 @@
                                 <i class="fas fa-shield-alt mr-2"></i>
                                 <span class="font-semibold">Secure & instant confirmation</span>
                             </div>
-                            <p class="text-xs text-neutral-dark/60 dark:text-gray-400 text-base md:text-sm">
+                            <p class="text-sm text-neutral-dark/60 dark:text-gray-400 ">
                                 Your spot is reserved for 15 minutes. Full payment secures your booking.
                             </p>
                         </div>
-                        
-                       
                         
                         <!-- Travel Tip Mini Card - Adds more value and fills space -->
                         <div class="bg-gradient-to-r from-primary-brown/10 to-secondary-green/10 dark:from-primary-brown/20 dark:to-secondary-green/20 rounded-xl p-4 mb-6">
@@ -1065,8 +1171,8 @@
                                     <i class="fas fa-lightbulb text-primary-brown text-sm"></i>
                                 </div>
                                 <div>
-                                    <p class="text-xs font-semibold dark:text-white text-base md:text-lg">✈️ Travel tip</p>
-                                    <p class="text-[11px] text-neutral-dark/70 dark:text-gray-400 text-base md:text-sm">Free cancellation up to 48 hours before your tour</p>
+                                    <p class="text-sm font-semibold dark:text-white">✈️ Travel tip</p>
+                                    <p class="text-xs text-neutral-dark/70 dark:text-gray-400">Free cancellation up to 48 hours before your tour</p>
                                 </div>
                             </div>
                         </div>
@@ -1086,14 +1192,14 @@
                                         <p class="text-xs text-neutral-dark/60 dark:text-gray-400" id="confirmation-date">Confirmed just now</p>
                                     </div>
                                 </div>
-                                <div class="bg-neutral-light/30 dark:bg-gray-800 rounded-lg p-3 text-xs" id="confirmation-details">
+                                <div class="bg-neutral-light/30 dark:bg-gray-800 rounded-lg p-3 text-sm" id="confirmation-details">
                                     <!-- Dynamic content -->
                                 </div>
                                 <div class="mt-3 flex gap-2 confirmation-buttons">
-                                    <a href="#" id="eticket-btn" class="text-xs bg-primary-brown text-white px-4 py-2.5 rounded-full hover:bg-opacity-90 transition flex items-center justify-center flex-1 font-medium">
+                                    <a href="#" id="eticket-btn" class="text-sm bg-primary-brown text-white px-4 py-2.5 rounded-full hover:bg-opacity-90 transition flex items-center justify-center flex-1 font-medium">
                                         <i class="fas fa-download mr-1.5"></i> E-ticket
                                     </a>
-                                    <a href="#" id="calendar-btn" class="text-xs border-2 border-primary-brown text-primary-brown px-4 py-2.5 rounded-full hover:bg-primary-brown hover:text-white transition flex items-center justify-center flex-1 font-medium">
+                                    <a href="#" id="calendar-btn" class="text-sm border-2 border-primary-brown text-primary-brown px-4 py-2.5 rounded-full hover:bg-primary-brown hover:text-white transition flex items-center justify-center flex-1 font-medium">
                                         <i class="fas fa-calendar-plus mr-1.5"></i> Calendar
                                     </a>
                                 </div>
@@ -1107,183 +1213,177 @@
                                 </a>
                             </p>
                         </div>
-                                            </div> <!-- End of Secure Confirmation Card -->
+                    </div> <!-- End of booking-card -->
+                    
+                    <!-- ===== NEW DESTINATION CARDS - FILL THE EMPTY SPACE ===== -->
+                    <!-- Section Title -->
+                    <div class="flex items-center justify-between mt-6 mb-6">
+                        <h4 class="font-display font-semibold text-neutral-dark dark:text-white">
+                            <i class="fas fa-map-marked-alt text-primary-brown mr-2"></i>
+                            You might also like
+                        </h4>
+                        <a href="#" class="text-sm text-primary-brown hover:underline font-medium">View all</a>
+                    </div>
+                    
+                    <!-- 7 Beautiful Destination Cards - 1x1 STACKED VERTICALLY -->
+                    <div class="flex flex-col gap-3 mb-6">
                         
-                        <!-- ===== NEW DESTINATION CARDS - FILL THE EMPTY SPACE ===== -->
-                        <!-- Section Title -->
-                        <div class="flex items-center justify-between mt-6 mb-6">
-                            <h4 class="font-display font-semibold text-neutral-dark dark:text-white">
-                                <i class="fas fa-map-marked-alt text-primary-brown mr-2"></i>
-                                You might also like
-                            </h4>
-                            <a href="#" class="text-xs text-primary-brown hover:underline font-medium">View all</a>
-                        </div>
-                        
-                                                <!-- 7 Beautiful Destination Cards - 1x1 STACKED VERTICALLY -->
-                        <div class="flex flex-col gap-3 mb-6">
-                            
-                            <!-- Card 1: Paris -->
-                            <div class="group bg-white dark:bg-dark-card rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex items-center mb-4">
-                                <div class="relative w-24 h-24 flex-shrink-0">
-                                    <img src="/assets/card.jpg" alt="Paris" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                                    <div class="absolute bottom-1 left-2 text-white">
-                                        <p class="text-xs font-bold">Paris</p>
-                                        <p class="text-[10px] opacity-90">France</p>
-                                    </div>
-                                    <div class="absolute top-1 right-1 bg-white/90 dark:bg-gray-900/90 rounded-full px-1.5 py-0.5 text-[10px] font-semibold text-primary-brown">
-                                        ★ 4.8
-                                    </div>
+                        <!-- Card 1: Paris -->
+                        <div class="group bg-white dark:bg-dark-card rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex items-center mb-4">
+                            <div class="relative w-24 h-24 flex-shrink-0">
+                                <img src="/assets/card.jpg" alt="Paris" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                                <div class="absolute bottom-1 left-2 text-white">
+                                    <p class="text-sm font-bold">Paris</p>
+                                    <p class="text-xs opacity-90">France</p>
                                 </div>
-                                <div class="p-3 flex-1">
-                                    <div class="flex items-center justify-between">
-                                        <div>
-                                            <span class="text-xs font-medium dark:text-white text-base md:text-sm">24 tours</span>
-                                            <p class="text-[10px] text-neutral-dark/50 dark:text-gray-500 text-base md:text-sm">Eiffel Tower, Louvre</p>
-                                        </div>
-                                        <span class="text-xs font-bold text-primary-brown">$49+</span>
-                                    </div>
+                                <div class="absolute top-1 right-1 bg-white/90 dark:bg-gray-900/90 rounded-full px-1.5 py-0.5 text-xs font-semibold text-primary-brown">
+                                    ★ 4.8
                                 </div>
                             </div>
-                            
-                            <!-- Card 2: Bali -->
-                            <div class="group bg-white dark:bg-dark-card rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex items-center mb-4">
-                                <div class="relative w-24 h-24 flex-shrink-0">
-                                    <img src="/assets/card1.jpg" alt="Bali" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                                    <div class="absolute bottom-1 left-2 text-white">
-                                        <p class="text-xs font-bold">Bali</p>
-                                        <p class="text-[10px] opacity-90">Indonesia</p>
+                            <div class="p-3 flex-1">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <span class="text-sm font-medium dark:text-white">24 tours</span>
+                                        <p class="text-xs text-neutral-dark/50 dark:text-gray-500">Eiffel Tower, Louvre</p>
                                     </div>
-                                    <div class="absolute top-1 right-1 bg-white/90 dark:bg-gray-900/90 rounded-full px-1.5 py-0.5 text-[10px] font-semibold text-primary-brown">
-                                        ★ 4.9
-                                    </div>
+                                    <span class="text-sm font-bold text-primary-brown">$49+</span>
                                 </div>
-                                <div class="p-3 flex-1">
-                                    <div class="flex items-center justify-between">
-                                        <div>
-                                            <span class="text-xs font-medium dark:text-white text-base md:text-sm">32 tours</span>
-                                            <p class="text-[10px] text-neutral-dark/50 dark:text-gray-500 text-base md:text-sm">Ubud, temples</p>
-                                        </div>
-                                        <span class="text-xs font-bold text-primary-brown">$65+</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Card 3: Santorini -->
-                            <div class="group bg-white dark:bg-dark-card rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex items-center mb-4">
-                                <div class="relative w-24 h-24 flex-shrink-0">
-                                    <img src="/assets/card2.jpg" alt="Santorini" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                                    <div class="absolute bottom-1 left-2 text-white">
-                                        <p class="text-xs font-bold">Santorini</p>
-                                        <p class="text-[10px] opacity-90">Greece</p>
-                                    </div>
-                                    <div class="absolute top-1 right-1 bg-white/90 dark:bg-gray-900/90 rounded-full px-1.5 py-0.5 text-[10px] font-semibold text-primary-brown">
-                                        ★ 4.7
-                                    </div>
-                                </div>
-                                <div class="p-3 flex-1">
-                                    <div class="flex items-center justify-between">
-                                        <div>
-                                            <span class="text-xs font-medium dark:text-white text-base md:text-sm">18 tours</span>
-                                            <p class="text-[10px] text-neutral-dark/50 dark:text-gray-500 text-base md:text-sm">Oia sunset, caldera</p>
-                                        </div>
-                                        <span class="text-xs font-bold text-primary-brown ">$79+</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Card 4: Kyoto -->
-                            <div class="group bg-white dark:bg-dark-card rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex items-center mb-4">
-                                <div class="relative w-24 h-24 flex-shrink-0">
-                                    <img src="/assets/card3.jpg" alt="Kyoto" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                                    <div class="absolute bottom-1 left-2 text-white">
-                                        <p class="text-xs font-bold">Kyoto</p>
-                                        <p class="text-[10px] opacity-90">Japan</p>
-                                    </div>
-                                    <div class="absolute top-1 right-1 bg-white/90 dark:bg-gray-900/90 rounded-full px-1.5 py-0.5 text-[10px] font-semibold text-primary-brown">
-                                        ★ 4.9
-                                    </div>
-                                </div>
-                                <div class="p-3 flex-1">
-                                    <div class="flex items-center justify-between">
-                                        <div>
-                                            <span class="text-xs font-medium dark:text-white text-base md:text-sm">27 tours</span>
-                                            <p class="text-[10px] text-neutral-dark/50 dark:text-gray-500 text-base md:text-sm">Temples, geishas</p>
-                                        </div>
-                                        <span class="text-xs font-bold text-primary-brown">$55+</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Card 5: New York -->
-                            <div class="group bg-white dark:bg-dark-card rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex items-center mb-4">
-                                <div class="relative w-24 h-24 flex-shrink-0">
-                                    <img src="/assets/card4.jpg" alt="New York" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                                    <div class="absolute bottom-1 left-2 text-white">
-                                        <p class="text-xs font-bold">New York</p>
-                                        <p class="text-[10px] opacity-90">USA</p>
-                                    </div>
-                                    <div class="absolute top-1 right-1 bg-white/90 dark:bg-gray-900/90 rounded-full px-1.5 py-0.5 text-[10px] font-semibold text-primary-brown">
-                                        ★ 4.8
-                                    </div>
-                                </div>
-                                <div class="p-3 flex-1">
-                                    <div class="flex items-center justify-between">
-                                        <div>
-                                            <span class="text-xs font-medium dark:text-white text-base md:text-sm">45 tours</span>
-                                            <p class="text-[10px] text-neutral-dark/50 dark:text-gray-500 text-base md:text-sm">Statue of Liberty, Central Park</p>
-                                        </div>
-                                        <span class="text-xs font-bold text-primary-brown">$59+</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Card 6: Rome -->
-                            <div class="group bg-white dark:bg-dark-card rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex items-center mb-4">
-                                <div class="relative w-24 h-24 flex-shrink-0">
-                                    <img src="/assets/card5.jpg" alt="Rome" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                                    <div class="absolute bottom-1 left-2 text-white">
-                                        <p class="text-xs font-bold">Rome</p>
-                                        <p class="text-[10px] opacity-90">Italy</p>
-                                    </div>
-                                    <div class="absolute top-1 right-1 bg-white/90 dark:bg-gray-900/90 rounded-full px-1.5 py-0.5 text-[10px] font-semibold text-primary-brown">
-                                        ★ 4.9
-                                    </div>
-                                </div>
-                                <div class="p-3 flex-1">
-                                    <div class="flex items-center justify-between">
-                                        <div>
-                                            <span class="text-xs font-medium dark:text-white text-base md:text-sm">36 tours</span>
-                                            <p class="text-[10px] text-neutral-dark/50 dark:text-gray-500 text-base md:text-sm">Colosseum, Vatican</p>
-                                        </div>
-                                        <span class="text-xs font-bold text-primary-brown">$52+</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            
-                               
-                        </div>
-                        
-                        <!-- Travel Tip Card -->
-                        <div class="bg-gradient-to-r from-primary-brown/5 to-secondary-green/5 dark:from-primary-brown/10 dark:to-secondary-green/10 rounded-xl p-3 mb-6">
-                            <div class="flex items-center">
-                                <div class="w-7 h-7 bg-primary-brown/10 rounded-full flex items-center justify-center mr-2">
-                                    <i class="fas fa-lightbulb text-primary-brown text-xs"></i>
-                                </div>
-                                <p class="text-[11px] text-neutral-dark/70 dark:text-gray-400">
-                                    <span class="font-semibold dark:text-white">Travel tip:</span> Book at least 3 days in advance for best availability!
-                                </p>
                             </div>
                         </div>
                         
-                        <!-- ===== CONFIRMATION PREVIEW ===== -->
-                        <div id="confirmation-mockup" class="mt-2 pt-5 border-t border-neutral-light dark:border-gray-700">
+                        <!-- Card 2: Bali -->
+                        <div class="group bg-white dark:bg-dark-card rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex items-center mb-4">
+                            <div class="relative w-24 h-24 flex-shrink-0">
+                                <img src="/assets/card1.jpg" alt="Bali" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                                <div class="absolute bottom-1 left-2 text-white">
+                                    <p class="text-sm font-bold">Bali</p>
+                                    <p class="text-xs opacity-90">Indonesia</p>
+                                </div>
+                                <div class="absolute top-1 right-1 bg-white/90 dark:bg-gray-900/90 rounded-full px-1.5 py-0.5 text-xs font-semibold text-primary-brown">
+                                    ★ 4.9
+                                </div>
+                            </div>
+                            <div class="p-3 flex-1">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <span class="text-sm font-medium dark:text-white">32 tours</span>
+                                        <p class="text-xs text-neutral-dark/50 dark:text-gray-500">Ubud, temples</p>
+                                    </div>
+                                    <span class="text-sm font-bold text-primary-brown">$65+</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Card 3: Santorini -->
+                        <div class="group bg-white dark:bg-dark-card rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex items-center mb-4">
+                            <div class="relative w-24 h-24 flex-shrink-0">
+                                <img src="/assets/card2.jpg" alt="Santorini" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                                <div class="absolute bottom-1 left-2 text-white">
+                                    <p class="text-sm font-bold">Santorini</p>
+                                    <p class="text-xs opacity-90">Greece</p>
+                                </div>
+                                <div class="absolute top-1 right-1 bg-white/90 dark:bg-gray-900/90 rounded-full px-1.5 py-0.5 text-xs font-semibold text-primary-brown">
+                                    ★ 4.7
+                                </div>
+                            </div>
+                            <div class="p-3 flex-1">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <span class="text-sm font-medium dark:text-white">18 tours</span>
+                                        <p class="text-xs text-neutral-dark/50 dark:text-gray-500">Oia sunset, caldera</p>
+                                    </div>
+                                    <span class="text-sm font-bold text-primary-brown">$79+</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Card 4: Kyoto -->
+                        <div class="group bg-white dark:bg-dark-card rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex items-center mb-4">
+                            <div class="relative w-24 h-24 flex-shrink-0">
+                                <img src="/assets/card3.jpg" alt="Kyoto" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                                <div class="absolute bottom-1 left-2 text-white">
+                                    <p class="text-sm font-bold">Kyoto</p>
+                                    <p class="text-xs opacity-90">Japan</p>
+                                </div>
+                                <div class="absolute top-1 right-1 bg-white/90 dark:bg-gray-900/90 rounded-full px-1.5 py-0.5 text-xs font-semibold text-primary-brown">
+                                    ★ 4.9
+                                </div>
+                            </div>
+                            <div class="p-3 flex-1">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <span class="text-sm font-medium dark:text-white">27 tours</span>
+                                        <p class="text-xs text-neutral-dark/50 dark:text-gray-500">Temples, geishas</p>
+                                    </div>
+                                    <span class="text-sm font-bold text-primary-brown">$55+</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Card 5: New York -->
+                        <div class="group bg-white dark:bg-dark-card rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex items-center mb-4">
+                            <div class="relative w-24 h-24 flex-shrink-0">
+                                <img src="/assets/card4.jpg" alt="New York" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                                <div class="absolute bottom-1 left-2 text-white">
+                                    <p class="text-sm font-bold">New York</p>
+                                    <p class="text-xs opacity-90">USA</p>
+                                </div>
+                                <div class="absolute top-1 right-1 bg-white/90 dark:bg-gray-900/90 rounded-full px-1.5 py-0.5 text-xs font-semibold text-primary-brown">
+                                    ★ 4.8
+                                </div>
+                            </div>
+                            <div class="p-3 flex-1">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <span class="text-sm font-medium dark:text-white">45 tours</span>
+                                        <p class="text-xs text-neutral-dark/50 dark:text-gray-500">Statue of Liberty, Central Park</p>
+                                    </div>
+                                    <span class="text-sm font-bold text-primary-brown">$59+</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Card 6: Rome -->
+                        <div class="group bg-white dark:bg-dark-card rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex items-center mb-4">
+                            <div class="relative w-24 h-24 flex-shrink-0">
+                                <img src="/assets/card5.jpg" alt="Rome" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                                <div class="absolute bottom-1 left-2 text-white">
+                                    <p class="text-sm font-bold">Rome</p>
+                                    <p class="text-xs opacity-90">Italy</p>
+                                </div>
+                                <div class="absolute top-1 right-1 bg-white/90 dark:bg-gray-900/90 rounded-full px-1.5 py-0.5 text-xs font-semibold text-primary-brown">
+                                    ★ 4.9
+                                </div>
+                            </div>
+                            <div class="p-3 flex-1">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <span class="text-sm font-medium dark:text-white">36 tours</span>
+                                        <p class="text-xs text-neutral-dark/50 dark:text-gray-500">Colosseum, Vatican</p>
+                                    </div>
+                                    <span class="text-sm font-bold text-primary-brown">$52+</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Travel Tip Card -->
+                    <div class="bg-gradient-to-r from-primary-brown/5 to-secondary-green/5 dark:from-primary-brown/10 dark:to-secondary-green/10 rounded-xl p-3 mb-6">
+                        <div class="flex items-center">
+                            <div class="w-7 h-7 bg-primary-brown/10 rounded-full flex items-center justify-center mr-2">
+                                <i class="fas fa-lightbulb text-primary-brown text-xs"></i>
+                            </div>
+                            <p class="text-sm text-neutral-dark/70 dark:text-gray-400">
+                                <span class="font-semibold dark:text-white">Travel tip:</span> Book at least 3 days in advance for best availability!
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1383,7 +1483,7 @@
                             <span class="text-2xl font-display font-bold text-primary-brown">Tour</span>
                         </div>
                     </div>
-                    <p class="mb-6 opacity-80 dark:opacity-70 text-center md:text-left">
+                    <p class="mb-6 opacity-80 dark:opacity-70 text-center md:text-left text-sm">
                         Connecting travelers with passionate local guides for authentic experiences around the world since 2015.
                     </p>
                     <div class="flex space-x-4 justify-center md:justify-start">
@@ -1399,11 +1499,11 @@
                   <div class="text-center md:text-left">
                 <h3 class="text-neutral-dark dark:text-white text-xl font-bold mb-6">Quick Links</h3>
                 <ul class="space-y-3">
-                    <li><a class='hover:text-primary-brown transition block' href='index.html'>Home</a></li>
-                    <li><a class='hover:text-primary-brown transition block' href='about.html'>About</a></li>
-                    <li><a class='hover:text-primary-brown transition block' href='service.html'>Services</a></li>
-                    <li><a class='hover:text-primary-brown transition block' href='book.html'>Book Now</a></li>
-                    <li><a class='hover:text-primary-brown transition block' href='contact.html'>Contact Us</a></li>
+                    <li><a class='hover:text-primary-brown transition block text-sm' href='index.html'>Home</a></li>
+                    <li><a class='hover:text-primary-brown transition block text-sm' href='about.html'>About</a></li>
+                    <li><a class='hover:text-primary-brown transition block text-sm' href='service.html'>Services</a></li>
+                    <li><a class='hover:text-primary-brown transition block text-sm' href='book.html'>Book Now</a></li>
+                    <li><a class='hover:text-primary-brown transition block text-sm' href='contact.html'>Contact Us</a></li>
                 </ul>
             </div>
                 
@@ -1411,12 +1511,12 @@
                 <div class="text-center md:text-left">
                 <h3 class="text-neutral-dark dark:text-white text-xl font-bold mb-6">Tour Types</h3>
                 <ul class="space-y-3">
-                    <li><a href="service.html" class="hover:text-primary-brown transition block">Adventure Tours</a></li>
-                    <li><a href="service.html" class="hover:text-primary-brown transition block">Cultural Tours</a></li>
-                    <li><a href="service.html" class="hover:text-primary-brown transition block">Food Tours</a></li>
-                    <li><a href="service.html" class="hover:text-primary-brown transition block">Nature Tours</a></li>
-                    <li><a href="service.html" class="hover:text-primary-brown transition block">City Tours</a></li>
-                    <li><a href="service.html" class="hover:text-primary-brown transition block">Custom Tours</a></li>
+                    <li><a href="service.html" class="hover:text-primary-brown transition block text-sm">Adventure Tours</a></li>
+                    <li><a href="service.html" class="hover:text-primary-brown transition block text-sm">Cultural Tours</a></li>
+                    <li><a href="service.html" class="hover:text-primary-brown transition block text-sm">Food Tours</a></li>
+                    <li><a href="service.html" class="hover:text-primary-brown transition block text-sm">Nature Tours</a></li>
+                    <li><a href="service.html" class="hover:text-primary-brown transition block text-sm">City Tours</a></li>
+                    <li><a href="service.html" class="hover:text-primary-brown transition block text-sm">Custom Tours</a></li>
                 </ul>
             </div>
                 
@@ -1426,19 +1526,19 @@
                     <ul class="space-y-4">
                         <li class="flex items-start justify-center md:justify-start">
                             <i class="fas fa-map-marker-alt text-primary-brown mt-1 mr-3"></i>
-                            <span class="text-center md:text-left">123 Adventure Street, Travel District, NY 10001</span>
+                            <span class="text-center md:text-left text-sm">123 Adventure Street, Travel District, NY 10001</span>
                         </li>
                         <li class="flex items-center justify-center md:justify-start">
                             <i class="fas fa-phone text-primary-brown mr-3"></i>
-                            <span>+1 (555) 123-4567</span>
+                            <span class="text-sm">+1 (555) 123-4567</span>
                         </li>
                         <li class="flex items-center justify-center md:justify-start">
                             <i class="fas fa-envelope text-primary-brown mr-3"></i>
-                            <span>hello@growwtour.com</span>
+                            <span class="text-sm">hello@growwtour.com</span>
                         </li>
                         <li class="flex items-center justify-center md:justify-start">
                             <i class="fas fa-clock text-primary-brown mr-3"></i>
-                            <span>Mon - Fri: 9:00 - 18:00</span>
+                            <span class="text-sm">Mon - Fri: 9:00 - 18:00</span>
                         </li>
                     </ul>
                 </div>
